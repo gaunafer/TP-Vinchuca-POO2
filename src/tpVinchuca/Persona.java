@@ -1,5 +1,5 @@
 package tpVinchuca;
 
-public class ClasePrueba {
+public class Persona {
 
 }
