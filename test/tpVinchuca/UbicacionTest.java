@@ -1,12 +1,12 @@
 package tpVinchuca;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+
 
 public class UbicacionTest {
 
@@ -15,20 +15,9 @@ public class UbicacionTest {
 	private Ubicacion ubicacion2;
 	private Ubicacion ubicacion3;
 	private Ubicacion ubicacion4;
-	
-	//ubicaciones imposibles, solo se usan en un test cada uno, quizas no deberian estar en el setUp
-	private Ubicacion ubicacion5;
-	private Ubicacion ubicacion6;
-	private Ubicacion ubicacion7;
-	private Ubicacion ubicacion8;
 
-	
-	
 	@BeforeEach
 	public void setUp() {
-		//primer double latitud, segundo double longitud
-		
-		//ubicaciones posibles
 		ubicacion1 = new Ubicacion(-34.627911, -58.380361); //Constitucion
 		ubicacion2 = new Ubicacion(-34.777857, -58.308091); //Solano
 		ubicacion3 = new Ubicacion(-34.795691, -58.287063); //Varela
@@ -37,36 +26,49 @@ public class UbicacionTest {
 	
 	
 	
-	
+	// Testea la creacion de una ubicacion existente
 	@Test
-	public void testCreacionUbicacion1() {
-		Double latUbicacion1 = ubicacion1.getLatitud();
-		Double longUbicacion1 = ubicacion1.getLongitud();
+	public void testCreacionUbicacionExistente() {
+		Double latitud = ubicacion1.getLatitud();
+		Double longitud = ubicacion1.getLongitud();
 		
-		assertEquals(-34.627911, latUbicacion1);
-		assertEquals(-58.380361, longUbicacion1);
+		assertEquals(-34.627911, latitud);
+		assertEquals(-58.380361, longitud);
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
-	public void testCreacionUbicacion5() {
-		ubicacion5 = new Ubicacion(-94.603066, -58.443407);
+	// Falla al crear una ubicacion con una latitud menor que el limite permitido
+	@Test
+	public void testCreacionUbicacionInexistentePorLatitudMenorQueElLimite() {
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			Ubicacion ubicacion = new Ubicacion(-94.603066, -58.443407);
+		});		
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
-	public void testCreacionUbicacion6() {
-		ubicacion6 = new Ubicacion(94.627911, -58.380361);
+	// Falla al crear una ubicacion con una latitud mayor que el limite permitido
+	@Test
+	public void testCreacionUbicacionInexistentePorLatitudMayorQueElLimite() {
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			Ubicacion ubicacion = new Ubicacion(94.627911, -58.380361);
+		});	
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
-	public void testCreacionUbicacion7() {
-		ubicacion7 = new Ubicacion(-34.603066, -198.443407);
+	// Falla al crear una ubicacion con una longiud menor que el limite permitido
+	@Test
+	public void testCreacionUbicacionInexistentePorLongitudMenorQueElLimite() {
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			Ubicacion ubicacion = new Ubicacion(-34.603066, -198.443407);
+		});
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
-	public void testCreacionUbicacion8() {
-		ubicacion8 = new Ubicacion(-34.627911, 198.380361);
+	// Falla al crear una ubicacion con una longiud mayor que el limite permitido
+	@Test
+	public void testCreacionUbicacionInexistentePorLongitudMayorQueElLimite() {
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			Ubicacion ubicacion = new Ubicacion(-34.627911, 198.380361);
+		});
 	}
 	
+	/*
 	public void testCalcularDistancia() {
 		//execute
 		Double distanciaConUbicacion2 = ubicacion1.calcularDistancia(ubicacion2); //resultado: 17.95
@@ -111,6 +113,6 @@ public class UbicacionTest {
 		int sizeMuestrasAMenosDe15km = muestrasAMenosDe15km.size(); 
 		
 		assertEquals(, sizeMuestrasAMenosDe15km);
-	}
+	}*/
 	
 }
