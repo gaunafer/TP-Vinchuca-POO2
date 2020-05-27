@@ -2,6 +2,9 @@ package tpVinchuca;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -68,7 +71,7 @@ public class UbicacionTest {
 		});
 	}
 	
-	/*
+	@Test
 	public void testCalcularDistancia() {
 		//execute
 		Double distanciaConUbicacion2 = ubicacion1.calcularDistancia(ubicacion2); //resultado: 17.95
@@ -76,34 +79,47 @@ public class UbicacionTest {
 		Double distanciaConUbicacion4 = ubicacion1.calcularDistancia(ubicacion4); //resultado: 32.78
 		
 		//verify
-		//ver margen de error -> se agrega el punto decimal a lo ultimo dentro del parentesis del assert
 		assertEquals(17.95, distanciaConUbicacion2, 0.02);
 		assertEquals(20.53, distanciaConUbicacion3, 0.02);
-		assertEquals(32.78, distanciaConUbicacion4, 0.02);
+		assertEquals(32.77, distanciaConUbicacion4, 0.02);
 	}
 	
-	
-	public void testUbicacionesAMenosDe() {
+	//Se testea que las ubicaciones a menos de 30 kilometros de ubicacion1 sean 2
+	@Test
+	public void testUbicacionesAMenosDe30Km() {
 		// setUp
-		ArrayList<Ubicacion> ubicaciones = new ArrayList<Ubicacion>();
+		List<Ubicacion> ubicaciones = new ArrayList<Ubicacion>();
 		ubicaciones.add(ubicacion2);
 		ubicaciones.add(ubicacion3);
 		ubicaciones.add(ubicacion4);
 		
 		//execute
 		//ubicaciones a menos de 30km
-		ArrayList<Ubicacion> ubicacionesAMenosDe30 = ubicacion1.ubicacionesAMenosDe(30d, ubicaciones);
-		int sizeUbicacionesAMenosDe30 = ubicacionesAMenosDe30.size();
-		
-		//ubicaciones a menos de 10km
-		ArrayList<Ubicacion> ubicacionesAMenosDe10 = ubicacion1.ubicacionesAMenosDe(10d, ubicaciones);
-		int sizeUbicacionesAMenosDe10 = ubicacionesAMenosDe10.size();
+		List<Ubicacion> ubicacionesAMenosDe = ubicacion1.ubicacionesAMenosDe(30d, ubicaciones);
+		int sizeUbicacionesAMenosDe = ubicacionesAMenosDe.size();
 		
 		//verify
-		assertEquals(2, sizeUbicacionesAMenosDe30);
-		assertEquals(0, sizeUbicacionesAMenosDe10);
+		assertEquals(2, sizeUbicacionesAMenosDe);
 	}
 	
+	//Se testea que las ubicaciones a menos de 10 kilometros de ubicacion1 sean 0	
+	@Test
+	public void testUbicacionesAMenosDe10Km() {
+		// setUp
+		List<Ubicacion> ubicaciones = new ArrayList<Ubicacion>();
+		ubicaciones.add(ubicacion2);
+		ubicaciones.add(ubicacion3);
+		ubicaciones.add(ubicacion4);
+		
+		//ubicaciones a menos de 10km
+		List<Ubicacion> ubicacionesAMenosDe = ubicacion1.ubicacionesAMenosDe(10d, ubicaciones);
+		int sizeUbicacionesAMenosDe = ubicacionesAMenosDe.size();
+		
+		//verify
+		assertEquals(0, sizeUbicacionesAMenosDe);
+	}
+	
+	/*
 	public void testMuentrasAMenosDe() {
 		
 		//muestra mockito?
