@@ -3,62 +3,61 @@ package tpVinchuca;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.*;
 
 public class ZonaDeCoberturaTest {
 	
-	private ZonaDeCobertura zona1;
-	private ZonaDeCobertura zona2;
-	private ZonaDeCobertura zona3;
-	private ZonaDeCobertura zona4;
+	private ZonaDeCobertura dominicoWilde;
+	private ZonaDeCobertura varela;
+	private ZonaDeCobertura solano;
+	private ZonaDeCobertura ezpeleta;
 	
-	//aca imagino que habria que usar mockito no?
-	private Ubicacion epicentro1;
-	private Ubicacion epicentro2;
-	private Ubicacion epicentro3;
-	private Ubicacion epicentro4;
+	private Ubicacion epicentroDominicoWilde;
+	private Ubicacion epicentroVarela;
+	private Ubicacion epicentroSolano;
+	private Ubicacion epicentroEzpeleta;
 	
-	
+	@BeforeEach
 	public void setUp() {
-		epicentro1 = new Ubicacion(-34.688910, -58.314271);
-		epicentro2 = new Ubicacion(-34.811389, -58.274080);
-		epicentro3 = new Ubicacion(-34.688910, -58.314271);
-		epicentro4 = new Ubicacion(-34.751968, -58.234205);
+		epicentroDominicoWilde = new Ubicacion(-34.688910, -58.314271);
+		epicentroVarela = new Ubicacion(-34.811389, -58.274080);
+		epicentroSolano = new Ubicacion(-34.782341, -58.315641);
+		epicentroEzpeleta = new Ubicacion(-34.751968, -58.234205);
 		
-		// epicentros en estaciones
-		zona1 = new ZonaDeCobertura(epicentro1, 2d, "Costanera Dominico Wilde"); // acceso parque santo domingo
-		zona2 = new ZonaDeCobertura(epicentro2, 4d, "Varela"); //epicentro en estacion
-		zona3 = new ZonaDeCobertura(epicentro3, 3.5d, "Solano"); //epicentro en 844 y donato alvarez
-		zona4 = new ZonaDeCobertura(epicentro4, 4d, "Ezpeleta"); //epicentro en estacion
+		
+		dominicoWilde = new ZonaDeCobertura(epicentroDominicoWilde, 2d, "Costanera Dominico Wilde"); // acceso parque santo domingo
+		varela = new ZonaDeCobertura(epicentroVarela, 4d, "Varela"); //epicentro en estacion
+		solano = new ZonaDeCobertura(epicentroSolano, 3.5d, "Solano"); //epicentro en 844 y donato alvarez
+		ezpeleta = new ZonaDeCobertura(epicentroEzpeleta, 4d, "Ezpeleta"); //epicentro en estacion
 	}
 	
 	
-	//no testeo epicentro porque seria testear Ubicacion, que ya esta testeada
+
 	//no se me ocurrieron excepciones... probar que no se puede cargar un radio negativo/vacio quizas?
+	@Test
 	public void testCreacionZonaDeCobertura() {
-		//en teoria no habria que crear un metodo para poder hacer correr un test asi que no se si estan bien estos gets...
-		Double radio = zona1.getRadio();
-		String nombre = zona1.getNombre();
 		
-		//reformular el assert? pero contra que variable? el nombre quizas?
+		Double radio = dominicoWilde.getRadio();
+		String nombre = dominicoWilde.getNombre();
+		
 		assertEquals(2, radio);
 		assertEquals("Costanera Dominico Wilde", nombre);
 	}
-	
-	
-	
-	//metodo privado seSolapaCon(ZonaDeCobertura) sin testear
-	
+		
 	
 	//ejemplo de zona que se solapa con otras dos zonas
-	public void testZonasConLasQueSeSolapa() {
+	@Test
+	public void testZonasConLasQueSeSolapaVarela() {
 		//setUp
-		ArrayList<ZonaDeCobertura> listaDeZonas = new ArrayList();
-		listaDeZonas.add(zona1); //distancia Dominico-Varela: 14.03
-		listaDeZonas.add(zona3); //distancia Solano-Varela: 4.91
-		listaDeZonas.add(zona4); //distancia Ezpeleta-Varela: 7.48
+		List<ZonaDeCobertura> listaDeZonas = new ArrayList<ZonaDeCobertura>();
+		listaDeZonas.add(dominicoWilde); //distancia Dominico-Varela: 14.03
+		listaDeZonas.add(solano); //distancia Solano-Varela: 4.91
+		listaDeZonas.add(ezpeleta); //distancia Ezpeleta-Varela: 7.48
 		
 		//execute
-		ArrayList<ZonaDeCobertura> listaDeZonasConLasQueSeSolapa = zona2.zonasConLasQueSeSolapa(listaDeZonas);
+		List<ZonaDeCobertura> listaDeZonasConLasQueSeSolapa = varela.zonasConLasQueSeSolapa(listaDeZonas);
 		Integer cantDeZonasConLasQueSeSolapa = listaDeZonasConLasQueSeSolapa.size(); 
 		
 		//verify
@@ -67,19 +66,21 @@ public class ZonaDeCoberturaTest {
 	
 
 	//ejemplo de zona que no se solapa con ninguna zona
-	public void testZonasConLasQueSeSolapa() {
+	@Test
+	public void testZonasConLasQueSeSolapaDominicoWilde() {
 		//setUp
-		ArrayList<ZonaDeCobertura> listaDeZonas = new ArrayList();
-		listaDeZonas.add(zona2); //distancia Varela-Dominico: 14.03
-		listaDeZonas.add(zona3); //distancia Solano-Dominico: 10.37
-		listaDeZonas.add(zona4); //distancia Ezpeleta-Dominico: 10.09
+		List<ZonaDeCobertura> listaDeZonas = new ArrayList<ZonaDeCobertura>();
+		listaDeZonas.add(varela); //distancia Varela-Dominico: 14.03
+		listaDeZonas.add(solano); //distancia Solano-Dominico: 10.37
+		listaDeZonas.add(ezpeleta); //distancia Ezpeleta-Dominico: 10.09
 		
 		//execute
-		ArrayList<ZonaDeCobertura> listaDeZonasConLasQueSeSolapa = zona1.zonasConLasQueSeSolapa(listaDeZonas);
+		List<ZonaDeCobertura> listaDeZonasConLasQueSeSolapa = dominicoWilde.zonasConLasQueSeSolapa(listaDeZonas);
 		Integer cantDeZonasConLasQueSeSolapa = listaDeZonasConLasQueSeSolapa.size(); 
 		
 		//verify
 		assertEquals(0, cantDeZonasConLasQueSeSolapa);
+		
 	}
 
 }
