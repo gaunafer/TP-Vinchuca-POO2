@@ -39,7 +39,6 @@ public class OrganizacionTest {
 	// Chequea que el metodo updateCreacionMuestra llame correctamente al nuevoEvento de la funcionalidadExterna
 	@Test
 	public void testUpdateCreacionMuestra() {
-		IFuncionalidadExterna funcionalidad = mock(IFuncionalidadExterna.class);
 		flech.setFuncionalidadCreacionDeMuestra(funcionalidad);
 		
 		flech.updateCreacionMuestra(muestra, zona);
@@ -49,7 +48,6 @@ public class OrganizacionTest {
 	// Chequea que el metodo updateValidacionMuestra llame correctamente al nuevoEvento de la funcionalidadExterna
 	@Test
 	public void testUpdateValidacionMuestra() {
-		IFuncionalidadExterna funcionalidad = mock(IFuncionalidadExterna.class);
 		flech.setFuncionalidadValidacionDeMuestra(funcionalidad);
 		
 		flech.updateValidacionMuestra(muestra, zona);
