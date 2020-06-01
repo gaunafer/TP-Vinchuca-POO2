@@ -5,7 +5,7 @@ public class Muestra {
 	private String clasificacion; //= ClasificacionDeFoto.VINCHUCA_INFESTANS;
 	
 	
-	public Muestra(Persona p, Ubicacion u, ClasificacionDeFoto c) {
+	public Muestra(Participante p, Ubicacion u, ClasificacionDeFoto c) {
 		this.clasificacion=c.getDescripcion();
 	}
 	

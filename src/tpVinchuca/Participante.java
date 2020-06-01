@@ -9,11 +9,13 @@ public class Participante {
 	private List<Votacion> votaciones;
 	private NivelDeConocimiento nivelDeConocimiento;
 	
+	
 	public Participante(String alias, NivelDeConocimiento nivelDeConocimiento) {
 		super();
 		this.alias = alias;
 		this.votaciones = new ArrayList<Votacion>();
 		this.nivelDeConocimiento = nivelDeConocimiento;
+	
 		
 	}
 
@@ -21,9 +23,6 @@ public class Participante {
 		return alias;
 	}
 
-	public List<Votacion> getVotaciones() {
-		return votaciones;
-	}
 
 	public String getNivelDeConocimiento() {
 		
@@ -43,12 +42,6 @@ public class Participante {
 		
 		this.nivelDeConocimiento = nivelDeConocimiento;
 		
-	}
-	
-	
-	
-	
-	
-	
+	}	
 
 }
