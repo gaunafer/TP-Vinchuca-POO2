@@ -20,7 +20,7 @@ public class ParticipanteTest {
 	private Participante pepe;
 	private Participante pepa;
 	private Participante pipo;
-	private int mesActual = LocalDate.now().getMonthValue();
+	private int mesPasado =  LocalDate.now().getMonthValue()-1;
 
 	@Mock
 	private Votacion votacion1 = mock(Votacion.class);
@@ -58,17 +58,17 @@ public class ParticipanteTest {
 
 		votaciones = new ArrayList<Votacion>();
 
-		when(votacion1.getFechaDeCreacion()).thenReturn(LocalDate.of(2020, mesActual, 6));
-		when(votacion2.getFechaDeCreacion()).thenReturn(LocalDate.of(2020, mesActual, 6));
-		when(votacion3.getFechaDeCreacion()).thenReturn(LocalDate.of(2020, mesActual, 6));
-		when(votacion4.getFechaDeCreacion()).thenReturn(LocalDate.of(2020, mesActual, 6));
-		when(votacion5.getFechaDeCreacion()).thenReturn(LocalDate.of(2020, mesActual, 6));
-		when(votacion6.getFechaDeCreacion()).thenReturn(LocalDate.of(2020, mesActual, 6));
-		when(votacion7.getFechaDeCreacion()).thenReturn(LocalDate.of(2020, mesActual, 6));
-		when(votacion8.getFechaDeCreacion()).thenReturn(LocalDate.of(2020, mesActual, 6));
-		when(votacion9.getFechaDeCreacion()).thenReturn(LocalDate.of(2020, mesActual, 6));
-		when(votacion10.getFechaDeCreacion()).thenReturn(LocalDate.of(2020, mesActual, 6));
-		when(votacion11.getFechaDeCreacion()).thenReturn(LocalDate.of(2020, mesActual, 6));
+		when(votacion1.getFechaDeCreacion()).thenReturn(LocalDate.of(2020, mesPasado, 6));
+		when(votacion2.getFechaDeCreacion()).thenReturn(LocalDate.of(2020, mesPasado, 6));
+		when(votacion3.getFechaDeCreacion()).thenReturn(LocalDate.of(2020, mesPasado, 6));
+		when(votacion4.getFechaDeCreacion()).thenReturn(LocalDate.of(2020, mesPasado, 6));
+		when(votacion5.getFechaDeCreacion()).thenReturn(LocalDate.of(2020, mesPasado, 6));
+		when(votacion6.getFechaDeCreacion()).thenReturn(LocalDate.of(2020, mesPasado, 6));
+		when(votacion7.getFechaDeCreacion()).thenReturn(LocalDate.of(2020, mesPasado, 6));
+		when(votacion8.getFechaDeCreacion()).thenReturn(LocalDate.of(2020, mesPasado, 6));
+		when(votacion9.getFechaDeCreacion()).thenReturn(LocalDate.of(2020, mesPasado, 6));
+		when(votacion10.getFechaDeCreacion()).thenReturn(LocalDate.of(2020, mesPasado, 6));
+		when(votacion11.getFechaDeCreacion()).thenReturn(LocalDate.of(2020, mesPasado, 6));
 
 	}
 
@@ -94,7 +94,7 @@ public class ParticipanteTest {
        votaciones.add(votacion10);
        votaciones.add(votacion11);
 
-       when(aplicacionVinchucas.getVotacionesDeParticipantePorFecha(pepe, LocalDate.now())).thenReturn(votaciones);
+       when(aplicacionVinchucas.getVotacionesDeParticipantePorFecha(pepe, LocalDate.now().minusMonths(1l))).thenReturn(votaciones);
        pepe.actualizarEstado();
         
 
