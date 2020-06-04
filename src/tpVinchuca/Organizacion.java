@@ -10,7 +10,7 @@ public class Organizacion implements IObservadoresDeZonas {
 	private IFuncionalidadExterna funcionalidadValidacionDeMuestra;
 	
 	/**
-	 * Crea una instancia de la clase Organizacion
+	 * Crea una instancia de la clase Organizacion sin las funcionalidades externas
 	 * @param tipoDeOrganizacion Uno de los tipos de TipoDeOrganizacion
 	 * @param ubicacion Localizacion de la organizacion expresada segun la clase Ubicacion
 	 * @param cantidadDeTrabajadores Cantidad de trabajadorxs que posee la organizacion
@@ -19,6 +19,20 @@ public class Organizacion implements IObservadoresDeZonas {
 		this.tipoDeOrganizacion = tipoDeOrganizacion;
 		this.ubicacion = ubicacion;
 		this.cantidadDeTrabajadores = cantidadDeTrabajadores;
+	}
+	
+	/**
+	 * Crea una instancia de la clase Organizacion con las funcionalidades externas
+	 * @param tipoDeOrganizacion Uno de los tipos de TipoDeOrganizacion
+	 * @param ubicacion Localizacion de la organizacion expresada segun la clase Ubicacion
+	 * @param cantidadDeTrabajadores Cantidad de trabajadorxs que posee la organizacion
+	 */
+	public Organizacion(TipoDeOrganizacion tipoDeOrganizacion, Ubicacion ubicacion, Integer cantidadDeTrabajadores, IFuncionalidadExterna funcionalidadCreacionMestra, IFuncionalidadExterna funcionalidadValidacionMestra) {
+		this.tipoDeOrganizacion = tipoDeOrganizacion;
+		this.ubicacion = ubicacion;
+		this.cantidadDeTrabajadores = cantidadDeTrabajadores;
+		setFuncionalidadCreacionDeMuestra(funcionalidadCreacionMestra);
+		setFuncionalidadValidacionDeMuestra(funcionalidadValidacionMestra);
 	}
 
 	/**
@@ -78,7 +92,7 @@ public class Organizacion implements IObservadoresDeZonas {
 	 */
 	@Override
 	public void updateCreacionMuestra(Muestra muestra, ZonaDeCobertura zona) {
-		funcionalidadCreacionDeMuestra.nuevoEvento(this, zona, muestra);
+		getFuncionalidadCreacionDeMuestra().nuevoEvento(this, zona, muestra);
 	}
 
 	/**
@@ -87,7 +101,7 @@ public class Organizacion implements IObservadoresDeZonas {
 	 */
 	@Override
 	public void updateValidacionMuestra(Muestra muestra, ZonaDeCobertura zona) {
-		funcionalidadValidacionDeMuestra.nuevoEvento(this, zona, muestra);
+		getFuncionalidadValidacionDeMuestra().nuevoEvento(this, zona, muestra);
 	}
 
 }
