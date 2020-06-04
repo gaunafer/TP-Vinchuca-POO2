@@ -19,5 +19,10 @@ public class Buscador {
 	private boolean esVotacionEnFecha(Votacion votacion, LocalDate fecha) {
 		return votacion.getFechaDeCreacion().getYear()==fecha.getYear() && votacion.getFechaDeCreacion().getMonth().equals(fecha.getMonth());
 	}
+	
+	public List<Muestra> buscar(List<Muestra> muestras, Filtro filtro){
+		return filtro.criterioDeBusqueda(muestras);
+		
+	}
 
 }
