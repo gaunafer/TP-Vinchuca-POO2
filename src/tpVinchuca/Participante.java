@@ -21,6 +21,7 @@ public class Participante {
 
 
 	public String getNivelDeConocimiento() {
+		this.actualizarEstado();
 		
 		 return this.nivelDeConocimiento.getNivelDeConocimiento();
 	}

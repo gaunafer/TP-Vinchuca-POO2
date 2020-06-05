@@ -154,8 +154,8 @@ public class ExpertoTest {
 	    
 	    when(aplicacionVinchucas.getVotacionesDeParticipanteEnLosUltimos30Dias(pepe)).thenReturn(votaciones);
 	    //when(pepe.getNivelDeConocimiento()).thenReturn(experto.getNivelDeConocimiento());
-	    experto.verificarEstado(pepe);
 	    pepe.actualizarEstado();
+	    experto.verificarEstado(pepe);
 	    verify(pepe).setNivelDeConocimiento(experto);
 	   
 	}
