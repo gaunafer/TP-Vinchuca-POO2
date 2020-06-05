@@ -1,5 +1,7 @@
 package tpVinchuca;
 
+import java.time.LocalDate;
+
 public enum ClasificacionDeFoto {
 	
 	    VINCHUCA_INFESTANS("Vinchuca", "Vinchuca Infestans"),
@@ -9,6 +11,7 @@ public enum ClasificacionDeFoto {
 	    PHITIA_CHINCHE("Chinche", "Phitia Chinche"),
 	    NINGUNA("Imagen", "Ninguna"),
 	    IMAGEN_POCO_CLARA("Imagen", "Imagen poco clara");
+
 	    
 	    private String tipo;
 	    private String descripcion;

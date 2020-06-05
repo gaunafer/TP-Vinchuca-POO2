@@ -2,15 +2,15 @@ package tpVinchuca;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class AplicacionVinchucas {
 	
 	private Buscador buscador;
-
-	private List<Muestra> muestras;
-	
+    private List<Muestra> muestras;
 	
 
 	public AplicacionVinchucas(Buscador buscador) {
@@ -18,26 +18,30 @@ public class AplicacionVinchucas {
 		this.buscador = buscador;
 		this.muestras = new ArrayList<Muestra>();
 	}
-
-
-    public List <Votacion> getVotaciones(){
-    	 List < List<Votacion> > votaciones = this.muestras.stream()
-    			 .map(muestra->muestra.getVotaciones())
-    			 .collect(Collectors.toList());
-    	 return votaciones.
-    }
-	public List<Votacion> getVotacionesDeParticipantePorFecha(Participante participante, LocalDate fecha) {
-		return this.buscador.getVotacionesDeParticipantePorFecha( votaciones, participante, fecha);
+	
+	public List<Muestra> getMuestrasDeParticipantePorFecha(Participante participante, LocalDate fecha) {
+		Filtro filtroFecha =  new FiltroFecha(fecha);
+		Filtro filtroParticipante = new FiltroParticipante(participante);
+	    Filtro and = new FiltroAnd(filtroParticipante, filtroFecha);
+		return this.buscador.buscar(muestras, and);
+	}
+	
+	public List<Votacion> getVotaciones(){
+		
+		return muestras.stream().flatMap(muestra -> muestra.getVotaciones().stream()).collect(Collectors.toList());
 		
 	}
 	
-	public List<Votacion> votacionesPorParticipantePorFecha(Participante participante, LocalDate fecha){
-		Filtro filtroFecha = new FiltroFecha(fecha);
-		Filtro filtroParticipante = new FiltroVotacionesPorParticipante(participante);
-		Filtro and = new FiltroAnd(filtroParticipante,filtroFecha);
-		List < List<Votacion> > votaciones = this.buscador.buscar(muestras, and).stream().map(muestra->muestra.getVotaciones()).collect(Collectors.toList());
-		return ;
-		
+	public List<Votacion> getVotacionesPorParticipante(Participante participante){
+		return this.getVotaciones().stream().filter(votacion-> votacion.getParticipante().equals(participante)).collect(Collectors.toList());
+	}
+	
+	public List<Votacion> getVotacionesPorFeacha(List<Votacion> votaciones, LocalDate fecha){
+		return votaciones.stream().filter(votacion->votacion.getFechaDeCreacion().isAfter(fecha)).collect(Collectors.toList());
+	}
+	
+	public List<Votacion> getVotacionesDeParticipanteEnLosUltimos30Dias(Participante participante){
+		return this.getVotacionesPorFeacha(this.getVotacionesPorParticipante(participante), LocalDate.now().minusDays(30l));
 	}
 
 

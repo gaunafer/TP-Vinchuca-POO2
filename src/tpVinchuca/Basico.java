@@ -14,7 +14,8 @@ public class Basico extends NivelDeConocimiento{
 	}
 	
 	public void verificarEstado(Participante participante) {
-			if (this.getCantidadDeVotacionesDeUnParticipantePertenecientesAlMesAnteriorAlMesEnCurso(participante) > 10l) {
+			if (this.getCantidadDeMuestrasDeUnParticipantePertenecientesAlMesAnteriorAlMesEnCurso(participante) > 10
+					&& this.getCantidadDeVotacionesDeUnParticipanteA30DiasDeLaFechaActual(participante) > 20) {
 					this.cambiarAExperto(participante);}
 		}
 }	

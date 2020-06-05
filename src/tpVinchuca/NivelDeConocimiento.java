@@ -2,6 +2,7 @@ package tpVinchuca;
 
 
 import java.time.LocalDate;
+import java.util.List;
 
 public abstract class NivelDeConocimiento {
 	
@@ -26,11 +27,16 @@ public abstract class NivelDeConocimiento {
 		
 	}
 	
-	public long getCantidadDeVotacionesDeUnParticipantePertenecientesAlMesAnteriorAlMesEnCurso(Participante participante) {
-		LocalDate mesAnterior = LocalDate.now().minusMonths(1l);
+	public Integer getCantidadDeMuestrasDeUnParticipantePertenecientesAlMesAnteriorAlMesEnCurso(Participante participante) {
+		LocalDate unMesAtras = LocalDate.now().minusMonths(1l);
 		
-		return aplicacionVinchucas.getVotacionesDeParticipantePorFecha(participante, mesAnterior).stream()
-				.filter(votacion->votacion.getFechaDeCreacion().getMonth() == mesAnterior.getMonth()).count();
+		return this.aplicacionVinchucas.getMuestrasDeParticipantePorFecha(participante, unMesAtras).size();
 	}
+	
+
+	public Integer getCantidadDeVotacionesDeUnParticipanteA30DiasDeLaFechaActual(Participante participante) {
+		
+		return this.aplicacionVinchucas.getVotacionesDeParticipanteEnLosUltimos30Dias(participante).size();
+	}	
 
 }

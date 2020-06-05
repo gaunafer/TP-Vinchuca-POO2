@@ -16,8 +16,10 @@ public class FiltroFecha implements Filtro{
 	public List<Muestra> criterioDeBusqueda(List<Muestra> muestras){
 		
 		return muestras.stream()
-				.filter(muestra->muestra.getFecha().equals(this.fecha))
+				.filter(muestra->muestra.getFecha().isAfter(this.fecha))
 				.collect(Collectors.toList());
 	}
+	
+
 
 }
