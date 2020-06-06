@@ -2,7 +2,7 @@ package tpVinchuca;
 
 import java.util.*;
 
-public class ZonaDeCobertura extends Observable {
+public class ZonaDeCobertura {
 	
 	private Ubicacion epicentro;
 	private Double radio;
@@ -71,14 +71,6 @@ public class ZonaDeCobertura extends Observable {
 		muestras.add(muestra);
 		notifyCreacionMuestra(muestra);
 	}
-	
-	/**
-	 * Devuelve true si la muestra esta en la lista de muestras de la zona de cobertura y false en caso contrario
-	 * @param muestra
-	 */
-	public Boolean contieneMuestra(Muestra muestra) {
-		return muestras.contains(muestra);
-	}
 
 	/**
 	 * Dada una lista de zonas de cobertura, filtra por aquellas con las que se solapa.
@@ -89,7 +81,7 @@ public class ZonaDeCobertura extends Observable {
 		List<ZonaDeCobertura> zonasQueSeSolapan = new ArrayList<ZonaDeCobertura>();
 		
 		for (ZonaDeCobertura zonaDeCobertura : zonas) {
-			if (this.seSolapaCon(zonaDeCobertura)) {
+			if (seSolapaCon(zonaDeCobertura)) {
 				zonasQueSeSolapan.add(zonaDeCobertura);
 			}
 		}
@@ -128,15 +120,6 @@ public class ZonaDeCobertura extends Observable {
 	 */
 	public void agregarObserver(IObservadoresDeZonas observer) {
 		observers.add(observer);
-	}
-	
-	/**
-	 * Chequea si un observer pertenece a la lista de observadores de la zona
-	 * @param observer 
-	 * @return Devuelve true si observer se encuentra en la lista observers
-	 */
-	public Boolean contieneObserver(IObservadoresDeZonas observer) {
-		return observers.contains(observer);
 	}
 
 	/**

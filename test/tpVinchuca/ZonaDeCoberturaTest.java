@@ -58,19 +58,19 @@ public class ZonaDeCoberturaTest {
 	@Test
 	public void testCreacionZonaDeCoberturaIncorrecta() {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			ZonaDeCobertura zona = new ZonaDeCobertura(epicentroDominicoWilde, 0d, "Costanera Dominico Wilde");
+			new ZonaDeCobertura(epicentroDominicoWilde, 0d, "Costanera Dominico Wilde");
 		});	
 	}
 	
-	// Testea el agregado de una muestra a la lista de muestras de la zona de cobertura
-	// Testea ademas que se convoque notifyCreacionMuestra a los observers de la zona
+	// Testea:
+	// - el agregado de una organizacion a la lista de observers de la zona de cobertura
+	// - el agregado de una muestra a la lista de muestras de la zona de cobertura
+	// - que se convoque notifyCreacionMuestra a los observers de la zona
 	@Test
-	public void testAgregarMuestra() {
+	public void testSeCreaUnaMuestraYSeAvisaALosObservers() {
 		dominicoWilde.agregarObserver(flech);
-		
 		dominicoWilde.agregarMuestra(muestra);
 		
-		assertTrue(dominicoWilde.contieneMuestra(muestra));
 		verify(flech).updateCreacionMuestra(muestra, dominicoWilde);
 	}
 	
@@ -110,29 +110,22 @@ public class ZonaDeCoberturaTest {
 	
 	// Testea que se convoque notifyValidacionMuestra a los observers cuandose avisa que hay una muestraValidada
 	@Test
-	public void testMuestraValidada() {
+	public void testSeValidaUnaMuestraYSeAvisaALosObservers() {
 		dominicoWilde.agregarObserver(flech);
 		dominicoWilde.muestraValidida(muestra);
 		
 		verify(flech).updateValidacionMuestra(muestra, dominicoWilde);
 	}
-	
-	// Testea el agregado de un observador a la lista observers de la zona de cobertura
+
+	// Testea la eliminacion de un observer, por lo que no hay interacciones al 
+	// validar una muestra
 	@Test
-	public void testAgregarObserver() {
+	public void testSeValidaUnaMuestraPeroNoHayObservers() {
 		dominicoWilde.agregarObserver(flech);
-		
-		assertTrue(dominicoWilde.contieneObserver(flech));
-	}
-	
-	// Testea la eliminacion de un observador a la lista observers de la zona de cobertura
-	@Test
-	public void testEliminarObserver() {dominicoWilde.agregarObserver(flech);
 		dominicoWilde.eliminarObserver(flech);
+		dominicoWilde.muestraValidida(muestra);
 		
-		assertFalse(dominicoWilde.contieneObserver(flech));
+		verify(flech, never()).updateValidacionMuestra(muestra, dominicoWilde);
 	}
-	
-	
 
 }
