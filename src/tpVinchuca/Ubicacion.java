@@ -101,7 +101,7 @@ public class Ubicacion {
 		return ubicacionesAMenosDe;
 	}
 
-	
+	// aclarar si la muestra original queda en la lista resultado
 	public List<Muestra> muestrasAMenosDe(Double distancia, Muestra muestra, List<Muestra> muestras) {
 		List<Muestra> muestrasAMenosDe = new ArrayList<Muestra>();
 		

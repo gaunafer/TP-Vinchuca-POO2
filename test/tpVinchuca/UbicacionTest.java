@@ -76,16 +76,14 @@ public class UbicacionTest {
 	// Falla al crear una ubicacion con una latitud menor que el limite permitido
 	@Test
 	public void testCreacionUbicacionInexistentePorLatitudMenorQueElLimite() {
-		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			Ubicacion ubicacion = new Ubicacion(-94.603066, -58.443407);
-		});		
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {new Ubicacion(-94.603066, -58.443407);});		
 	}
 	
 	// Falla al crear una ubicacion con una latitud mayor que el limite permitido
 	@Test
 	public void testCreacionUbicacionInexistentePorLatitudMayorQueElLimite() {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			Ubicacion ubicacion = new Ubicacion(94.627911, -58.380361);
+			new Ubicacion(94.627911, -58.380361);
 		});	
 	}
 	
@@ -93,7 +91,7 @@ public class UbicacionTest {
 	@Test
 	public void testCreacionUbicacionInexistentePorLongitudMenorQueElLimite() {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			Ubicacion ubicacion = new Ubicacion(-34.603066, -198.443407);
+			new Ubicacion(-34.603066, -198.443407);
 		});
 	}
 	
@@ -101,7 +99,7 @@ public class UbicacionTest {
 	@Test
 	public void testCreacionUbicacionInexistentePorLongitudMayorQueElLimite() {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			Ubicacion ubicacion = new Ubicacion(-34.627911, 198.380361);
+			new Ubicacion(-34.627911, 198.380361);
 		});
 	}
 	
