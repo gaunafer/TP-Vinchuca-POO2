@@ -15,7 +15,7 @@ public class Experto extends NivelDeConocimiento{
 
 	
 	public void verificarEstado(Participante participante) {
-		if (this.getCantidadDeMuestrasDeUnParticipantePertenecientesAlMesAnteriorAlMesEnCurso(participante) < 10
+		if (this.getCantidadDeMuestrasDeUnParticipanteA30DiasDeLaFechaActual(participante) < 10
 				|| this.getCantidadDeVotacionesDeUnParticipanteA30DiasDeLaFechaActual(participante)<20) {
 					this.cambiarABasico(participante);
 				}

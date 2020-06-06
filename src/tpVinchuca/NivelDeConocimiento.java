@@ -12,7 +12,9 @@ public abstract class NivelDeConocimiento {
 		super();
 		this.aplicacionVinchucas = aplicacionVinchucas;
 	}
+	
 	protected abstract String getNivelDeConocimiento();
+	
 	protected abstract void verificarEstado(Participante participante);
 
 	public void cambiarABasico(Participante participante) {
@@ -27,7 +29,7 @@ public abstract class NivelDeConocimiento {
 		
 	}
 	
-	public Integer getCantidadDeMuestrasDeUnParticipantePertenecientesAlMesAnteriorAlMesEnCurso(Participante participante) {
+	public Integer getCantidadDeMuestrasDeUnParticipanteA30DiasDeLaFechaActual(Participante participante) {
 		LocalDate unMesAtras = LocalDate.now().minusMonths(1l);
 		
 		return this.aplicacionVinchucas.getMuestrasDeParticipantePorFecha(participante, unMesAtras).size();
@@ -36,7 +38,7 @@ public abstract class NivelDeConocimiento {
 
 	public Integer getCantidadDeVotacionesDeUnParticipanteA30DiasDeLaFechaActual(Participante participante) {
 		
-		return this.aplicacionVinchucas.getVotacionesDeParticipanteEnLosUltimos30Dias(participante).size();
+		return this.aplicacionVinchucas.getVotacionDeParticipantePorfecha(participante).size();
 	}	
 
 }

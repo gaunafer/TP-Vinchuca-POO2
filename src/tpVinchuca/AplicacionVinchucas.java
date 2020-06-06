@@ -26,22 +26,14 @@ public class AplicacionVinchucas {
 		return this.buscador.buscar(muestras, and);
 	}
 	
-	public List<Votacion> getVotaciones(){
+    public List<Votacion> getVotaciones(){
 		
 		return muestras.stream().flatMap(muestra -> muestra.getVotaciones().stream()).collect(Collectors.toList());
 		
 	}
 	
-	public List<Votacion> getVotacionesPorParticipante(Participante participante){
-		return this.getVotaciones().stream().filter(votacion-> votacion.getParticipante().equals(participante)).collect(Collectors.toList());
-	}
-	
-	public List<Votacion> getVotacionesPorFeacha(List<Votacion> votaciones, LocalDate fecha){
-		return votaciones.stream().filter(votacion->votacion.getFechaDeCreacion().isAfter(fecha)).collect(Collectors.toList());
-	}
-	
-	public List<Votacion> getVotacionesDeParticipanteEnLosUltimos30Dias(Participante participante){
-		return this.getVotacionesPorFeacha(this.getVotacionesPorParticipante(participante), LocalDate.now().minusDays(30l));
+	public List<Votacion> getVotacionDeParticipantePorfecha(Participante participante){
+		return this.buscador.getVotacionesDeParticipanteEnLosUltimos30Dias(this.getVotaciones(),participante);
 	}
 
 

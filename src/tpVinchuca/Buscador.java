@@ -6,23 +6,21 @@ import java.util.stream.Collectors;
 
 public class Buscador {
 	
-	public List<Votacion> getVotacionesDeParticipantePorFecha(List<Votacion> votaciones, Participante participante, LocalDate fecha){
-		return votaciones.stream()
-				.filter(votacion-> this.esVotacionDe(votacion, participante) && this.esVotacionEnFecha(votacion, fecha))
-				.collect(Collectors.toList());
-	}
-	
-	private boolean esVotacionDe(Votacion votacion, Participante participante) {
-		return votacion.getParticipante().equals(participante);
-	}
-	
-	private boolean esVotacionEnFecha(Votacion votacion, LocalDate fecha) {
-		return votacion.getFechaDeCreacion().getYear()==fecha.getYear() && votacion.getFechaDeCreacion().getMonth().equals(fecha.getMonth());
-	}
 	
 	public List<Muestra> buscar(List<Muestra> muestras, Filtro filtro){
 		return filtro.criterioDeBusqueda(muestras);
-		
+	}
+	
+    private List<Votacion> getVotacionesPorParticipante(List<Votacion> votaciones, Participante participante){
+		return votaciones.stream().filter(votacion-> votacion.getParticipante().equals(participante)).collect(Collectors.toList());
+	}
+	
+	private List<Votacion> getVotacionesPorFeacha(List<Votacion> votaciones, LocalDate fecha){
+		return votaciones.stream().filter(votacion->votacion.getFechaDeCreacion().isAfter(fecha)).collect(Collectors.toList());
+	}
+	
+	public List<Votacion> getVotacionesDeParticipanteEnLosUltimos30Dias(List<Votacion> votaciones, Participante participante){
+		return this.getVotacionesPorFeacha(this.getVotacionesPorParticipante(votaciones, participante), LocalDate.now().minusDays(30l));
 	}
 
 }
