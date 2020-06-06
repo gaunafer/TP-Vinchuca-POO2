@@ -176,8 +176,7 @@ public class ExpertoTest {
 
 	    when(aplicacionVinchucas.getVotacionDeParticipantePorfecha(pepe)).thenReturn(votaciones);
 	    when(aplicacionVinchucas.getMuestrasDeParticipantePorFecha(pepe, LocalDate.now())).thenReturn(muestras);
-	    //when(pepe.getNivelDeConocimiento()).thenReturn(experto.getNivelDeConocimiento());
-	    //pepe.actualizarEstado();
+	    
 	    experto.verificarEstado(pepe);
 	    
 	    verify(pepe).setNivelDeConocimiento(any(Basico.class));
