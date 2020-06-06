@@ -1,51 +1,61 @@
 package tpVinchuca;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.mockito.Mockito;
+import static org.mockito.Mockito.*;
+
+import java.time.LocalDate;
 
 public class MuestraTest {
 	private Muestra muestra1;
 	@Mock
-	private Persona persona;
+	private Participante persona = mock(Participante.class);
 	@Mock
 	private Ubicacion ubicacion;
 	@Mock
 	private Imagen imagen;
 	@Mock
-	private OpinionDeImagen opinion;
+	private Votacion votacion = mock(Votacion.class);
 	@Mock
-	private Votacion votacion;
-	@Mock
-	private Votacion votacion2;
+	private Votacion votacion2 = mock(Votacion.class);
+	private ResultadoDeMuestra opinion;
 	
 	@BeforeEach
 	public void setUp() {
-		Mockito.doReturn("fer").when(persona).getAlias();
-		Mockito.doReturn("vinchuca").when(opinion).getOpinionDeFoto();
-		Mockito.doReturn("Chinche Foliada").when(votacion).getOpinion();
-		Mockito.doReturn("Chinche Foliada").when(votacion).getOpinion();
-		muestra1 = new Muestra(opinion, ubicacion, persona, imagen);
+		opinion = ResultadoDeMuestra.VINCHUCA;
+		when(persona.getAlias()).thenReturn("fer");
+		when(persona.getNivelDeConocimiento()).thenReturn("Nivel Basico");
+		when(votacion.getParticipante()).thenReturn(persona);
+		when(votacion.getOpinion()).thenReturn("Chinche Foliada");
+		when(votacion2.getOpinion()).thenReturn("Chinche Foliada");
+		when(votacion2.getParticipante()).thenReturn(persona);
+		muestra1 = new Muestra(imagen, persona, opinion, ubicacion);
 	}
 	
 	@Test
 	public void muestraConstructorTest() {
-		assertEquals(persona, muestra1.getPersona());
+		assertEquals(persona.getAlias(), muestra1.getAliasParticipante());
 		assertEquals(ubicacion, muestra1.getUbicacion());
 		assertEquals(imagen, muestra1.getImagen());
-		assertEquals("vinchuca", muestra1.getTipoVinchuca());
+		assertEquals("Vinchuca", muestra1.getVeredicto());
+		assertEquals(LocalDate.now(), muestra1.getFecha());
 	}
 	@Test
 	public void resultadoActualMuestraSinVotos() {
-		assertEquals("vinchuca", muestra1.getResultadoActual());
+		assertEquals("Vinchuca", muestra1.getResultadoActual());
 	}
 	@Test
-	void void resultadoMuestraCon2Votos() {
+	public void muestraRegistradaComoVinchucaVotadaUnaVezComoChinche() {
+		muestra1.registrarVotacion(votacion);
+		assertEquals("Muestra Indefinida", muestra1.getResultadoActual());
+	}
+	@Test
+	public void muestraRegistradaComoVinchucaConDosVotosChincheFoliadaEsChinche() {
 		muestra1.registrarVotacion(votacion);
 		muestra1.registrarVotacion(votacion2);
 		assertEquals("Chinche Foliada", muestra1.getResultadoActual());
 	}
+
 }
