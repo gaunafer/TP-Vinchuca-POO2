@@ -13,6 +13,10 @@ public class MuestraTest {
 	@Mock
 	private Participante persona = mock(Participante.class);
 	@Mock
+	private Participante persona2 = mock(Participante.class);
+	@Mock
+	private Participante persona3 = mock(Participante.class);
+	@Mock
 	private Ubicacion ubicacion;
 	@Mock
 	private Imagen imagen;
@@ -20,6 +24,8 @@ public class MuestraTest {
 	private Votacion votacion = mock(Votacion.class);
 	@Mock
 	private Votacion votacion2 = mock(Votacion.class);
+	@Mock
+	private Votacion votacion3 = mock(Votacion.class);
 	private ResultadoDeMuestra opinion;
 	
 	@BeforeEach
@@ -27,10 +33,22 @@ public class MuestraTest {
 		opinion = ResultadoDeMuestra.VINCHUCA;
 		when(persona.getAlias()).thenReturn("fer");
 		when(persona.getNivelDeConocimiento()).thenReturn("Nivel Basico");
+		
+		when(persona2.getAlias()).thenReturn("nati");
+		when(persona2.getNivelDeConocimiento()).thenReturn("Nivel Basico");
+		
+		when(persona3.getAlias()).thenReturn("cin");
+		when(persona3.getNivelDeConocimiento()).thenReturn("Nivel Basico");
+		
 		when(votacion.getParticipante()).thenReturn(persona);
 		when(votacion.getOpinion()).thenReturn("Chinche Foliada");
+		
+		when(votacion2.getParticipante()).thenReturn(persona2);
 		when(votacion2.getOpinion()).thenReturn("Chinche Foliada");
-		when(votacion2.getParticipante()).thenReturn(persona);
+		
+		when(votacion3.getParticipante()).thenReturn(persona3);
+		when(votacion3.getOpinion()).thenReturn("Chinche Foliada");
+		
 		muestra1 = new Muestra(imagen, persona, opinion, ubicacion);
 	}
 	
@@ -43,19 +61,22 @@ public class MuestraTest {
 		assertEquals(LocalDate.now(), muestra1.getFecha());
 	}
 	@Test
-	public void resultadoActualMuestraSinVotos() {
+	public void resultadoActualMuestraRegistradaComoVinchucaSinVotosEsVinchuca() {
 		assertEquals("Vinchuca", muestra1.getResultadoActual());
 	}
 	@Test
-	public void muestraRegistradaComoVinchucaVotadaUnaVezComoChinche() {
+	public void muestraRegistradaComoVinchucaVotadaUnaVezComoChinche() throws Exception {
 		muestra1.registrarVotacion(votacion);
 		assertEquals("Muestra Indefinida", muestra1.getResultadoActual());
 	}
 	@Test
-	public void muestraRegistradaComoVinchucaConDosVotosChincheFoliadaEsChinche() {
-		muestra1.registrarVotacion(votacion);
+	public void muestraRegistradaComoVinchucaConDosVotosChincheFoliadaEsChinche() throws Exception {
 		muestra1.registrarVotacion(votacion2);
+		muestra1.registrarVotacion(votacion3);
 		assertEquals("Chinche Foliada", muestra1.getResultadoActual());
 	}
-
+	@Test
+	public void muestraVotadaPorElParticipanteQueLaCreoLanzaExcepcion() {
+		
+	}
 }
