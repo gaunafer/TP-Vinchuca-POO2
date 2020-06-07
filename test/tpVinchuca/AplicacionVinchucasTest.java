@@ -14,6 +14,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.Spy;
 
 
 public class AplicacionVinchucasTest {
@@ -33,19 +34,80 @@ public class AplicacionVinchucasTest {
 	@Mock
 	private List<Muestra> muestras = mock(ArrayList.class);
 	@Mock
-	private List<Votacion> votaciones = mock(ArrayList.class);
+	private Muestra muestra = mock(Muestra.class);
+	@Mock
+	private Muestra muestra1 = mock(Muestra.class);
+	@Mock
+	private Votacion votacion = mock(Votacion.class);
+	@Mock
+	private Votacion votacion1 = mock(Votacion.class);
+
+	private List<Votacion> votaciones ;
+	@Mock
+	private Participante juanPerez = mock(Participante.class);
 	
-	private AplicacionVinchucas aplicacion = new AplicacionVinchucas(null); 
+	private List<Muestra> muestrasConVotaciones;
 	
+	
+	private AplicacionVinchucas aplicacion; 
 	@BeforeEach
 	public void setUp() {
+			aplicacion = new AplicacionVinchucas(buscador); 
+			votaciones = new ArrayList<Votacion>();
+			muestrasConVotaciones = new ArrayList<Muestra>();	
+	}
+	
+	@Test
+	public void seCreaUnaAplicacionVinchucasCorrectamente() {
+		assertEquals(buscador, aplicacion.getBuscador());
+		assertEquals(new ArrayList<Muestra>(), aplicacion.getMuestras());
+	}
+	
+	@Test
+	public void retornaLaListaDeMuestrasFiltradasPorFecha() {
 		
-		when(muestras.size()).thenReturn(11);
-		when(votaciones.size()).thenReturn(21);
+		when(muestra.getParticipante()).thenReturn(juanPerez);
+		muestrasConVotaciones.add(muestra);
+		aplicacion.añadirMuestra(muestra);
+		when(buscador.buscar(muestrasConVotaciones, filtroFecha)).thenReturn(muestrasConVotaciones);
+		when(buscador.buscar(muestrasConVotaciones, and)).thenReturn(muestrasConVotaciones);
+		when(buscador.buscar(muestrasConVotaciones, filtroParticipante)).thenReturn(muestrasConVotaciones);
+		when(filtroFecha.criterioDeBusqueda(muestrasConVotaciones)).thenReturn(muestrasConVotaciones);
+		when(filtroParticipante.criterioDeBusqueda(muestrasConVotaciones)).thenReturn(muestrasConVotaciones);
+		when(and.criterioDeBusqueda(muestrasConVotaciones)).thenReturn(muestrasConVotaciones);
 	
 		
 		
+		assertEquals(muestrasConVotaciones, aplicacion.getMuestrasDeParticipantePorFecha(juanPerez, LocalDate.now()));
+	}
+	
+	@Test 
+	public void votacionesTotalesDelaAplicacion() {
 		
+		votaciones.add(votacion);
+		votaciones.add(votacion1);
+		when(muestra.getVotaciones()).thenReturn(votaciones);
+	
+		aplicacion.añadirMuestra(muestra);
+		
+		
+		assertEquals(votaciones, aplicacion.getVotaciones());
+		
+	}
+	
+	@Test
+	public void seObtienLaListaDeVotacionesDeUnaListaDeMuestras() {
+		aplicacion.añadirMuestra(muestra);
+		aplicacion.añadirMuestra(muestra1);
+		
+
+		when(buscador.getVotacionesDeParticipanteEnLosUltimos30Dias(votaciones,juanPerez)).thenReturn(votaciones);
+		when(muestra.getVotaciones()).thenReturn(votaciones);
+	
+		when(muestra.getParticipante()).thenReturn(juanPerez);
+	
+	
+		assertEquals(votaciones, aplicacion.getVotacionDeParticipantePorfecha(juanPerez));
 	}
 
 
