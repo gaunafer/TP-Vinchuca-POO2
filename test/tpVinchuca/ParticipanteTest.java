@@ -114,11 +114,4 @@ public class ParticipanteTest {
 	}
 
 
-	public Votacion crearVotacion(LocalDate fechaCreacion, ResultadoDeMuestra tipoResultadoMuestra,
-			Participante participante) {
-		Votacion votacion = new Votacion(tipoResultadoMuestra, participante);
-		votacion.setFechaDeCreacion(fechaCreacion);
-		return votacion;
-	}
-
 }

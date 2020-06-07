@@ -1,5 +1,6 @@
 package tpVinchuca;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,16 +39,8 @@ public class Muestra {
  * @throws Exception 
  * 
  */
-	////
 	public void registrarVotacion(Votacion votacion) throws Exception {
 			nivelDeValidacion.registrarVotacion(this, votacion);
-<<<<<<< HEAD
-		} catch (Exception e) {
-		
-			e.printStackTrace();
-		}
-=======
->>>>>>> fer
 	}
 	public String getAliasParticipante() {
 		return participante.getAlias();
@@ -86,18 +79,10 @@ public class Muestra {
 	public void addVotacion(Votacion votacion) {
 		this.votaciones.add(votacion);		
 	}
-<<<<<<< HEAD
-	
-=======
-
 
 	public Participante getParticipante() {
 		return participante;
 	}
 
-
-
-
->>>>>>> fer
 }
 
