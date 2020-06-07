@@ -8,33 +8,21 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class NivelExperto extends NivelDeValidacion {
+public class NivelValidada extends NivelDeValidacion {
 
 	@Override
 	public String resultadoActual(Muestra muestra) {
 		Map<String, Integer> contadorDeOpiniones = crearRankingDeOpiniones(muestra);
 		List<String> estadosMasVotados = obtenerOpinionesMasVotadas(contadorDeOpiniones);
 		return analizarOpiniones(estadosMasVotados);
+	}
+
+	@Override
+	public void registrarVotacion(Muestra muestra, Votacion votacion) throws Exception {
+		throw new ErrorParticipanteVotaMuestraValidada();
 		
 	}
-	private String analizarOpiniones(List<String> estadosMasVotados) {
-		if (estadosMasVotados.size() > 1 ) {
-			return ResultadoDeMuestra.INDEFINIDA.getValor();
-		}
-		else {
-			return estadosMasVotados.get(0);
-		}
-	}
-	private List<String> obtenerOpinionesMasVotadas(Map<String, Integer> contadorDeOpiniones) {
-		Integer valorMaximo = Collections.max(contadorDeOpiniones.values());
-		List<String> estadosMasVotados = new ArrayList<String>();
-		for (String opinion : contadorDeOpiniones.keySet()) {
-			if (contadorDeOpiniones.get(opinion).equals(valorMaximo)) {
-				estadosMasVotados.add(opinion);
-			}
-		}
-		return estadosMasVotados;
-	}
+	
 	private Map<String, Integer> crearRankingDeOpiniones(Muestra muestra) {
 		Stream<Votacion> votacionesExpertas;
 		votacionesExpertas = muestra.getVotaciones().stream().filter(votacion->votacion.getParticipante().getNivelDeConocimiento() == "Nivel Experto");
@@ -50,19 +38,24 @@ public class NivelExperto extends NivelDeValidacion {
 		}
 		return contadorDeOpiniones;
 	}
-	@Override
-	public void registrarVotacion(Muestra muestra, Votacion votacion) throws Exception {
-		if(votacion.getParticipante().getNivelDeConocimiento() == "Nivel Basico") {
-			throw new ErrorParticipanteBasicoVotaMuetraNivelExperto();
+	
+	private List<String> obtenerOpinionesMasVotadas(Map<String, Integer> contadorDeOpiniones) {
+		Integer valorMaximo = Collections.max(contadorDeOpiniones.values());
+		List<String> estadosMasVotados = new ArrayList<String>();
+		for (String opinion : contadorDeOpiniones.keySet()) {
+			if (contadorDeOpiniones.get(opinion).equals(valorMaximo)) {
+				estadosMasVotados.add(opinion);
+			}
 		}
-		if (crearRankingDeOpiniones(muestra).containsKey(votacion.getOpinion()) ) {
-			muestra.addVotacion(votacion);
-			muestra.setNivelDeValidacionValidada();
+		return estadosMasVotados;
+	}
+	private String analizarOpiniones(List<String> estadosMasVotados) {
+		if (estadosMasVotados.size() > 1 ) {
+			return ResultadoDeMuestra.INDEFINIDA.getValor();
 		}
 		else {
-			muestra.addVotacion(votacion);
+			return estadosMasVotados.get(0);
 		}
-		
 	}
 
 }

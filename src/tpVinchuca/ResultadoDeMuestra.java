@@ -3,6 +3,7 @@ package tpVinchuca;
 public enum ResultadoDeMuestra {
 	
 	VINCHUCA ("Vinchuca"),
+	INDEFINIDA("Muestra Indefinida"),
 	IMAGEN_POCO_LEGIBLE("Imagen poco legible");
 	
 	private String valor;
@@ -13,11 +14,8 @@ public enum ResultadoDeMuestra {
 
 	public String getValor() {
 		return valor;
-	}
-	
-	
-	
-	
-	
+	}	
 
 }
+
+
