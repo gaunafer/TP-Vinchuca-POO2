@@ -17,23 +17,21 @@ public abstract class NivelDeValidacion {
 	public  String resultadoActual(Muestra muestra) {
 		List<Votacion> votaciones = getVotaciones(muestra);
 		Map<String, Integer> contadorDeOpiniones = crearRankingDeOpiniones(muestra, votaciones);
+		contadorDeOpiniones = agregarOpinionDeLaMuestraAlRanking(muestra, contadorDeOpiniones);
 		List<String> estadosMasVotados = obtenerOpinionesMasVotadas(contadorDeOpiniones);
 		return analizarOpiniones(estadosMasVotados);
 	}
+	protected abstract Map<String, Integer> agregarOpinionDeLaMuestraAlRanking(Muestra muestra, Map<String, Integer> contadorDeOpiniones);
 	/**
-	 * Obriene las votaciones que seran analizadas para analizar el resultado actual de la muestra.
+	 * Obriene las votaciones que seran tenidas en cuenta para analizar el resultado actual de la muestra.
 	 * */
-	protected List<Votacion> getVotaciones(Muestra muestra){
-		Stream<Votacion> votacionesExpertas;
-		votacionesExpertas = muestra.getVotaciones().stream().filter(votacion->votacion.getParticipante().getNivelDeConocimiento() == "Nivel Experto");
-		return votacionesExpertas.collect(Collectors.toList());
-	}
+	protected abstract List<Votacion> getVotaciones(Muestra muestra);
+	
 	/**
 	 * Crea un ranking de las opiniones recibidas con la cantidad de veces que se selecciono esa opcion
 	 * */	
 	protected Map<String, Integer> crearRankingDeOpiniones(Muestra muestra, List<Votacion> votaciones) {
 		Map<String, Integer> contadorDeOpiniones = new HashMap<>();
-		contadorDeOpiniones.put(muestra.getVeredicto(), 1);
 		for (Votacion vot : votaciones) {
 			if (contadorDeOpiniones.containsKey(vot.getOpinion())) {
 				contadorDeOpiniones.put(vot.getOpinion(), contadorDeOpiniones.get(vot.getOpinion())+1);
