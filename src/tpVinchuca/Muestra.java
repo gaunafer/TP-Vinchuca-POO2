@@ -18,7 +18,7 @@ public class Muestra {
 		this.participante = participante;
 		this.imagen = imagen;
 		this.fecha = LocalDate.now();
-		this.veredicto = veredicto;
+		this.veredicto = veredicto; 
 		this.ubicacion = ubicacion;
 		this.inicializarEstado();
 		 this.votaciones = new ArrayList<Votacion>();
@@ -84,10 +84,6 @@ public class Muestra {
 		return participante;
 	}
 
-	public Ubicacion getUbicacion() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
 

@@ -16,7 +16,7 @@ public class Buscador {
 	}
 	
 	private List<Votacion> getVotacionesPorFeacha(List<Votacion> votaciones, LocalDate fecha){
-		return votaciones.stream().filter(votacion->votacion.getFechaDeCreacion().isAfter(fecha)).collect(Collectors.toList());
+		return votaciones.stream().filter(votacion->votacion.getFecha().isAfter(fecha)).collect(Collectors.toList());
 	}
 	
 	public List<Votacion> getVotacionesDeParticipanteEnLosUltimos30Dias(List<Votacion> votaciones, Participante participante){
