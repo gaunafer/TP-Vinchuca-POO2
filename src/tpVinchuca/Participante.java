@@ -1,6 +1,5 @@
 package tpVinchuca;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,19 +34,6 @@ public class Participante {
 
 	public void actualizarEstado() {
 		this.nivelDeConocimiento.verificarEstado(this);
-	}
+	}	
 
-	
-
-=======
-public class Participante {
-	public String getAlias() {
-		return "";
-	}
-
-	public String getNivelDeConocimiento() {
-		// TODO Auto-generated method stub
-		return null;
-	}
->>>>>>> Fer
 }
