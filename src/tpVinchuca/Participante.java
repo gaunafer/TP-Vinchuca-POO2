@@ -30,7 +30,7 @@ public class Participante {
 		
 		this.nivelDeConocimiento = nivelDeConocimiento;
 		
-	}	
+	}
 
 	public void actualizarEstado() {
 		this.nivelDeConocimiento.verificarEstado(this);
