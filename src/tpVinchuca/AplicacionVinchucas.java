@@ -19,6 +19,18 @@ public class AplicacionVinchucas {
 		this.muestras = new ArrayList<Muestra>();
 	}
 	
+	public Buscador getBuscador() {
+		return buscador;
+	}
+
+	public List<Muestra> getMuestras() {
+		return muestras;
+	}
+	
+	public void añadirMuestra(Muestra muestra) {
+		muestras.add(muestra);
+	}
+
 	public List<Muestra> getMuestrasDeParticipantePorFecha(Participante participante, LocalDate fecha) {
 		Filtro filtroFecha =  new FiltroFecha(fecha);
 		Filtro filtroParticipante = new FiltroParticipante(participante);
