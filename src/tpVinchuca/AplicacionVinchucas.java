@@ -36,5 +36,4 @@ public class AplicacionVinchucas {
 		return this.buscador.getVotacionesDeParticipanteEnLosUltimos30Dias(this.getVotaciones(),participante);
 	}
 
-
 }

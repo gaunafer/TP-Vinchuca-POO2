@@ -84,5 +84,10 @@ public class Muestra {
 		return participante;
 	}
 
+	public Ubicacion getUbicacion() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
 
