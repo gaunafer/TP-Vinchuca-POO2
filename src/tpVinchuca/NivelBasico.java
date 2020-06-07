@@ -28,7 +28,7 @@ public class NivelBasico extends NivelDeValidacion {
 			muestra.setNivelDeValidacionExperto();
 		}
 	}
-
+/////
 	/*private void verificarParticipante(Muestra muestra, Votacion votacion) throws Exception  {
 		if (muestra.getParticipante().equals(votacion.getParticipante())) {
 			throw new ErrorParticipanteNoPuedeVotarMuestraPublicadaPorSiMismo();

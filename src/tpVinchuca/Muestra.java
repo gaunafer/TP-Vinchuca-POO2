@@ -39,6 +39,7 @@ public class Muestra {
  * @throws Exception 
  * 
  */
+	////
 	public void registrarVotacion(Votacion votacion) throws Exception {
 			nivelDeValidacion.registrarVotacion(this, votacion);
 	}
