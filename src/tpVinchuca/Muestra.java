@@ -36,15 +36,11 @@ public class Muestra {
 
 /**
  * Utiliza try catch porque eclipse lo dice.
+ * @throws Exception 
  * 
  */
-	public void registrarVotacion(Votacion votacion) {
-		try {
+	public void registrarVotacion(Votacion votacion) throws Exception {
 			nivelDeValidacion.registrarVotacion(this, votacion);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	public String getAliasParticipante() {
 		return participante.getAlias();
@@ -82,6 +78,11 @@ public class Muestra {
 	}
 	public void addVotacion(Votacion votacion) {
 		this.votaciones.add(votacion);		
+	}
+
+
+	public Participante getParticipante() {
+		return participante;
 	}
 
 
