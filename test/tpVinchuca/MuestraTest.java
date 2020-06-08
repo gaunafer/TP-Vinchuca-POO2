@@ -48,8 +48,8 @@ public class MuestraTest {
 		opinion = ResultadoDeMuestra.VINCHUCA;
 		when(persona.getAlias()).thenReturn("fer");
 		when(persona.getNivelDeConocimiento()).thenReturn("Nivel Basico");
-		
 		when(persona2.getAlias()).thenReturn("nati");
+		
 		when(persona2.getNivelDeConocimiento()).thenReturn("Nivel Basico");
 		
 		when(persona3.getAlias()).thenReturn("cin");
