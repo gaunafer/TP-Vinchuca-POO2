@@ -120,8 +120,8 @@ public class AplicacionVinchucasTest {
 		when(muestra.getParticipante()).thenReturn(juanPerez);
 		when(muestra1.getParticipante()).thenReturn(juanPerez);
 		
-		aplicacion.añadirMuestra(muestra);
-		aplicacion.añadirMuestra(muestra1);
+		aplicacion.agregarMuestra(muestra);
+		aplicacion.agregarMuestra(muestra1);
 		
 		when(buscador.buscar(muestras, filtroFecha)).thenReturn(muestras);
 		when(buscador.buscar(muestras, and)).thenReturn(muestras);
@@ -129,9 +129,9 @@ public class AplicacionVinchucasTest {
 		when(filtroFecha.criterioDeBusqueda(muestras)).thenReturn(muestras);
 		when(filtroParticipante.criterioDeBusqueda(muestras)).thenReturn(muestras);
 		when(and.criterioDeBusqueda(muestras)).thenReturn(muestras);
+
 	
-		
-		
+				
 		assertEquals(muestrasConVotaciones, aplicacion.getMuestrasDeParticipantePorFecha(juanPerez, LocalDate.now()));
 	}
 	
@@ -142,7 +142,7 @@ public class AplicacionVinchucasTest {
 		votaciones.add(votacion1);
 		when(muestra.getVotaciones()).thenReturn(votaciones);
 	
-		aplicacion.añadirMuestra(muestra);
+		aplicacion.agregarMuestra(muestra);
 		
 		
 		assertEquals(votaciones, aplicacion.getVotaciones());
@@ -151,8 +151,8 @@ public class AplicacionVinchucasTest {
 	
 	@Test
 	public void seObtienLaListaDeVotacionesDeUnaListaDeMuestras() {
-		aplicacion.añadirMuestra(muestra);
-		aplicacion.añadirMuestra(muestra1);
+		aplicacion.agregarMuestra(muestra);
+		aplicacion.agregarMuestra(muestra1);
 		
 
 		when(buscador.getVotacionesDeParticipanteEnLosUltimos30Dias(votaciones,juanPerez)).thenReturn(votaciones);
