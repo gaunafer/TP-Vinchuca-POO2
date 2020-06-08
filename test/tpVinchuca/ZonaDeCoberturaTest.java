@@ -128,4 +128,30 @@ public class ZonaDeCoberturaTest {
 		verify(flech, never()).updateValidacionMuestra(muestra, dominicoWilde);
 	}
 
+	// Testea el metodo zonaContieneUbicacionDeMuestra para una muestra que se encuentra
+	// ubicada dentro de la zona de cobertura
+	@Test
+	public void testZonaContieneUbicacionDeMuestra() {
+		Ubicacion ubicacionMuestra = mock(Ubicacion.class);
+		when(muestra.getUbicacion()).thenReturn(ubicacionMuestra);
+		when(ubicacionMuestra.calcularDistancia(epicentroVarela)).thenReturn(3d);
+		
+		Boolean zonaContieneUbicacionDeMuestra = varela.zonaContieneUbicacionDeMuestra(muestra);
+		
+		assertTrue(zonaContieneUbicacionDeMuestra);
+	}
+	
+	// Testea el metodo zonaContieneUbicacionDeMuestra para una muestra que se encuentra
+	// fuera de la zona de cobertura
+	@Test
+	public void testZonaNoContieneUbicacionDeMuestra() {
+		Ubicacion ubicacionMuestra = mock(Ubicacion.class);
+		when(muestra.getUbicacion()).thenReturn(ubicacionMuestra);
+		when(ubicacionMuestra.calcularDistancia(epicentroVarela)).thenReturn(4.5d);
+		
+		Boolean zonaContieneUbicacionDeMuestra = varela.zonaContieneUbicacionDeMuestra(muestra);
+		
+		assertFalse(zonaContieneUbicacionDeMuestra);
+	}
+	
 }

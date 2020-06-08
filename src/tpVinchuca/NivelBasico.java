@@ -34,5 +34,10 @@ public class NivelBasico extends NivelDeValidacion {
 		return contadorDeOpiniones;
 	}
 
+	@Override
+	protected String getNivelDeValidacion() {
+		return "Nivel Basico";
+	}
+
 
 }

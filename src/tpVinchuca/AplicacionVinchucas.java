@@ -1,22 +1,21 @@
 package tpVinchuca;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.*;
+import java.util.stream.*;
 
 public class AplicacionVinchucas {
 	
 	private Buscador buscador;
     private List<Muestra> muestras;
+    private List<ZonaDeCobertura> zonas;
 	
 
 	public AplicacionVinchucas(Buscador buscador) {
 		super();
 		this.buscador = buscador;
 		this.muestras = new ArrayList<Muestra>();
+		this.zonas = new ArrayList<ZonaDeCobertura>();
 	}
 	
 	public Buscador getBuscador() {
@@ -46,6 +45,33 @@ public class AplicacionVinchucas {
 	
 	public List<Votacion> getVotacionDeParticipantePorfecha(Participante participante){
 		return this.buscador.getVotacionesDeParticipanteEnLosUltimos30Dias(this.getVotaciones(),participante);
+	}
+
+	/**
+	 * Agrega una zona de cobertura a la lista de zonas de la aplicacion
+	 * @param zonaDeCobertura
+	 */
+	public void agregarZonaDeCobertura(ZonaDeCobertura zonaDeCobertura) {
+		zonas.add(zonaDeCobertura);
+	}
+
+	/**
+	 * Registra la creacion de una nueva muestra agregandola a su lista de muestras. 
+	 * Ademas, revisa la lista de zonas de cobertura y agrega la muestra en aquellas 
+	 * zonas a las que pertenece la muestra. 
+	 * Por ultimo, se asegura que la clase que monitorea la validacion de cada muestra
+	 * agregue las zonas.
+	 * @param muestra
+	 */
+	public void agregarMuestra(Muestra muestra) {
+		muestras.add(muestra);
+		
+		for (ZonaDeCobertura zona : this.zonas) {
+			if (zona.zonaContieneUbicacionDeMuestra(muestra)) {
+				zona.agregarMuestra(muestra);
+				muestra.asignarZona(zona);
+			}
+		}
 	}
 
 }

@@ -114,6 +114,7 @@ public class Ubicacion {
 				muestrasAMenosDe.add(muestraDeLaLista);
 			}
 		}
+		muestrasAMenosDe.remove(muestra);
 		return muestrasAMenosDe;
 	}
 	

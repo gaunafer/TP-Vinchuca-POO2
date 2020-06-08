@@ -20,7 +20,7 @@ public class NivelExperto extends NivelDeValidacion {
 
 	@Override
 	public void registrarVotacion(Muestra muestra, Votacion votacion) throws Exception {
-		if (votacion.getParticipante().getNivelDeConocimiento() == "Nivel Basico") {
+		if (votacion.getParticipante().getNivelDeConocimiento() == "Nivel Basico" || muestra.muestraVotadaPor(votacion.getParticipante())) {
 			throw new ErrorParticipanteBasicoVotaMuetraNivelExperto();
 		}
 		if (crearRankingDeOpiniones(muestra, getVotaciones(muestra)).containsKey(votacion.getOpinion())) {
@@ -33,11 +33,15 @@ public class NivelExperto extends NivelDeValidacion {
 	@Override
 	protected Map<String, Integer> agregarOpinionDeLaMuestraAlRanking(Muestra muestra,
 			Map<String, Integer> contadorDeOpiniones) {
-
 		if (muestra.getVeredicto().equalsIgnoreCase("Nivel Experto")) {
 			contadorDeOpiniones.put(muestra.getVeredicto(), 1);
 		}
 		return contadorDeOpiniones;
+	}
+
+	@Override
+	protected String getNivelDeValidacion() {
+		return "Nivel Experto";
 	}
 
 }

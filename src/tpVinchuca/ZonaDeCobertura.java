@@ -150,4 +150,16 @@ public class ZonaDeCobertura {
 		}
 	}
 
+	/**
+	 * Determina si una muestra se encuentra ubicada dentro de la zona de cobertura
+	 * @param muestra Muestra cuuya ubicacion es evaluada
+	 * @return true si la muestra se encuentra ubicada en la zona, false caso contrar
+	 */
+	public Boolean zonaContieneUbicacionDeMuestra(Muestra muestra) {
+		Ubicacion ubicacionDeLaMuestra = muestra.getUbicacion();
+		Double distanciaEntreMuestraYEpicentro = ubicacionDeLaMuestra.calcularDistancia(getEpicentro());
+		Boolean zonaContieneUbicacionDeMuestra = distanciaEntreMuestraYEpicentro <= getRadio();
+		return zonaContieneUbicacionDeMuestra;
+	}
+
 }

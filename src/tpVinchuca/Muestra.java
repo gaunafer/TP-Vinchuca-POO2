@@ -13,10 +13,10 @@ public class Muestra {
 	private List<Votacion> votaciones;
 	private Participante participante;
 	private NivelDeValidacion nivelDeValidacion;
-	private List<ZonaDeCobertura> zonasDeCobertura;
 	private Imagen imagen;
 	private ResultadoDeMuestra veredicto;
 	private Ubicacion ubicacion;
+	private ClaseX claseX;
 	
 	public Muestra(Imagen imagen, Participante participante, ResultadoDeMuestra veredicto, Ubicacion ubicacion) {
 		this.participante = participante;
@@ -25,7 +25,8 @@ public class Muestra {
 		this.veredicto = veredicto; 
 		this.ubicacion = ubicacion;
 		this.inicializarEstado();
-		 this.votaciones = new ArrayList<Votacion>();
+		this.votaciones = new ArrayList<Votacion>();
+		this.claseX = new ClaseX();
 	}
 	
 	
@@ -80,12 +81,25 @@ public class Muestra {
 	public Imagen getImagen() {
 		return this.imagen;
 	}
+	
+	public ClaseX getClaseX() {
+		return this.claseX;
+	}
+	
 	public void addVotacion(Votacion votacion) {
 		this.votaciones.add(votacion);		
 	}
 
 	public Participante getParticipante() {
 		return participante;
+	}
+
+	/**
+	 * Asigna la zona a la lista de zonas de la ClaseX a las que pertenece la muestra
+	 * @param zona ZonaDeCobertura
+	 */
+	public void asignarZona(ZonaDeCobertura zona) {
+		getClaseX().agregarZonaDeCobertura(zona);
 	}
 
 
@@ -95,6 +109,10 @@ public class Muestra {
 				.collect(Collectors.toList());
 		return !votaciones.isEmpty();
 	}
+	public String getNivelDeValidacion() {
+		return nivelDeValidacion.getNivelDeValidacion();
+	}
+
 
 
 }

@@ -11,11 +11,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.mockito.Mock;
 import org.mockito.Spy;
-
 
 public class AplicacionVinchucasTest {
 	
@@ -49,14 +47,63 @@ public class AplicacionVinchucasTest {
 	private List<Muestra> muestrasConVotaciones;
 	private List<Votacion> votaciones ;
 	
-	
 	private AplicacionVinchucas aplicacion; 
+	
+	
 	@BeforeEach
 	public void setUp() {
 			aplicacion = new AplicacionVinchucas(buscador); 
 			votaciones = new ArrayList<Votacion>();
 			muestrasConVotaciones = new ArrayList<Muestra>();	
 			muestras = new ArrayList<Muestra>();
+	}
+	
+	// Testea:
+	// -el agregado de zonas de cobertura a la lista de zonas
+	// -el agregado de muestras a la lista de muestras
+	// -que al agregar una muestra, las zonas a las que pertenece la muestra la agreguen a su lista
+	// -que ademas las clases que monitorean la validacion de muestras agreguen a las zonas a las que la muestra pertenece
+	@Test
+	public void testSeAgregaUnaMuestraQuePerteneceADosZonasDeCobertura() {
+		ZonaDeCobertura varela = mock(ZonaDeCobertura.class);
+		ZonaDeCobertura berazategui = mock(ZonaDeCobertura.class);
+		
+		aplicacion.agregarZonaDeCobertura(varela);
+		aplicacion.agregarZonaDeCobertura(berazategui);
+		
+		when(varela.zonaContieneUbicacionDeMuestra(muestra)).thenReturn(true);
+		when(berazategui.zonaContieneUbicacionDeMuestra(muestra)).thenReturn(true);
+
+		aplicacion.agregarMuestra(muestra);
+		
+		verify(varela).agregarMuestra(muestra);
+		verify(berazategui).agregarMuestra(muestra);
+		verify(muestra).asignarZona(varela);
+		verify(muestra).asignarZona(berazategui);
+	}
+
+	// Testea:
+	// -el agregado de zonas de cobertura a la lista de zonas
+	// -el agregado de muestras a la lista de muestras
+	// -que al agregar una muestra, las zonas a las que no pertenece la muestra no agreguen a la misma a su lista
+	// -que ademas las clases que monitorean la validacion de muestras no agreguen a las zonas a las que la muestra no pertenece
+	@Test
+	public void testSeAgregaUnaMuestraQueNoPerteneceANingunaZonasDeCobertura() {
+		ZonaDeCobertura varela = mock(ZonaDeCobertura.class);
+		ZonaDeCobertura berazategui = mock(ZonaDeCobertura.class);
+		
+		aplicacion.agregarZonaDeCobertura(varela);
+		aplicacion.agregarZonaDeCobertura(berazategui);
+		
+		when(varela.zonaContieneUbicacionDeMuestra(muestra)).thenReturn(false);
+		when(berazategui.zonaContieneUbicacionDeMuestra(muestra)).thenReturn(false);
+
+		aplicacion.agregarMuestra(muestra);
+		
+		verify(varela, never()).agregarMuestra(muestra);
+		verify(berazategui, never()).agregarMuestra(muestra);
+		verify(muestra, never()).asignarZona(varela);
+		verify(muestra, never()).asignarZona(berazategui);
 	}
 	
 	@Test
@@ -116,6 +163,7 @@ public class AplicacionVinchucasTest {
 	
 		assertEquals(votaciones, aplicacion.getVotacionDeParticipantePorfecha(juanPerez));
 	}
+
 
 
 }
