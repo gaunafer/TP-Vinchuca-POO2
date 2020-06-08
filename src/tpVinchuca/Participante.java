@@ -35,5 +35,9 @@ public class Participante {
 	public void actualizarEstado() {
 		this.nivelDeConocimiento.verificarEstado(this);
 	}	
+	
+	public boolean equals(Participante participante) {
+		return this.getAlias() == participante.getAlias();
+	}
 
 }
