@@ -19,49 +19,75 @@ import org.mockito.Spy;
 
 public class BuscadorTest {
 	
-	
 	private Buscador buscador;
+	private List<Votacion> votaciones;
+	
 	@Mock
-	private FiltroFecha filtroFecha = mock(FiltroFecha.class);
+	private Filtro filtro = mock(Filtro.class);
 	@Mock
-	private FiltroAnd and = mock(FiltroAnd.class);
-	@Mock
-	private FiltroCombinado filtroCombinado = mock(FiltroCombinado.class);
-	@Mock
-	private FiltroMuestraValida filtroMuestraValida = mock(FiltroMuestraValida.class);
-	@Mock
-	private FiltroParticipante filtroParticipante = mock(FiltroParticipante.class);
-	@Mock
-	private Muestra muestra = mock(Muestra.class);
-	@Mock
-	private Muestra muestra1 = mock(Muestra.class);
+	private List<Muestra> muestras = mock(ArrayList.class);
 	@Mock
 	private Votacion votacion = mock(Votacion.class);
 	@Mock
 	private Votacion votacion1 = mock(Votacion.class);
 	@Mock
+	private Votacion votacion2 = mock(Votacion.class);
+	@Mock
+	private Votacion votacion3 = mock(Votacion.class);
+	@Mock
+	private Votacion votacion4 = mock(Votacion.class);
+	@Mock
 	private Participante juanPerez = mock(Participante.class);
-	
-	private List<Muestra> muestras;
+	@Mock
+	private Participante anaFernandez = mock(Participante.class);
+	@Mock
+	private Participante camilaSaez = mock(Participante.class);
 
+	
 	@BeforeEach
 	public void setUp() {
 		buscador = new Buscador();
-		muestras = new ArrayList<Muestra>();
+		votaciones = new ArrayList<Votacion>();
+		
+		when(votacion.getParticipante()).thenReturn(juanPerez);
+		when(votacion1.getParticipante()).thenReturn(anaFernandez);
+		when(votacion2.getParticipante()).thenReturn(juanPerez);
+		when(votacion3.getParticipante()).thenReturn(camilaSaez);
+		when(votacion4.getParticipante()).thenReturn(juanPerez);
+		
+		when(votacion.getFecha()).thenReturn(LocalDate.now().minusDays(20l));
+		when(votacion1.getFecha()).thenReturn(LocalDate.now().minusDays(20l));
+		when(votacion2.getFecha()).thenReturn(LocalDate.now().minusDays(20l));
+		when(votacion3.getFecha()).thenReturn(LocalDate.now().minusMonths(2l));
+		when(votacion4.getFecha()).thenReturn(LocalDate.now().minusMonths(2l));
+		
+		votaciones.add(votacion);
+		votaciones.add(votacion1);
+		votaciones.add(votacion2);
+		votaciones.add(votacion3);
+		votaciones.add(votacion4);
+		
 	}
 
+	// Testea que el metodo buscar llame al metodo criterioDeBusqueda del filtro pasado como parametro
 	@Test
-	public void seBuscaLaListaDeMuestrasQueCoincidanConLosParametrosDelFiltroIndicado() {
+	public void testSeBuscaLaListaDeMuestrasQueCoincidanConLosParametrosDelFiltroIndicado() {
+		buscador.buscar(muestras, filtro);
 		
-		muestras.add(muestra);
-		muestras.add(muestra1);
-		when(filtroFecha.criterioDeBusqueda(muestras)).thenReturn(muestras);
-		
-		assertEquals(muestras, buscador.buscar(muestras, filtroFecha));
+		verify(filtro).criterioDeBusqueda(muestras);
 	}
 	
+	/* Testea que las votaciones se filtren correctamente por participante y fecha
+	con el metodo getVotacionesDeParticipanteEnLosUltimos30Dias.
+	Para este caso, el resultado debe obviar una votacion que se corresponde con
+	el participante pero no con la fecha, otra votacion que se corresponde con la
+	fecha pero no con el participante, y otra que no cumple con ningun criterio.*/
 	@Test
-	public void seBuscaLaListaDeVotacionesPorParticipanteDadoYEnElRangodeLaFechaIndicada() {
+	public void testSeBuscaLaListaDeVotacionesPorParticipanteDadoEnElUltimoMesYSonDos() {
 		
+		List<Votacion> votacionesDeJuanPerez = buscador.getVotacionesDeParticipanteEnLosUltimos30Dias(votaciones, juanPerez);
+		
+		assertEquals(2, votacionesDeJuanPerez.size());
 	}
+	
 }

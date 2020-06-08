@@ -15,12 +15,12 @@ public class Buscador {
 		return votaciones.stream().filter(votacion-> votacion.getParticipante().equals(participante)).collect(Collectors.toList());
 	}
 	
-	private List<Votacion> getVotacionesPorFeacha(List<Votacion> votaciones, LocalDate fecha){
+	private List<Votacion> getVotacionesPorFecha(List<Votacion> votaciones, LocalDate fecha){
 		return votaciones.stream().filter(votacion->votacion.getFecha().isAfter(fecha)).collect(Collectors.toList());
 	}
 	
 	public List<Votacion> getVotacionesDeParticipanteEnLosUltimos30Dias(List<Votacion> votaciones, Participante participante){
-		return this.getVotacionesPorFeacha(this.getVotacionesPorParticipante(votaciones, participante), LocalDate.now().minusDays(30l));
+		return this.getVotacionesPorFecha(this.getVotacionesPorParticipante(votaciones, participante), LocalDate.now().minusDays(30l));
 	}
 
 }
