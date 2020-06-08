@@ -29,8 +29,7 @@ public class AplicacionVinchucasTest {
 	private FiltroMuestraValida filtroMuestraValida = mock(FiltroMuestraValida.class);
 	@Mock
 	private FiltroParticipante filtroParticipante = mock(FiltroParticipante.class);
-	@Mock
-	private List<Muestra> muestras = mock(ArrayList.class);
+
 	@Mock
 	private Muestra muestra = mock(Muestra.class);
 	@Mock
@@ -39,12 +38,14 @@ public class AplicacionVinchucasTest {
 	private Votacion votacion = mock(Votacion.class);
 	@Mock
 	private Votacion votacion1 = mock(Votacion.class);
-
-	private List<Votacion> votaciones ;
 	@Mock
 	private Participante juanPerez = mock(Participante.class);
 	
+	
+
+	private List<Muestra> muestras;
 	private List<Muestra> muestrasConVotaciones;
+	private List<Votacion> votaciones ;
 	
 	private AplicacionVinchucas aplicacion; 
 	
@@ -54,6 +55,7 @@ public class AplicacionVinchucasTest {
 			aplicacion = new AplicacionVinchucas(buscador); 
 			votaciones = new ArrayList<Votacion>();
 			muestrasConVotaciones = new ArrayList<Muestra>();	
+			muestras = new ArrayList<Muestra>();
 	}
 	
 	// Testea:
@@ -113,18 +115,23 @@ public class AplicacionVinchucasTest {
 	@Test
 	public void retornaLaListaDeMuestrasFiltradasPorFecha() {
 		
+		muestras.add(muestra);
+		muestras.add(muestra1);
 		when(muestra.getParticipante()).thenReturn(juanPerez);
-		muestrasConVotaciones.add(muestra);
+		when(muestra1.getParticipante()).thenReturn(juanPerez);
+		
 		aplicacion.añadirMuestra(muestra);
-		when(buscador.buscar(muestrasConVotaciones, filtroFecha)).thenReturn(muestrasConVotaciones);
-		when(buscador.buscar(muestrasConVotaciones, and)).thenReturn(muestrasConVotaciones);
-		when(buscador.buscar(muestrasConVotaciones, filtroParticipante)).thenReturn(muestrasConVotaciones);
-		when(filtroFecha.criterioDeBusqueda(muestrasConVotaciones)).thenReturn(muestrasConVotaciones);
-		when(filtroParticipante.criterioDeBusqueda(muestrasConVotaciones)).thenReturn(muestrasConVotaciones);
-		when(and.criterioDeBusqueda(muestrasConVotaciones)).thenReturn(muestrasConVotaciones);
+		aplicacion.añadirMuestra(muestra1);
+		
+		when(buscador.buscar(muestras, filtroFecha)).thenReturn(muestras);
+		when(buscador.buscar(muestras, and)).thenReturn(muestras);
+		when(buscador.buscar(muestras, filtroParticipante)).thenReturn(muestras);
+		when(filtroFecha.criterioDeBusqueda(muestras)).thenReturn(muestras);
+		when(filtroParticipante.criterioDeBusqueda(muestras)).thenReturn(muestras);
+		when(and.criterioDeBusqueda(muestras)).thenReturn(muestras);
+
 	
-		
-		
+				
 		assertEquals(muestrasConVotaciones, aplicacion.getMuestrasDeParticipantePorFecha(juanPerez, LocalDate.now()));
 	}
 	
