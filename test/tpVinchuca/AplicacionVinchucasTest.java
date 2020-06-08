@@ -115,7 +115,7 @@ public class AplicacionVinchucasTest {
 		
 		when(muestra.getParticipante()).thenReturn(juanPerez);
 		muestrasConVotaciones.add(muestra);
-		aplicacion.aÃ±adirMuestra(muestra);
+		aplicacion.añadirMuestra(muestra);
 		when(buscador.buscar(muestrasConVotaciones, filtroFecha)).thenReturn(muestrasConVotaciones);
 		when(buscador.buscar(muestrasConVotaciones, and)).thenReturn(muestrasConVotaciones);
 		when(buscador.buscar(muestrasConVotaciones, filtroParticipante)).thenReturn(muestrasConVotaciones);
@@ -135,7 +135,7 @@ public class AplicacionVinchucasTest {
 		votaciones.add(votacion1);
 		when(muestra.getVotaciones()).thenReturn(votaciones);
 	
-		aplicacion.aÃ±adirMuestra(muestra);
+		aplicacion.añadirMuestra(muestra);
 		
 		
 		assertEquals(votaciones, aplicacion.getVotaciones());
@@ -144,8 +144,8 @@ public class AplicacionVinchucasTest {
 	
 	@Test
 	public void seObtienLaListaDeVotacionesDeUnaListaDeMuestras() {
-		aplicacion.aÃ±adirMuestra(muestra);
-		aplicacion.aÃ±adirMuestra(muestra1);
+		aplicacion.añadirMuestra(muestra);
+		aplicacion.añadirMuestra(muestra1);
 		
 
 		when(buscador.getVotacionesDeParticipanteEnLosUltimos30Dias(votaciones,juanPerez)).thenReturn(votaciones);
