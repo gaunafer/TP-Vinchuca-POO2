@@ -41,7 +41,7 @@ public class Ubicacion {
 	 */
 	public void setLatitud(Double latitud) {
 		 if ((latitud < -90 || latitud > 90)) {
-	          throw new IllegalArgumentException("Ubicacion inexistente. La latitud debe tener un valor entre -90 y 90");
+	          throw new ErrorLaUbicacionNoExiste("La latitud debe tener un valor entre -90 y 90");
 	       } else {
 	    	   this.latitud = latitud;
 	       }
@@ -54,7 +54,7 @@ public class Ubicacion {
 	 */
 	public void setLongitud(Double longitud) {
 		 if (longitud < -180 || longitud > 180) {
-			throw new IllegalArgumentException("Ubicacion inexistente. La longitud debe tener un valor entre -180 y 180");
+			throw new ErrorLaUbicacionNoExiste("La longitud debe tener un valor entre -180 y 180");
 		 } else {
 			this.longitud = longitud;
 	     }

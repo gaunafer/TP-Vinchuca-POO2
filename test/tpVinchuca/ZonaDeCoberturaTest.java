@@ -57,7 +57,7 @@ public class ZonaDeCoberturaTest {
 	// Chequea la creacion de una instancia de clase ZonaDeCobertura con radio incorrecto y lanza excepcion
 	@Test
 	public void testCreacionZonaDeCoberturaIncorrecta() {
-		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+		Assertions.assertThrows(ErrorElRadioDebeSerMayorACero.class, () -> {
 			new ZonaDeCobertura(epicentroDominicoWilde, 0d, "Costanera Dominico Wilde");
 		});	
 	}

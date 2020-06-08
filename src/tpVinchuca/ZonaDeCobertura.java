@@ -56,7 +56,7 @@ public class ZonaDeCobertura {
 	 */
 	public void setRadio(Double radio) {
 		if (radio <= 0d) {
-			throw new IllegalArgumentException("El radio debe ser mayor a 0.");
+			throw new ErrorElRadioDebeSerMayorACero();
 		} else {
 			this.radio = radio;
 		}
