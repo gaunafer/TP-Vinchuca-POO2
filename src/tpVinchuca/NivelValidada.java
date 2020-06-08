@@ -8,10 +8,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class NivelValidada extends NivelDeValidacion {
+public class NivelValidada extends NivelExperto {
 	@Override
 	public void registrarVotacion(Muestra muestra, Votacion votacion) throws Exception {
 		throw new ErrorParticipanteVotaMuestraValidada();
-		
 	}
 }

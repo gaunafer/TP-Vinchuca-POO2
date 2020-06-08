@@ -1,6 +1,8 @@
 package tpVinchuca;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -17,6 +19,8 @@ public class MuestraTest {
 	@Mock
 	private Participante persona3 = mock(Participante.class);
 	@Mock
+	private Participante persona4 = mock(Participante.class);
+	@Mock
 	private Ubicacion ubicacion;
 	@Mock
 	private Imagen imagen;
@@ -26,6 +30,8 @@ public class MuestraTest {
 	private Votacion votacion2 = mock(Votacion.class);
 	@Mock
 	private Votacion votacion3 = mock(Votacion.class);
+	@Mock
+	private Votacion votacion4 = mock(Votacion.class);
 	private ResultadoDeMuestra opinion;
 	
 	@BeforeEach
@@ -39,6 +45,9 @@ public class MuestraTest {
 		
 		when(persona3.getAlias()).thenReturn("cin");
 		when(persona3.getNivelDeConocimiento()).thenReturn("Nivel Basico");
+
+		when(persona4.getAlias()).thenReturn("pepe");
+		when(persona4.getNivelDeConocimiento()).thenReturn("Nivel Experto");
 		
 		when(votacion.getParticipante()).thenReturn(persona);
 		when(votacion.getOpinion()).thenReturn("Chinche Foliada");
@@ -48,6 +57,9 @@ public class MuestraTest {
 		
 		when(votacion3.getParticipante()).thenReturn(persona3);
 		when(votacion3.getOpinion()).thenReturn("Chinche Foliada");
+		
+		when(votacion4.getParticipante()).thenReturn(persona4);
+		when(votacion4.getOpinion()).thenReturn("Vinchuca");
 		
 		muestra1 = new Muestra(imagen, persona, opinion, ubicacion);
 	}
@@ -66,7 +78,7 @@ public class MuestraTest {
 	}
 	@Test
 	public void muestraRegistradaComoVinchucaVotadaUnaVezComoChinche() throws Exception {
-		muestra1.registrarVotacion(votacion);
+		muestra1.registrarVotacion(votacion2);
 		assertEquals("Muestra Indefinida", muestra1.getResultadoActual());
 	}
 	@Test
@@ -77,6 +89,7 @@ public class MuestraTest {
 	}
 	@Test
 	public void muestraVotadaPorElParticipanteQueLaCreoLanzaExcepcion() {
-		
+		assertThrows(ErrorParticipanteNoPuedeVotarMuestraPublicadaPorSiMismo.class,() ->{	muestra1.registrarVotacion(votacion);
+		});
 	}
 }

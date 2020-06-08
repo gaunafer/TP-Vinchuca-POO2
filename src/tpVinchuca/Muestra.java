@@ -1,8 +1,12 @@
 package tpVinchuca;
 
+import static org.junit.jupiter.api.DynamicTest.stream;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Muestra {
 	private LocalDate fecha;
@@ -96,6 +100,14 @@ public class Muestra {
 	 */
 	public void asignarZona(ZonaDeCobertura zona) {
 		getClaseX().agregarZonaDeCobertura(zona);
+	}
+
+
+	public boolean muestraVotadaPor(Participante participante) {
+		List<Votacion> votaciones = this.getVotaciones().stream()
+				.filter(votacion -> votacion.getParticipante().equals(participante))
+				.collect(Collectors.toList());
+		return !votaciones.isEmpty();
 	}
 
 
