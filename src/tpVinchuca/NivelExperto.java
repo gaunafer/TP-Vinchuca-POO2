@@ -26,6 +26,7 @@ public class NivelExperto extends NivelDeValidacion {
 		if (crearRankingDeOpiniones(muestra, getVotaciones(muestra)).containsKey(votacion.getOpinion())) {
 			muestra.addVotacion(votacion);
 			muestra.setNivelDeValidacionValidada();
+			muestra.informarVerificacion();
 		} else {
 			muestra.addVotacion(votacion);
 		}
