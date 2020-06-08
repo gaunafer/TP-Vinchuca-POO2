@@ -26,7 +26,7 @@ public class BuscadorTest {
 	@Mock
 	private FiltroAnd and = mock(FiltroAnd.class);
 	@Mock
-	private FiltroCombinado filtroCombinado = mock(FiltroCombinado.class);
+	private FiltroOr filtroCombinado = mock(FiltroOr.class);
 	@Mock
 	private FiltroMuestraValida filtroMuestraValida = mock(FiltroMuestraValida.class);
 	@Mock

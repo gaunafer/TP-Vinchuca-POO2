@@ -26,7 +26,7 @@ public class AplicacionVinchucas {
 		return muestras;
 	}
 	
-	public void añadirMuestra(Muestra muestra) {
+	public void aÃ±adirMuestra(Muestra muestra) {
 		muestras.add(muestra);
 	}
 
