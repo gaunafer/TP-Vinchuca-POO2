@@ -109,6 +109,10 @@ public class Muestra {
 				.collect(Collectors.toList());
 		return !votaciones.isEmpty();
 	}
+	public String getNivelDeValidacion() {
+		return nivelDeValidacion.getNivelDeValidacion();
+	}
+
 
 
 }

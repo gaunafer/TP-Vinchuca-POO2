@@ -13,4 +13,8 @@ public class NivelValidada extends NivelExperto {
 	public void registrarVotacion(Muestra muestra, Votacion votacion) throws Exception {
 		throw new ErrorParticipanteVotaMuestraValidada();
 	}
+	@Override
+	protected String getNivelDeValidacion() {
+		return "Nivel Validada";
+	}
 }

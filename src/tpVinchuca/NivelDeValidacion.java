@@ -67,5 +67,6 @@ public abstract class NivelDeValidacion {
 			return estadosMasVotados.get(0);
 		}
 	}
+	protected abstract String getNivelDeValidacion();
 	
 }
