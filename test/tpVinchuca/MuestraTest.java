@@ -24,6 +24,8 @@ public class MuestraTest {
 	@Mock
 	private Participante persona5 = mock(Participante.class);
 	@Mock
+	private Participante persona6 = mock(Participante.class);
+	@Mock
 	private Ubicacion ubicacion;
 	@Mock
 	private Imagen imagen;
@@ -38,14 +40,16 @@ public class MuestraTest {
 	private ResultadoDeMuestra opinion;
 	@Mock
 	private Votacion votacion5 = mock(Votacion.class);
+	@Mock
+	private Votacion votacion6 = mock(Votacion.class);
 	
 	@BeforeEach
 	public void setUp() {
 		opinion = ResultadoDeMuestra.VINCHUCA;
 		when(persona.getAlias()).thenReturn("fer");
 		when(persona.getNivelDeConocimiento()).thenReturn("Nivel Basico");
-		
 		when(persona2.getAlias()).thenReturn("nati");
+		
 		when(persona2.getNivelDeConocimiento()).thenReturn("Nivel Basico");
 		
 		when(persona3.getAlias()).thenReturn("cin");
@@ -56,6 +60,9 @@ public class MuestraTest {
 		
 		when(persona5.getAlias()).thenReturn("montoto");
 		when(persona5.getNivelDeConocimiento()).thenReturn("Nivel Experto");
+		
+		when(persona6.getAlias()).thenReturn("fulano");
+		when(persona6.getNivelDeConocimiento()).thenReturn("Nivel Experto");
 		
 		when(votacion.getParticipante()).thenReturn(persona);
 		when(votacion.getOpinion()).thenReturn("Chinche Foliada");
@@ -76,6 +83,10 @@ public class MuestraTest {
 		when(votacion5.getParticipante()).thenReturn(persona5);
 		when(votacion5.getOpinion()).thenReturn("Chinche Foliada");
 		when(votacion5.getNivelDeConocimientoParticipante()).thenReturn("Nivel Experto");
+		
+		when(votacion6.getParticipante()).thenReturn(persona6);
+		when(votacion6.getOpinion()).thenReturn("Vinchuca");
+		when(votacion6.getNivelDeConocimientoParticipante()).thenReturn("Nivel Experto");
 		
 		muestra1 = new Muestra(imagen, persona, opinion, ubicacion);
 		muestra2 = new Muestra(imagen, persona4, opinion,ubicacion);
@@ -124,5 +135,13 @@ public class MuestraTest {
 		muestra1.registrarVotacion(votacion5);
 		assertEquals("Chinche Foliada", muestra1.getResultadoActual());
 		assertEquals("Nivel Validada", muestra1.getNivelDeValidacion());
+	}
+	@Test
+	public void muestraValidadaNoPuedeSerVotada() throws Exception {
+		muestra1.registrarVotacion(votacion4);
+		muestra1.registrarVotacion(votacion5);
+		System.out.println(muestra1.getNivelDeValidacion());
+		assertThrows(ErrorParticipanteVotaMuestraValidada.class,() ->{	muestra1.registrarVotacion(votacion3);
+		});
 	}
 }
