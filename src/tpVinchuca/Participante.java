@@ -36,5 +36,4 @@ public class Participante {
 		this.nivelDeConocimiento.verificarEstado(this);
 	}	
 
-
 }

@@ -63,7 +63,7 @@ public class Muestra {
 		return ubicacion;
 	}
 	public void informarVerificacion() {
-		//Informa a zonade Cobertura
+		getClaseX().muestraValidada(this);
 	}
 	public void setNivelDeValidacionBasico() {
 		this.nivelDeValidacion = new NivelBasico();

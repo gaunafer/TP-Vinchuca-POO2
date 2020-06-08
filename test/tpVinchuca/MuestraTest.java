@@ -11,10 +11,13 @@ import static org.mockito.Mockito.*;
 import java.time.LocalDate;
 
 public class MuestraTest {
+	
 	private Muestra muestra1;
 	private Muestra muestra2;
 	@Mock
 	private Participante persona = mock(Participante.class);
+	@Mock
+	private ZonaDeCobertura zonaDeCobertura = mock(ZonaDeCobertura.class);
 	@Mock
 	private Participante persona2 = mock(Participante.class);
 	@Mock
@@ -48,8 +51,8 @@ public class MuestraTest {
 		opinion = ResultadoDeMuestra.VINCHUCA;
 		when(persona.getAlias()).thenReturn("fer");
 		when(persona.getNivelDeConocimiento()).thenReturn("Nivel Basico");
-		
 		when(persona2.getAlias()).thenReturn("nati");
+		
 		when(persona2.getNivelDeConocimiento()).thenReturn("Nivel Basico");
 		
 		when(persona3.getAlias()).thenReturn("cin");
@@ -140,8 +143,15 @@ public class MuestraTest {
 	public void muestraValidadaNoPuedeSerVotada() throws Exception {
 		muestra1.registrarVotacion(votacion4);
 		muestra1.registrarVotacion(votacion5);
-		System.out.println(muestra1.getNivelDeValidacion());
 		assertThrows(ErrorParticipanteVotaMuestraValidada.class,() ->{	muestra1.registrarVotacion(votacion3);
 		});
+	}
+	@Test
+	public void testMuestraVotadaPorDosExpertosConLaMismaOpinionsSeValidaEInformaAZonasDeCobertura() throws Exception {
+		muestra1.asignarZona(zonaDeCobertura);
+		muestra1.registrarVotacion(votacion4);
+		muestra1.registrarVotacion(votacion5);
+		assertEquals("Nivel Validada", muestra1.getNivelDeValidacion());
+		verify(zonaDeCobertura, times(1)).muestraValidida(any(Muestra.class));
 	}
 }
