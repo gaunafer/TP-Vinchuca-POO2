@@ -3,7 +3,7 @@ package tpVinchuca;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FiltroMuestraValida implements Filtro{
+public class FiltroMuestraValidada implements Filtro{
 	
 	private Participante participante;
 
@@ -11,7 +11,7 @@ public class FiltroMuestraValida implements Filtro{
     public List<Muestra> criterioDeBusqueda(List<Muestra> muestras){
 		
 		return muestras.stream()
-				.filter(muestra->muestra.getParticipante().equals(this.participante))
+				.filter(muestra->muestra.getNivelDeValidacion().equals("Nivel Validada"))
 				.collect(Collectors.toList());
 	}
 }
