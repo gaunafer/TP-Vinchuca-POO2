@@ -11,22 +11,42 @@ public class AplicacionVinchucas {
     private List<ZonaDeCobertura> zonas;
 	
 
+    /**
+     * Construye una instancia de la aplicacion, con un buscador.
+     * La aplicacion se construye tambien con una lista vacia de muestras 
+     * y otra lista vacia de zonas de cobertura 
+     * 
+     * @param buscador El buscador al que recurrira la aplicacion para realizar busquedas
+     */
 	public AplicacionVinchucas(Buscador buscador) {
-		super();
 		this.buscador = buscador;
 		this.muestras = new ArrayList<Muestra>();
 		this.zonas = new ArrayList<ZonaDeCobertura>();
 	}
 	
+	/**
+	 * Devuelve el buscador con el que se crea una aplicacion.
+	 * 
+	 * @return el buscador de la aplicacion
+	 */
 	public Buscador getBuscador() {
 		return buscador;
 	}
 
-	public List<Muestra> getMuestras() {
-		return muestras;
-	}
+	/*
+	 * public List<Muestra> getMuestras() { return muestras; }
+	 */
 
-
+	/**
+	 * Dado un {@code participante}, filtra la lista de muestras de la aplicacion 
+	 * por aquellas que fueron creadas por dicho participante desde la {@code fecha}
+	 * pasada como parametro hasta la fecha actual.
+	 * 
+	 * @param participante Participante que crea las muestras que se desea obtener
+	 * @param fecha Fecha desde la cual se quiere obtener las muestras 
+	 * @return una lista de todas las muestras creadas por {@code participante} 
+	 * creadas despues de {@code fecha} 
+	 */
 	public List<Muestra> getMuestrasDeParticipantePorFecha(Participante participante, LocalDate fecha) {
 		Filtro filtroFecha =  new FiltroFechaDeCreacionDesde(fecha);
 		Filtro filtroParticipante = new FiltroParticipante(participante);
@@ -34,18 +54,31 @@ public class AplicacionVinchucas {
 		return this.buscador.buscar(muestras, and);
 	}
 	
+	/**
+	 * A partir de la lista de muestras obtiene una lista de todas las votaciones 
+	 * de todas las muestras. 
+	 * 
+	 * @return una lista de todas las votaciones de todas las muestras
+	 */
     public List<Votacion> getVotaciones(){
-		
 		return muestras.stream().flatMap(muestra -> muestra.getVotaciones().stream()).collect(Collectors.toList());
 		
 	}
 	
+    /**
+     * Devuelve las votaciones hechas por el participante en los ultimos 30 dias.
+     * 
+     * @param participante Participante del cual se quieren las votaciones
+     * @return una lista con las votaciones hechas por {@code participante} en los 
+     * ultimos 30 dias
+     */
 	public List<Votacion> getVotacionDeParticipantePorfecha(Participante participante){
 		return this.buscador.getVotacionesDeParticipanteEnLosUltimos30Dias(this.getVotaciones(),participante);
 	}
 
 	/**
 	 * Agrega una zona de cobertura a la lista de zonas de la aplicacion
+	 * 
 	 * @param zonaDeCobertura
 	 */
 	public void agregarZonaDeCobertura(ZonaDeCobertura zonaDeCobertura) {
@@ -58,7 +91,8 @@ public class AplicacionVinchucas {
 	 * zonas a las que pertenece la muestra. 
 	 * Por ultimo, se asegura que la clase que monitorea la validacion de cada muestra
 	 * agregue las zonas.
-	 * @param muestra
+	 * 
+	 * @param muestra muestra creada
 	 */
 	public void agregarMuestra(Muestra muestra) {
 		muestras.add(muestra);
