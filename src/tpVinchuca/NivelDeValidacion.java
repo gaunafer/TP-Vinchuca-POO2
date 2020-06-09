@@ -61,7 +61,7 @@ public abstract class NivelDeValidacion {
 	 * */
 	private String analizarOpiniones(List<String> estadosMasVotados) {
 		if (estadosMasVotados.size() > 1 ) {
-			return ResultadoDeMuestra.INDEFINIDA.getValor();
+			return ClasificacionDeFoto.INDEFINIDA.getValor();
 		}
 		else {
 			return estadosMasVotados.get(0);

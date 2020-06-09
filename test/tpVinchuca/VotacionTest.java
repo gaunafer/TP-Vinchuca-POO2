@@ -11,7 +11,7 @@ public class VotacionTest {
 		Participante emma = mock(Participante.class);
 		when(emma.getNivelDeConocimiento()).thenReturn("Nivel basico");
 		
-		Votacion votacion = new Votacion(emma, ResultadoDeMuestra.VINCHUCA);
+		Votacion votacion = new Votacion(emma, ClasificacionDeFoto.VINCHUCA);
 		Participante participante = votacion.getParticipante();
 		String resultadoDeVotacion = votacion.getOpinion();
 		LocalDate fecha = votacion.getFecha();

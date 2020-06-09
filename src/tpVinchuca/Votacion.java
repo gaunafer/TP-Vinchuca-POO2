@@ -4,12 +4,12 @@ import java.time.LocalDate;
 
 public class Votacion {
 	private Participante participante;
-	private ResultadoDeMuestra opinion;
+	private ClasificacionDeFoto opinion;
 	private LocalDate fecha;
 	private String nivelConocimientoParticipante;
 	
 	
-	public Votacion(Participante participante, ResultadoDeMuestra opinion) {
+	public Votacion(Participante participante, ClasificacionDeFoto opinion) {
 		this.participante = participante;
 		this.opinion = opinion;
 		this.fecha = LocalDate.now();

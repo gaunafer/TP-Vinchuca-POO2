@@ -14,11 +14,11 @@ public class Muestra {
 	private Participante participante;
 	private NivelDeValidacion nivelDeValidacion;
 	private Imagen imagen;
-	private ResultadoDeMuestra veredicto;
+	private ClasificacionDeFoto veredicto;
 	private Ubicacion ubicacion;
 	private ClaseX claseX;
 	
-	public Muestra(Imagen imagen, Participante participante, ResultadoDeMuestra veredicto, Ubicacion ubicacion) {
+	public Muestra(Imagen imagen, Participante participante, ClasificacionDeFoto veredicto, Ubicacion ubicacion) {
 		this.participante = participante;
 		this.imagen = imagen;
 		this.fecha = LocalDate.now();
