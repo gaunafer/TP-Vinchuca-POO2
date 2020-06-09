@@ -1,18 +1,21 @@
 package tpVinchuca;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.mockito.Mock;
-
-public class FiltroFechaTest {
+import org.mockito.Spy;
+public class FiltroFechaDesdeTest {
 	
 	private Filtro filtroFecha;
 	private List<Muestra> muestras;
@@ -27,14 +30,14 @@ public class FiltroFechaTest {
 	
 	@BeforeEach
 	public void setUp() {
-		filtroFecha = new FiltroFecha(LocalDate.now().minusDays(30l));
+		filtroFecha = new FiltroFechaDesde(LocalDate.now().minusDays(30l));
 		muestras = new ArrayList<Muestra>();
 		muestras.add(muestra);
 		muestras.add(muestra1);
 		muestras.add(muestra2);
 		
-		when(muestra.getFecha()).thenReturn(LocalDate.now().minusDays(30l));
-		when(muestra1.getFecha()).thenReturn(LocalDate.now().minusDays(30l));
+		when(muestra.getFecha()).thenReturn(LocalDate.now().minusDays(15l));
+		when(muestra1.getFecha()).thenReturn(LocalDate.now().minusDays(29l));
 		when(muestra2.getFecha()).thenReturn(LocalDate.now().minusDays(31l));
 		
 		muestrasFiltradas = new ArrayList<Muestra>();
@@ -50,6 +53,5 @@ public class FiltroFechaTest {
 		assertEquals(muestrasFiltradas, filtroFecha.criterioDeBusqueda(muestras));
 		
 	}
-
 
 }

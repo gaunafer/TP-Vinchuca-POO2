@@ -20,7 +20,7 @@ public class AplicacionVinchucasTest {
 	@Mock
 	private Buscador buscador= mock(Buscador.class);
 	@Mock
-	private FiltroFecha filtroFecha = mock(FiltroFecha.class);
+	private FiltroFechaDesde filtroFecha = mock(FiltroFechaDesde.class);
 	@Mock
 	private FiltroAnd and = mock(FiltroAnd.class);
 	@Mock
