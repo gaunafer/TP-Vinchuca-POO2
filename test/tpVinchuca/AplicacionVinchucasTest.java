@@ -24,7 +24,7 @@ public class AplicacionVinchucasTest {
 	@Mock
 	private FiltroAnd and = mock(FiltroAnd.class);
 	@Mock
-	private FiltroCombinado filtroCombinado = mock(FiltroCombinado.class);
+	private FiltroOr filtroCombinado = mock(FiltroOr.class);
 	@Mock
 	private FiltroMuestraValida filtroMuestraValida = mock(FiltroMuestraValida.class);
 	@Mock
@@ -119,9 +119,10 @@ public class AplicacionVinchucasTest {
 		muestras.add(muestra1);
 		when(muestra.getParticipante()).thenReturn(juanPerez);
 		when(muestra1.getParticipante()).thenReturn(juanPerez);
-		
+
 		aplicacion.agregarMuestra(muestra);
 		aplicacion.agregarMuestra(muestra1);
+
 		
 		when(buscador.buscar(muestras, filtroFecha)).thenReturn(muestras);
 		when(buscador.buscar(muestras, and)).thenReturn(muestras);
@@ -142,8 +143,8 @@ public class AplicacionVinchucasTest {
 		votaciones.add(votacion1);
 		when(muestra.getVotaciones()).thenReturn(votaciones);
 	
-		aplicacion.agregarMuestra(muestra);
-		
+
+		aplicacion.agregarMuestra(muestra);		
 		
 		assertEquals(votaciones, aplicacion.getVotaciones());
 		
@@ -151,9 +152,10 @@ public class AplicacionVinchucasTest {
 	
 	@Test
 	public void seObtienLaListaDeVotacionesDeUnaListaDeMuestras() {
+
 		aplicacion.agregarMuestra(muestra);
 		aplicacion.agregarMuestra(muestra1);
-		
+
 
 		when(buscador.getVotacionesDeParticipanteEnLosUltimos30Dias(votaciones,juanPerez)).thenReturn(votaciones);
 		when(muestra.getVotaciones()).thenReturn(votaciones);

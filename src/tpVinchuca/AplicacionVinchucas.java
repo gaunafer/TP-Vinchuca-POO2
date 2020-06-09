@@ -26,6 +26,7 @@ public class AplicacionVinchucas {
 		return muestras;
 	}
 
+
 	public List<Muestra> getMuestrasDeParticipantePorFecha(Participante participante, LocalDate fecha) {
 		Filtro filtroFecha =  new FiltroFecha(fecha);
 		Filtro filtroParticipante = new FiltroParticipante(participante);

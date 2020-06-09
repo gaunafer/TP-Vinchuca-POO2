@@ -27,6 +27,8 @@ public class BuscadorTest {
 	@Mock
 	private List<Muestra> muestras = mock(ArrayList.class);
 	@Mock
+    private FiltroOr filtroCombinado = mock(FiltroOr.class);
+    @Mock
 	private Votacion votacion = mock(Votacion.class);
 	@Mock
 	private Votacion votacion1 = mock(Votacion.class);

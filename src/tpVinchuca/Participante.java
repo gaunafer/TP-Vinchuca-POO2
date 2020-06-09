@@ -35,6 +35,5 @@ public class Participante {
 	public void actualizarEstado() {
 		this.nivelDeConocimiento.verificarEstado(this);
 	}	
-	
 
 }
