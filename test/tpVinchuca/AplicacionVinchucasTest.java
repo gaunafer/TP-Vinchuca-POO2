@@ -109,7 +109,6 @@ public class AplicacionVinchucasTest {
 	@Test
 	public void seCreaUnaAplicacionVinchucasCorrectamente() {
 		assertEquals(buscador, aplicacion.getBuscador());
-		assertEquals(new ArrayList<Muestra>(), aplicacion.getMuestras());
 	}
 	
 	@Test
