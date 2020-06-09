@@ -14,7 +14,7 @@ public class MuestraTest {
 	
 	private Muestra muestra1;
 	private Muestra muestra2;
-	private ResultadoDeMuestra opinion;
+	private ClasificacionDeFoto opinion;
 	@Mock
 	private Ubicacion ubicacion;
 	@Mock
@@ -48,7 +48,7 @@ public class MuestraTest {
 	
 	@BeforeEach
 	public void setUp() {
-		opinion = ResultadoDeMuestra.VINCHUCA;
+		opinion = ClasificacionDeFoto.VINCHUCA;
 		zonaDeCobertura = mock(ZonaDeCobertura.class);
 		persona = mock(Participante.class);
 		persona2 = mock(Participante.class);
