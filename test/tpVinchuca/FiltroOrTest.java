@@ -33,7 +33,7 @@ public class FiltroOrTest {
 	@Mock
 	private FiltroParticipante filtroParticipante = mock(FiltroParticipante.class);
 	@Mock
-	private FiltroFechaDesde filtroFecha = mock(FiltroFechaDesde.class);
+	private FiltroFechaDeCreacionDesde filtroFecha = mock(FiltroFechaDeCreacionDesde.class);
 	
 	@BeforeEach
 	public void setUp() {

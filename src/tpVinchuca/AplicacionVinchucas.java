@@ -28,7 +28,7 @@ public class AplicacionVinchucas {
 
 
 	public List<Muestra> getMuestrasDeParticipantePorFecha(Participante participante, LocalDate fecha) {
-		Filtro filtroFecha =  new FiltroFechaDesde(fecha);
+		Filtro filtroFecha =  new FiltroFechaDeCreacionDesde(fecha);
 		Filtro filtroParticipante = new FiltroParticipante(participante);
 	    Filtro and = new FiltroAnd(filtroParticipante, filtroFecha);
 		return this.buscador.buscar(muestras, and);

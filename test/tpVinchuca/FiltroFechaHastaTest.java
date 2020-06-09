@@ -27,7 +27,7 @@ public class FiltroFechaHastaTest {
 		
 		@BeforeEach
 		public void setUp() {
-			filtroFechaHasta = new FiltroFechaHasta(LocalDate.now().minusDays(30l));
+			filtroFechaHasta = new FiltroFechaDeCreacionHasta(LocalDate.now().minusDays(30l));
 			muestras = new ArrayList<Muestra>();
 			muestras.add(muestra);
 			muestras.add(muestra1);

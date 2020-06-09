@@ -4,11 +4,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FiltroFechaDesde implements Filtro{
-	
+public class FiltroFechaDeCreacion implements Filtro {
 	private LocalDate fecha;
 	
-    public FiltroFechaDesde(LocalDate fecha) {
+    public FiltroFechaDeCreacion(LocalDate fecha) {
 		super();
 		this.fecha = fecha;
 	}
@@ -16,10 +15,8 @@ public class FiltroFechaDesde implements Filtro{
 	public List<Muestra> criterioDeBusqueda(List<Muestra> muestras){
 		
 		return muestras.stream()
-				.filter(muestra->muestra.getFecha().isAfter(this.fecha))
+				.filter(muestra->muestra.getFecha().equals(this.fecha))
 				.collect(Collectors.toList());
 	}
-	
-
 
 }
