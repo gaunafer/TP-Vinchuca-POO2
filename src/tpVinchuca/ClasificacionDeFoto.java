@@ -2,9 +2,8 @@ package tpVinchuca;
 
 public enum ClasificacionDeFoto {
 	
-	VINCHUCA ("Vinchuca"),
+	VINCHUCA_INFESTANS ("Vinchuca Infestans"),
 	INDEFINIDA("Muestra Indefinida"),
-    VINCHUCA_INFESTANS("Vinchuca Infestans"),
     VINCHUCA_SORDIDA("Vinchuca Sordida"),
     VINCHUCA_GUASAYANA("Vinchuca Gasayana"),
     CHINCHE_FOLIADA("Chinche Foliada"),

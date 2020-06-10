@@ -18,7 +18,6 @@ public class ClasificacionDeFotoTest {
 	
 	@BeforeEach
 	public void setUp() {
-		vinchuca = ClasificacionDeFoto.VINCHUCA;
 		muestraIndefinida = ClasificacionDeFoto.INDEFINIDA;
 		imagenPocoLegible = ClasificacionDeFoto.IMAGEN_POCO_CLARA;
 	    vinchucaInfestans = ClasificacionDeFoto.VINCHUCA_INFESTANS;
@@ -30,10 +29,9 @@ public class ClasificacionDeFotoTest {
 	}
 	@Test
 	public void testEnum() {
-		assertEquals("Vinchuca", vinchuca.getValor());
+	
 		assertEquals("Muestra Indefinida", muestraIndefinida.getValor());
 		assertEquals("Imagen poco clara", imagenPocoLegible.getValor());
-		
 		assertEquals("Vinchuca Infestans", vinchucaInfestans.getValor());
 		assertEquals("Vinchuca Sordida", vinchucaSordida.getValor());
 		assertEquals("Vinchuca Gasayana", vinchucaGasayana.getValor());

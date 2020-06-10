@@ -53,7 +53,7 @@ public class MuestraTest {
 	
 	@BeforeEach
 	public void setUp() {
-		opinion = ClasificacionDeFoto.VINCHUCA;
+		opinion = ClasificacionDeFoto.VINCHUCA_INFESTANS;
 		zonaDeCobertura = mock(ZonaDeCobertura.class);
 		persona = mock(Participante.class);
 		persona2 = mock(Participante.class);
@@ -77,12 +77,12 @@ public class MuestraTest {
 		assertEquals(persona.getAlias(), muestra1.getAliasParticipante());
 		assertEquals(ubicacion, muestra1.getUbicacion());
 		assertEquals(imagen, muestra1.getImagen());
-		assertEquals("Vinchuca", muestra1.getVeredicto());
+		assertEquals("Vinchuca Infestans", muestra1.getVeredicto());
 		assertEquals(LocalDate.now(), muestra1.getFecha());
 	}
 	@Test
 	public void resultadoActualMuestraRegistradaComoVinchucaSinVotosEsVinchuca() {
-		assertEquals("Vinchuca", muestra1.getResultadoActual());
+		assertEquals("Vinchuca Infestans", muestra1.getResultadoActual());
 	}
 	@Test
 	public void muestraRegistradaComoVinchucaVotadaUnaVezComoChinchePorUsuarioBasicoEsIndefinida() throws Exception {
