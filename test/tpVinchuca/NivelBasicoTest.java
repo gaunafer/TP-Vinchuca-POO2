@@ -3,7 +3,6 @@ package tpVinchuca;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.graalvm.compiler.debug.Assertions;
 import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -51,7 +50,7 @@ public class NivelBasicoTest {
 		when(votacion.getParticipante()).thenReturn(participante);
 		
 		String exception = assertThrows(ErrorParticipanteNoPuedeVotarEstaMuestra.class,()->{basico.registrarVotacion(muestra, votacion);}).getMessage();
-		assertEquals("Error participante no puede votar muestra creada por sí mismo", exception);
+		assertEquals("Error participante no puede votar muestra creada por sï¿½ mismo", exception);
 	}
 	@Test
 	public void registrarVotacionLanzaExcepcionSiElParticipanteYaVotoLaMuestra() throws ErrorParticipanteNoPuedeVotarEstaMuestra {
