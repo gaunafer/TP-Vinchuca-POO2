@@ -43,7 +43,7 @@ public class ExpertoTest {
 	public void elNivelDeConocimientoDejaDeSerExpertoCuandoNoCumpleCon10MuestrasEnLos30DiasPosterioresALaFechaActual(){
 
 
-	    when(aplicacionVinchucas.getVotacionDeParticipantePorfecha(pepe)).thenReturn(votaciones);
+	    when(aplicacionVinchucas.getVotacionesDeParticipanteDeLosUltimos30Dias(pepe)).thenReturn(votaciones);
 	    when(aplicacionVinchucas.getMuestrasDeParticipantePorFecha(pepe, LocalDate.now().minusMonths(1l))).thenReturn(muestras);
 	    when(votaciones.size()).thenReturn(11);
 	    when(muestras.size()).thenReturn(11);
@@ -60,7 +60,7 @@ public class ExpertoTest {
 
 
 	    when(aplicacionVinchucas.getMuestrasDeParticipantePorFecha(pepe, LocalDate.now().minusMonths(1l))).thenReturn(muestras);
-	    when(aplicacionVinchucas.getVotacionDeParticipantePorfecha(pepe)).thenReturn(votaciones);
+	    when(aplicacionVinchucas.getVotacionesDeParticipanteDeLosUltimos30Dias(pepe)).thenReturn(votaciones);
 	    when(votaciones.size()).thenReturn(11);
 	    when(muestras.size()).thenReturn(11);
 	    experto.verificarEstado(pepe);
@@ -75,7 +75,7 @@ public class ExpertoTest {
 
 
 	    when(aplicacionVinchucas.getMuestrasDeParticipantePorFecha(pepe, LocalDate.now().minusMonths(1l))).thenReturn(muestras);
-	    when(aplicacionVinchucas.getVotacionDeParticipantePorfecha(pepe)).thenReturn(votaciones);
+	    when(aplicacionVinchucas.getVotacionesDeParticipanteDeLosUltimos30Dias(pepe)).thenReturn(votaciones);
 	    when(votaciones.size()).thenReturn(21);
 	    when(muestras.size()).thenReturn(11);
 	   
