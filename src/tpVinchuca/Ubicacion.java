@@ -39,7 +39,7 @@ public class Ubicacion {
 	 * Lanza una excepcion en caso de que el valor sea menor a -90 o mayor a 90 
 	 * @param latitud Latitud expresada en decimal
 	 */
-	public void setLatitud(Double latitud) {
+	public void setLatitud(Double latitud) throws ErrorLaUbicacionNoExiste {
 		 if ((latitud < -90 || latitud > 90)) {
 	          throw new ErrorLaUbicacionNoExiste("La latitud debe tener un valor entre -90 y 90");
 	       } else {
@@ -52,7 +52,7 @@ public class Ubicacion {
 	 * Lanza una excepcion en caso de que el valor sea menor a -180 o mayor a 180 
 	 * @param latitud Longitud expresada en decimal
 	 */
-	public void setLongitud(Double longitud) {
+	public void setLongitud(Double longitud) throws ErrorLaUbicacionNoExiste {
 		 if (longitud < -180 || longitud > 180) {
 			throw new ErrorLaUbicacionNoExiste("La longitud debe tener un valor entre -180 y 180");
 		 } else {
@@ -101,7 +101,16 @@ public class Ubicacion {
 		return ubicacionesAMenosDe;
 	}
 
-	// aclarar si la muestra original queda en la lista resultado
+	/**
+	 * Obtiene las muestras que se encuentran a menos de cierta distancia de una 
+	 * muestra determinada.
+	 * 
+	 * @param distancia distancia en km a la que se tienen que encontrar las muestras
+	 * @param muestra muestra a partir de cuya ubicacion se calcula la distancia
+	 * @param muestras una lista de muestras
+	 * @return una lista de muestras que se encuentra a menos distancia de la muestra 
+	 * original (la cual es excluida de la lista final)
+	 */
 	public List<Muestra> muestrasAMenosDe(Double distancia, Muestra muestra, List<Muestra> muestras) {
 		List<Muestra> muestrasAMenosDe = new ArrayList<Muestra>();
 		
