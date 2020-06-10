@@ -16,7 +16,7 @@ public class Muestra {
 	private Imagen imagen;
 	private ClasificacionDeFoto veredicto;
 	private Ubicacion ubicacion;
-	private ClaseX claseX;
+	private InformadorDeZonas informadorDeZonas;
 	
 	public Muestra(Imagen imagen, Participante participante, ClasificacionDeFoto veredicto, Ubicacion ubicacion) {
 		this.participante = participante;
@@ -26,7 +26,7 @@ public class Muestra {
 		this.ubicacion = ubicacion;
 		this.inicializarEstado();
 		this.votaciones = new ArrayList<Votacion>();
-		this.claseX = new ClaseX();
+		this.informadorDeZonas = new InformadorDeZonas();
 	}
 	
 	
@@ -63,7 +63,7 @@ public class Muestra {
 		return ubicacion;
 	}
 	public void informarVerificacion() {
-		getClaseX().muestraValidada(this);
+		getInformadorDeZonas().muestraValidada(this);
 	}
 	public void setNivelDeValidacionBasico() {
 		this.nivelDeValidacion = new NivelBasico();
@@ -82,8 +82,8 @@ public class Muestra {
 		return this.imagen;
 	}
 	
-	public ClaseX getClaseX() {
-		return this.claseX;
+	public InformadorDeZonas getInformadorDeZonas() {
+		return this.informadorDeZonas;
 	}
 	
 	public void addVotacion(Votacion votacion) {
@@ -99,7 +99,7 @@ public class Muestra {
 	 * @param zona ZonaDeCobertura
 	 */
 	public void asignarZona(ZonaDeCobertura zona) {
-		getClaseX().agregarZonaDeCobertura(zona);
+		getInformadorDeZonas().agregarZonaDeCobertura(zona);
 	}
 
 

@@ -5,9 +5,9 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ClaseXTest {
+class InformadorDeZonasTest {
 	
-	private ClaseX claseX;
+	private InformadorDeZonas informadorDeZonas;
 	
 	private ZonaDeCobertura solano;
 	private ZonaDeCobertura varela;
@@ -15,7 +15,7 @@ class ClaseXTest {
 	
 	@BeforeEach
 	public void setUp() {
-		claseX = new ClaseX();
+		informadorDeZonas = new InformadorDeZonas();
 		
 		solano = mock(ZonaDeCobertura.class);
 		varela = mock(ZonaDeCobertura.class);
@@ -27,10 +27,10 @@ class ClaseXTest {
 	// - la activacion del metodo muestraValidada para cada zona de cobertura de la lista
 	@Test
 	public void testSeValidaUnaMuestraYSeAvisaALasZonasDeCobertura() {
-		claseX.agregarZonaDeCobertura(solano);
-		claseX.agregarZonaDeCobertura(varela);
+		informadorDeZonas.agregarZonaDeCobertura(solano);
+		informadorDeZonas.agregarZonaDeCobertura(varela);
 		
-		claseX.muestraValidada(muestra);
+		informadorDeZonas.muestraValidada(muestra);
 		
 		verify(solano).muestraValidida(muestra);
 		verify(varela).muestraValidida(muestra);
@@ -41,13 +41,13 @@ class ClaseXTest {
 	// - al no haber zonas de cobertura en la lista, no se les avisa ante la validacion de una muestra
 	@Test
 	public void testSeValidaUnaMuestraPeroNoHayZonasDeCobertura() {
-		claseX.agregarZonaDeCobertura(solano);
-		claseX.agregarZonaDeCobertura(varela);
+		informadorDeZonas.agregarZonaDeCobertura(solano);
+		informadorDeZonas.agregarZonaDeCobertura(varela);
 		
-		claseX.eliminarZonaDeCobertura(solano);
-		claseX.eliminarZonaDeCobertura(varela);
+		informadorDeZonas.eliminarZonaDeCobertura(solano);
+		informadorDeZonas.eliminarZonaDeCobertura(varela);
 		
-		claseX.muestraValidada(muestra);
+		informadorDeZonas.muestraValidada(muestra);
 		
 		verify(solano, never()).muestraValidida(muestra);
 		verify(varela, never()).muestraValidida(muestra);
