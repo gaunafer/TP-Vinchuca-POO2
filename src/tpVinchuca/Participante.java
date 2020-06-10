@@ -35,5 +35,10 @@ public class Participante {
 	public void actualizarEstado() {
 		this.nivelDeConocimiento.verificarEstado(this);
 	}	
+	@Override
+	public boolean equals(Object participante) {
+		Participante otroParticipante = (Participante)participante;
+		return this.getAlias().equals(otroParticipante.getAlias());
+	}
 
 }

@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 public abstract class NivelDeValidacion {
 	
-	public abstract void registrarVotacion(Muestra muestra, Votacion votacion) throws Exception;
+	public abstract void registrarVotacion(Muestra muestra, Votacion votacion) throws ErrorParticipanteNoPuedeVotarEstaMuestra;
 	/**
 	 * retorna el resultado actual de la muestra
 	 * */

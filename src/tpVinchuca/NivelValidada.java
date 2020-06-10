@@ -10,8 +10,8 @@ import java.util.stream.Stream;
 
 public class NivelValidada extends NivelExperto {
 	@Override
-	public void registrarVotacion(Muestra muestra, Votacion votacion) throws Exception {
-		throw new ErrorParticipanteVotaMuestraValidada();
+	public void registrarVotacion(Muestra muestra, Votacion votacion) throws ErrorParticipanteNoPuedeVotarEstaMuestra {
+		throw new ErrorParticipanteNoPuedeVotarEstaMuestra("No se puede votar una muestra validada");
 	}
 	@Override
 	protected String getNivelDeValidacion() {

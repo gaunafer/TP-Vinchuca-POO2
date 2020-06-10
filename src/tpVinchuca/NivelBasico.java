@@ -19,13 +19,22 @@ public class NivelBasico extends NivelDeValidacion {
 	}
 
 	@Override
-	public void registrarVotacion(Muestra muestra, Votacion votacion) throws Exception  {
-		if (muestra.getParticipante().equals(votacion.getParticipante()) || muestra.muestraVotadaPor(votacion.getParticipante())) {
-			throw new ErrorParticipanteNoPuedeVotarMuestraPublicadaPorSiMismo();
-			}
+	public void registrarVotacion(Muestra muestra, Votacion votacion) throws ErrorParticipanteNoPuedeVotarEstaMuestra  {
+		verificarSiElParticipantePuedeVotarLaMuestra(muestra, votacion);
 		muestra.addVotacion(votacion);
 		if (votacion.getNivelDeConocimientoParticipante() == "Nivel Experto") {
 			muestra.setNivelDeValidacionExperto();
+		}
+	}
+
+	private void verificarSiElParticipantePuedeVotarLaMuestra(Muestra muestra, Votacion votacion)
+			throws ErrorParticipanteNoPuedeVotarEstaMuestra {
+		if (muestra.getParticipante().equals(votacion.getParticipante()) || muestra.muestraVotadaPor(votacion.getParticipante())) {
+			if(muestra.getParticipante().equals(votacion.getParticipante())) {
+				throw new ErrorParticipanteNoPuedeVotarEstaMuestra("Error participante no puede votar muestra creada por sí mismo");
+			} else {
+				throw new ErrorParticipanteNoPuedeVotarEstaMuestra("Error el participante no pueve volver a votar esta muestra");
+			}
 		}
 	}
 	@Override

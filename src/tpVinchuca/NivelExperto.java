@@ -19,16 +19,31 @@ public class NivelExperto extends NivelDeValidacion {
 	}
 
 	@Override
-	public void registrarVotacion(Muestra muestra, Votacion votacion) throws Exception {
-		if (votacion.getParticipante().getNivelDeConocimiento() == "Nivel Basico" || muestra.muestraVotadaPor(votacion.getParticipante())) {
-			throw new ErrorParticipanteBasicoVotaMuetraNivelExperto();
-		}
+	public void registrarVotacion(Muestra muestra, Votacion votacion) throws  ErrorParticipanteNoPuedeVotarEstaMuestra {
+		verificarSiElParticipantePuedeVotarLaMuestra(muestra, votacion);
 		if (crearRankingDeOpiniones(muestra, getVotaciones(muestra)).containsKey(votacion.getOpinion())) {
 			muestra.addVotacion(votacion);
 			muestra.setNivelDeValidacionValidada();
 			muestra.informarVerificacion();
 		} else {
 			muestra.addVotacion(votacion);
+		}
+	}
+
+	private void verificarSiElParticipantePuedeVotarLaMuestra(Muestra muestra, Votacion votacion)
+			throws ErrorParticipanteNoPuedeVotarEstaMuestra {
+		if (votacion.getParticipante().getNivelDeConocimiento().equals("Nivel Basico")  ||
+				muestra.muestraVotadaPor(votacion.getParticipante()) ||
+				muestra.getParticipante().equals(votacion.getParticipante())) {
+			if(votacion.getParticipante().getNivelDeConocimiento() == "Nivel Basico") {
+			throw new ErrorParticipanteNoPuedeVotarEstaMuestra("Error participante Nivel Basico no puede votar muestra nivel experto");
+			}
+			else if (muestra.muestraVotadaPor(votacion.getParticipante())) {
+				throw new ErrorParticipanteNoPuedeVotarEstaMuestra("Error Participante no puede volver a votar esta muestra");
+			}
+			else {
+				throw new ErrorParticipanteNoPuedeVotarEstaMuestra("Error Participante no puede votar muestra creada por sí mismo");
+			}
 		}
 	}
 	@Override
