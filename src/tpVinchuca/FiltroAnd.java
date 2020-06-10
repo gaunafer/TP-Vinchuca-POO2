@@ -2,21 +2,16 @@ package tpVinchuca;
 
 import java.util.List;
 
-public class FiltroAnd implements Filtro{
-
-	
-	   private Filtro filtro;
-	   private Filtro otroFiltro;
+public class FiltroAnd extends OperadorBinario {
 
 	   public FiltroAnd(Filtro filtro, Filtro otroFiltro) {
-	      this.filtro = filtro;
-	      this.otroFiltro = otroFiltro; 
+	      super(filtro, otroFiltro);
 	   }
 
 	   @Override
 	   public List<Muestra> criterioDeBusqueda(List<Muestra> muestras) {
 	   
-	      List<Muestra> muestrasSegunCriterio = filtro.criterioDeBusqueda(muestras);		
-	      return otroFiltro.criterioDeBusqueda(muestrasSegunCriterio);
+	      List<Muestra> muestrasSegunCriterio = getFiltro().criterioDeBusqueda(muestras);		
+	      return getOtroFiltro().criterioDeBusqueda(muestrasSegunCriterio);
 	   }
 }
