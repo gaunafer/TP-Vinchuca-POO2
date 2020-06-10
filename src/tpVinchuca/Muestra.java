@@ -109,9 +109,26 @@ public class Muestra {
 				.collect(Collectors.toList());
 		return !votaciones.isEmpty();
 	}
+	
 	public String getNivelDeValidacion() {
 		return nivelDeValidacion.getNivelDeValidacion();
 	}
+	
+	public boolean esMuestraVotada() {
+		return votaciones.size() > 0;
+	}
+	
+	/**
+	 * este metodo solo es utilizado para Muestras que han sido votadas al menos una ves.
+	 * @return Fecha de la votacion mas reciente que se le realizo a esa muestra.
+	 */
+	public LocalDate getFechaUltimaVotacion() {
+		int posicionUltimaVotacion = this.getVotaciones().size() - 1;
+		Votacion ultimaVotacion = votaciones.get(posicionUltimaVotacion);
+	
+		return ultimaVotacion.getFecha();
+	}
+
 
 
 

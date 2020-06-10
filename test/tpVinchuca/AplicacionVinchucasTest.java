@@ -25,8 +25,7 @@ public class AplicacionVinchucasTest {
 	private FiltroAnd and = mock(FiltroAnd.class);
 	@Mock
 	private FiltroOr filtroCombinado = mock(FiltroOr.class);
-	@Mock
-	private FiltroMuestraValidada filtroMuestraValida = mock(FiltroMuestraValidada.class);
+	
 	@Mock
 	private FiltroParticipante filtroParticipante = mock(FiltroParticipante.class);
 

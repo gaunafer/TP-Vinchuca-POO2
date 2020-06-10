@@ -180,4 +180,9 @@ public class MuestraTest {
 		assertEquals("Nivel Validada", muestra1.getNivelDeValidacion());
 		verify(zonaDeCobertura, times(1)).muestraValidida(any(Muestra.class));
 	}
+	
+	@Test
+	public void fechaDeLaUltimaVotacionDeLaMuestra() {
+		
+	}
 }

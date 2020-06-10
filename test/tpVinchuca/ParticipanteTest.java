@@ -22,8 +22,6 @@ public class ParticipanteTest {
 	private Participante juanPerez;
 	private Participante juanaMolina;
 	private Participante marioBros;
-	private int mesPasado =  LocalDate.now().getMonthValue()-1;
-
 	@Mock
 	private Votacion votacion1 = mock(Votacion.class);
 	@Mock
@@ -101,16 +99,12 @@ public class ParticipanteTest {
 	@Test
     public void siElParticipanteGeneraMasDe10MuestrasYRealiza20VotacionesEnLosUltimos30DiasSuEstadoEsExperto() {
 
-		System.out.println(nivelDeConocimiento.getNivelDeConocimiento());
 		when(muestras.size()).thenReturn(11);
 		when(votaciones.size()).thenReturn(21);
 		when(aplicacionVinchucas.getMuestrasDeParticipantePorFecha(juanPerez, LocalDate.now().minusMonths(1l))).thenReturn(muestras);
 		when(aplicacionVinchucas.getVotacionDeParticipantePorfecha(juanPerez)).thenReturn(votaciones);
 		when(nivelDeConocimiento.getCantidadDeMuestrasDeUnParticipanteA30DiasDeLaFechaActual(juanPerez)).thenReturn(11);
 		when(nivelDeConocimiento.getCantidadDeVotacionesDeUnParticipanteA30DiasDeLaFechaActual(juanPerez)).thenReturn(21);
-		
-		//juanPerez.getNivelDeConocimiento();
-		System.out.println(juanPerez.getNivelDeConocimiento());
 		
 
        assertEquals("Nivel Experto", juanPerez.getNivelDeConocimiento());
@@ -119,8 +113,6 @@ public class ParticipanteTest {
 	@Test
 	public void siLaPersonaNoHizo10VotacionesEnUnMismoMesSuEstadoEsBasico() {
 		
-	
-
 		assertEquals("Nivel Basico", juanPerez.getNivelDeConocimiento());
 	}
 
