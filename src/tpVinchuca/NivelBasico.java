@@ -1,25 +1,18 @@
 package tpVinchuca;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 public class NivelBasico extends NivelDeValidacion {
-	
-	@Override
-	protected  List<Votacion> getVotaciones(Muestra muestra){
-		List<Votacion> votaciones;
-		votaciones = muestra.getVotaciones();
-		return votaciones;
-	}
 
+	/**
+	 *Verifica si el participante puede votar la muestra y en caso afirmativo registra el voto
+	 * @throws ErrorParticipanteNoPuedeVotarEstaMuestra
+	 */
 	@Override
-	public void registrarVotacion(Muestra muestra, Votacion votacion) throws ErrorParticipanteNoPuedeVotarEstaMuestra  {
+	public void registrarVotacion(Muestra muestra, Votacion votacion) throws ErrorParticipanteNoPuedeVotarEstaMuestra {
 		verificarSiElParticipantePuedeVotarLaMuestra(muestra, votacion);
 		muestra.addVotacion(votacion);
 		if (votacion.getNivelDeConocimientoParticipante() == "Nivel Experto") {
@@ -27,26 +20,50 @@ public class NivelBasico extends NivelDeValidacion {
 		}
 	}
 
+	/**
+	 * Verifica si el participante puede votar la muestra. levanta excepcion si no puede votar
+	 * @throws ErrorParticipanteNoPuedeVotarEstaMuestra
+	 */
 	private void verificarSiElParticipantePuedeVotarLaMuestra(Muestra muestra, Votacion votacion)
 			throws ErrorParticipanteNoPuedeVotarEstaMuestra {
-		if (muestra.getParticipante().equals(votacion.getParticipante()) || muestra.muestraVotadaPor(votacion.getParticipante())) {
-			if(muestra.getParticipante().equals(votacion.getParticipante())) {
-				throw new ErrorParticipanteNoPuedeVotarEstaMuestra("Error participante no puede votar muestra creada por sí mismo");
+		if (muestra.getParticipante().equals(votacion.getParticipante())
+				|| muestra.muestraVotadaPor(votacion.getParticipante())) {
+			if (muestra.getParticipante().equals(votacion.getParticipante())) {
+				throw new ErrorParticipanteNoPuedeVotarEstaMuestra(
+						"Error participante no puede votar muestra creada por si mismo");
 			} else {
-				throw new ErrorParticipanteNoPuedeVotarEstaMuestra("Error el participante no pueve volver a votar esta muestra");
+				throw new ErrorParticipanteNoPuedeVotarEstaMuestra(
+						"Error el participante no pueve volver a votar esta muestra");
 			}
 		}
 	}
+
+	/**
+	 * Retorna la lista de votaciones de la muestra
+	 */
 	@Override
-	protected Map<String, Integer> agregarOpinionDeLaMuestraAlRanking(Muestra muestra, Map<String, Integer> contadorDeOpiniones) {
+	protected  List<Votacion> getVotaciones(Muestra muestra) {
+		List<Votacion> votaciones;
+		votaciones = muestra.getVotaciones();
+		return votaciones;
+	}
+
+	/**
+	 *Agrega la opinion de la muestra al ranking de votaciones de la muestra
+	 */
+	@Override
+	protected Map<String, Integer> agregarOpinionDeLaMuestraAlRanking(Muestra muestra,
+			Map<String, Integer> contadorDeOpiniones) {
 		contadorDeOpiniones.put(muestra.getVeredicto(), 1);
 		return contadorDeOpiniones;
 	}
 
+	/**
+	 * Retorna el nivel de validacion de la muestra
+	 */
 	@Override
 	protected String getNivelDeValidacion() {
 		return "Nivel Basico";
 	}
-
 
 }

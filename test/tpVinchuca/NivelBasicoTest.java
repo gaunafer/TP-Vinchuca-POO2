@@ -50,7 +50,7 @@ public class NivelBasicoTest {
 		when(votacion.getParticipante()).thenReturn(participante);
 		
 		String exception = assertThrows(ErrorParticipanteNoPuedeVotarEstaMuestra.class,()->{basico.registrarVotacion(muestra, votacion);}).getMessage();
-		assertEquals("Error participante no puede votar muestra creada por s� mismo", exception);
+		assertEquals("Error participante no puede votar muestra creada por si mismo", exception);
 	}
 	@Test
 	public void registrarVotacionLanzaExcepcionSiElParticipanteYaVotoLaMuestra() throws ErrorParticipanteNoPuedeVotarEstaMuestra {
