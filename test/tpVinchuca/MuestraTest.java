@@ -104,8 +104,9 @@ public class MuestraTest {
 		when(votacion.getParticipante()).thenReturn(persona);
 		when(votacion.getOpinion()).thenReturn("Chinche Foliada");
 		when(votacion.getNivelDeConocimientoParticipante()).thenReturn("Nivel Basico");
-		assertThrows(ErrorParticipanteNoPuedeVotarMuestraPublicadaPorSiMismo.class,() ->{	muestra1.registrarVotacion(votacion);
+		assertThrows(ErrorParticipanteNoPuedeVotarEstaMuestra.class,() ->{	muestra1.registrarVotacion(votacion);
 		});
+		System.out.println("hola");
 	}
 	@Test
 	public void muestraCreadaPorExpertoSeCreaConNivelDeValidacionExperto() {
@@ -113,7 +114,6 @@ public class MuestraTest {
 		when(persona4.getNivelDeConocimiento()).thenReturn("Nivel Experto");
 		muestra2 = new Muestra(imagen, persona4, opinion,ubicacion);
 		assertEquals("Nivel Experto", muestra2.getNivelDeValidacion());
-		
 	}
 	@Test
 	public void muestraCreadaPorParticipanteBasicoSeCreaConNivelDeValidacionBasico() {
@@ -145,7 +145,7 @@ public class MuestraTest {
 		when(votacion5.getParticipante()).thenReturn(persona5);
 		when(votacion5.getOpinion()).thenReturn("Chinche Foliada");
 		when(votacion5.getNivelDeConocimientoParticipante()).thenReturn("Nivel Experto");
-		
+		when(persona5.getNivelDeConocimiento()).thenReturn("Nivel Experto");
 		muestra1.registrarVotacion(votacion4);
 		muestra1.registrarVotacion(votacion5);
 		assertEquals("Chinche Foliada", muestra1.getResultadoActual());
@@ -159,10 +159,11 @@ public class MuestraTest {
 		when(votacion5.getParticipante()).thenReturn(persona5);
 		when(votacion5.getOpinion()).thenReturn("Chinche Foliada");
 		when(votacion5.getNivelDeConocimientoParticipante()).thenReturn("Nivel Experto");
+		when(persona5.getNivelDeConocimiento()).thenReturn("Nivel Experto");
 		
 		muestra1.registrarVotacion(votacion4);
 		muestra1.registrarVotacion(votacion5);
-		assertThrows(ErrorParticipanteVotaMuestraValidada.class,() ->{
+		assertThrows(ErrorParticipanteNoPuedeVotarEstaMuestra.class,() ->{
 			muestra1.registrarVotacion(votacion3);
 			});
 	}
@@ -172,6 +173,7 @@ public class MuestraTest {
 		when(votacion4.getOpinion()).thenReturn("Chinche Foliada");
 		when(votacion4.getNivelDeConocimientoParticipante()).thenReturn("Nivel Experto");
 		when(votacion5.getParticipante()).thenReturn(persona5);
+		when(persona5.getNivelDeConocimiento()).thenReturn("Nivel Experto");
 		when(votacion5.getOpinion()).thenReturn("Chinche Foliada");
 		when(votacion5.getNivelDeConocimientoParticipante()).thenReturn("Nivel Experto");
 		muestra1.asignarZona(zonaDeCobertura);
