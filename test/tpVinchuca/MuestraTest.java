@@ -1,7 +1,9 @@
 package tpVinchuca;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,12 +11,15 @@ import org.mockito.Mock;
 import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MuestraTest {
 	
 	private Muestra muestra1;
 	private Muestra muestra2;
 	private ClasificacionDeFoto opinion;
+	private List<Votacion> votaciones;
 	@Mock
 	private Ubicacion ubicacion;
 	@Mock
@@ -64,6 +69,7 @@ public class MuestraTest {
 		votacion6 = mock(Votacion.class);
 		muestra1 = new Muestra(imagen, persona, opinion, ubicacion);
 		muestra2 = new Muestra(imagen, persona4, opinion,ubicacion);
+		votaciones = new ArrayList<Votacion>();
 	}
 	
 	@Test
@@ -184,6 +190,30 @@ public class MuestraTest {
 	
 	@Test
 	public void fechaDeLaUltimaVotacionDeLaMuestra() {
+		when(votacion.getFecha()).thenReturn(LocalDate.now().minusDays(2l));
+		when(votacion2.getFecha()).thenReturn(LocalDate.now().minusDays(1l));
+		votaciones.add(votacion);
+		votaciones.add(votacion2);
+		muestra1.addVotacion(votacion);
+		muestra1.addVotacion(votacion2);
+			
+		assertEquals(votacion2.getFecha(), muestra1.getFechaUltimaVotacion());	
 		
+	}
+	
+	@Test
+	public void laMuestraNoTieneVotaciones() {
+		
+		assertFalse(muestra1.esMuestraVotada());
+	}
+	
+	@Test
+	public void laMuestraTieneVotaciones() {
+		votaciones.add(votacion);
+		votaciones.add(votacion2);
+		muestra2.addVotacion(votacion);
+		muestra2.addVotacion(votacion2);
+		
+		assertTrue(muestra2.esMuestraVotada());
 	}
 }
