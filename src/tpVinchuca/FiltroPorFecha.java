@@ -13,10 +13,6 @@ public abstract class FiltroPorFecha implements Filtro{
 		this.fecha = fecha;
 		this.operador = operador;
 	}
-    
-    public LocalDate getFecha() {
-    	return fecha;
-    }
 
 	public List<Muestra> criterioDeBusqueda(List<Muestra> muestras){
 		
