@@ -161,7 +161,7 @@ public class AplicacionVinchucasTest {
 		when(muestra.getParticipante()).thenReturn(juanPerez);
 	
 	
-		assertEquals(votaciones, aplicacion.getVotacionDeParticipantePorfecha(juanPerez));
+		assertEquals(votaciones, aplicacion.getVotacionesDeParticipanteDeLosUltimos30Dias(juanPerez));
 	}
 
 

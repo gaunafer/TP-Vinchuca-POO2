@@ -2,17 +2,17 @@ package tpVinchuca;
 
 import java.util.*;
 
-public class ClaseX {
+public class InformadorDeZonas {
 	
 	private List<ZonaDeCobertura> zonasQueContienenLaMuestra;
 
 	/**
-	 * Creacion de clase
+	 * Creacion de instancia de InformadorDeZonas
 	 * Esta clase contiene las zonas de cobertura que abarcan la ubicacion
 	 * de una determinada muestra.
 	 * Su funcion es avisarle a dichas zonas que la muestra ha sido validada
 	 */
-	public ClaseX() {
+	public InformadorDeZonas() {
 		zonasQueContienenLaMuestra = new ArrayList<ZonaDeCobertura>();
 	}
 

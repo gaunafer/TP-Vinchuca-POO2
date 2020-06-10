@@ -36,8 +36,8 @@ public class ZonaDeCobertura {
 		return radio;
 	}
 
-	/** Devuelve en nombre de la zona de cobertura
-	 * 
+	/** 
+	 * Devuelve en nombre de la zona de cobertura
 	 */
 	public String getNombre() {
 		return nombre;

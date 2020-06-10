@@ -79,7 +79,7 @@ public class ParticipanteTest {
 		when(muestras.size()).thenReturn(0);
 		when(votaciones.size()).thenReturn(0);
 		when(aplicacionVinchucas.getMuestrasDeParticipantePorFecha(juanPerez, LocalDate.now().minusMonths(1l))).thenReturn(muestras);
-		when(aplicacionVinchucas.getVotacionDeParticipantePorfecha(juanPerez)).thenReturn(votaciones);
+		when(aplicacionVinchucas.getVotacionesDeParticipanteDeLosUltimos30Dias(juanPerez)).thenReturn(votaciones);
 		when(nivelDeConocimiento.getCantidadDeMuestrasDeUnParticipanteA30DiasDeLaFechaActual(juanPerez)).thenReturn(0);
 		when(nivelDeConocimiento.getCantidadDeVotacionesDeUnParticipanteA30DiasDeLaFechaActual(juanPerez)).thenReturn(0);
 		
@@ -102,7 +102,7 @@ public class ParticipanteTest {
 		when(muestras.size()).thenReturn(11);
 		when(votaciones.size()).thenReturn(21);
 		when(aplicacionVinchucas.getMuestrasDeParticipantePorFecha(juanPerez, LocalDate.now().minusMonths(1l))).thenReturn(muestras);
-		when(aplicacionVinchucas.getVotacionDeParticipantePorfecha(juanPerez)).thenReturn(votaciones);
+		when(aplicacionVinchucas.getVotacionesDeParticipanteDeLosUltimos30Dias(juanPerez)).thenReturn(votaciones);
 		when(nivelDeConocimiento.getCantidadDeMuestrasDeUnParticipanteA30DiasDeLaFechaActual(juanPerez)).thenReturn(11);
 		when(nivelDeConocimiento.getCantidadDeVotacionesDeUnParticipanteA30DiasDeLaFechaActual(juanPerez)).thenReturn(21);
 		

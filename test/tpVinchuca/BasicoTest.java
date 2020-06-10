@@ -42,7 +42,7 @@ public class BasicoTest {
 	public void elNivelDeConocimientoDejaDeSerBasicoCuandoCumpleConGenerarMasDe10MuestrasYMasDe20VotosEnLosUltimos30Dias(){
 
 
-	    when(aplicacionVinchucas.getVotacionDeParticipantePorfecha(juanPerez)).thenReturn(votaciones);
+	    when(aplicacionVinchucas.getVotacionesDeParticipanteDeLosUltimos30Dias(juanPerez)).thenReturn(votaciones);
 	    when(aplicacionVinchucas.getMuestrasDeParticipantePorFecha(juanPerez, LocalDate.now().minusMonths(1l))).thenReturn(muestras);
 	    when(votaciones.size()).thenReturn(21);
 	    when(muestras.size()).thenReturn(11);
@@ -60,7 +60,7 @@ public class BasicoTest {
 
 
 	    when(aplicacionVinchucas.getMuestrasDeParticipantePorFecha(juanPerez, LocalDate.now().minusMonths(1l))).thenReturn(muestras);
-	    when(aplicacionVinchucas.getVotacionDeParticipantePorfecha(juanPerez)).thenReturn(votaciones);
+	    when(aplicacionVinchucas.getVotacionesDeParticipanteDeLosUltimos30Dias(juanPerez)).thenReturn(votaciones);
 	    when(votaciones.size()).thenReturn(9);
 	    when(muestras.size()).thenReturn(11);
 	   
@@ -77,7 +77,7 @@ public class BasicoTest {
 
 
 	    when(aplicacionVinchucas.getMuestrasDeParticipantePorFecha(juanPerez, LocalDate.now().minusMonths(1l))).thenReturn(muestras);
-	    when(aplicacionVinchucas.getVotacionDeParticipantePorfecha(juanPerez)).thenReturn(votaciones);
+	    when(aplicacionVinchucas.getVotacionesDeParticipanteDeLosUltimos30Dias(juanPerez)).thenReturn(votaciones);
 	    when(votaciones.size()).thenReturn(34);
 	    when(muestras.size()).thenReturn(9);
 	   

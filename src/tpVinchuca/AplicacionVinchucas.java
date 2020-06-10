@@ -33,10 +33,6 @@ public class AplicacionVinchucas {
 		return buscador;
 	}
 
-	/*
-	 * public List<Muestra> getMuestras() { return muestras; }
-	 */
-
 	/**
 	 * Dado un {@code participante}, filtra la lista de muestras de la aplicacion 
 	 * por aquellas que fueron creadas por dicho participante desde la {@code fecha}
@@ -51,7 +47,7 @@ public class AplicacionVinchucas {
 		Filtro filtroFecha =  new FiltroFechaDeCreacionDesde(fecha);
 		Filtro filtroParticipante = new FiltroParticipante(participante);
 	    Filtro and = new FiltroAnd(filtroParticipante, filtroFecha);
-		return this.buscador.buscar(muestras, and);
+		return buscar(muestras, and);
 	}
 	
 	/**
@@ -72,7 +68,7 @@ public class AplicacionVinchucas {
      * @return una lista con las votaciones hechas por {@code participante} en los 
      * ultimos 30 dias
      */
-	public List<Votacion> getVotacionDeParticipantePorfecha(Participante participante){
+	public List<Votacion> getVotacionesDeParticipanteDeLosUltimos30Dias(Participante participante){
 		return this.buscador.getVotacionesDeParticipanteEnLosUltimos30Dias(this.getVotaciones(),participante);
 	}
 
@@ -89,8 +85,7 @@ public class AplicacionVinchucas {
 	 * Registra la creacion de una nueva muestra agregandola a su lista de muestras. 
 	 * Ademas, revisa la lista de zonas de cobertura y agrega la muestra en aquellas 
 	 * zonas a las que pertenece la muestra. 
-	 * Por ultimo, se asegura que la clase que monitorea la validacion de cada muestra
-	 * agregue las zonas.
+	 * Por ultimo, se asegura que el informador de zonas de la muestra agregue las zonas.
 	 * 
 	 * @param muestra muestra creada
 	 */
@@ -103,6 +98,17 @@ public class AplicacionVinchucas {
 				muestra.asignarZona(zona);
 			}
 		}
+	}
+	
+	/**
+	 * Busca en la lista de muestras aquellas que cumplan con el criterio dado por el filtro
+	 * 
+	 * @param muestras la lista de muestras donde se realizara la busqueda 
+	 * @param filtro criterio de busqueda por el cual se filtraran las muestras
+	 * @return una lista con las muestras que cumplen el criterio del filtro
+	 */
+	public List<Muestra> buscar(List<Muestra> muestras, Filtro filtro) {
+		return getBuscador().buscar(muestras, filtro);
 	}
 
 }
