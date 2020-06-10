@@ -11,14 +11,14 @@ public class VotacionTest {
 		Participante emma = mock(Participante.class);
 		when(emma.getNivelDeConocimiento()).thenReturn("Nivel basico");
 		
-		Votacion votacion = new Votacion(emma, ClasificacionDeFoto.VINCHUCA);
+		Votacion votacion = new Votacion(emma, ClasificacionDeFoto.VINCHUCA_INFESTANS);
 		Participante participante = votacion.getParticipante();
 		String resultadoDeVotacion = votacion.getOpinion();
 		LocalDate fecha = votacion.getFecha();
 		String nivelConocimientoParticipante = votacion.getNivelDeConocimientoParticipante();
 		
 		assertEquals(emma, participante);
-		assertEquals("Vinchuca", resultadoDeVotacion);
+		assertEquals("Vinchuca Infestans", resultadoDeVotacion);
 		assertEquals(LocalDate.now(), fecha);
 		assertEquals("Nivel basico", nivelConocimientoParticipante);
 	}
