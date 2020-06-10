@@ -23,12 +23,12 @@ public abstract class NivelDeValidacion {
 	}
 	protected abstract Map<String, Integer> agregarOpinionDeLaMuestraAlRanking(Muestra muestra, Map<String, Integer> contadorDeOpiniones);
 	/**
-	 * Obriene las votaciones que seran tenidas en cuenta para analizar el resultado actual de la muestra.
+	 * Obtiene las votaciones que seran tenidas en cuenta para analizar el resultado actual de la muestra.
 	 * */
 	protected abstract List<Votacion> getVotaciones(Muestra muestra);
 	
 	/**
-	 * Crea un ranking de las opiniones recibidas con la cantidad de veces que se selecciono esa opcion
+	 * Crea un ranking de las opiniones recibidas con la cantidad de veces que se voto cada opcion
 	 * */	
 	protected Map<String, Integer> crearRankingDeOpiniones(Muestra muestra, List<Votacion> votaciones) {
 		Map<String, Integer> contadorDeOpiniones = new HashMap<>();
@@ -43,7 +43,7 @@ public abstract class NivelDeValidacion {
 		return contadorDeOpiniones;
 	}
 	/**
-	 * Genera una lista con la opinion mas votada, si hubiera empate incluye en la lista todas las opiniones 
+	 * Genera una lista con la opinion mas votadas, si hubiera empate incluye en la lista todas las opiniones 
 	 * que estan empatadas en primer lugar en el ranking de opiniones.
 	 * */
 	private List<String> obtenerOpinionesMasVotadas(Map<String, Integer> contadorDeOpiniones) {
@@ -57,7 +57,8 @@ public abstract class NivelDeValidacion {
 		return estadosMasVotados;
 	}
 	/**
-	 * Analiza las opiniones mas votadas y retorna el estado actual de la muestra.
+	 * Analiza las opiniones mas votadas y retorna el estado actual de la muestra. Siendo indefinida si 
+	 * hay más de una opinion en la lista o la opinion en caso de que exista solo una.
 	 * */
 	private String analizarOpiniones(List<String> estadosMasVotados) {
 		if (estadosMasVotados.size() > 1 ) {

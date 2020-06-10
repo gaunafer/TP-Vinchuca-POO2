@@ -1,8 +1,5 @@
 package tpVinchuca;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -10,14 +7,11 @@ import java.util.stream.Stream;
 
 public class NivelExperto extends NivelDeValidacion {
 
-	@Override
-	protected List<Votacion> getVotaciones(Muestra muestra) {
-		Stream<Votacion> votacionesExpertas;
-		votacionesExpertas = muestra.getVotaciones().stream()
-				.filter(votacion -> votacion.getNivelDeConocimientoParticipante() == "Nivel Experto");
-		return votacionesExpertas.collect(Collectors.toList());
-	}
-
+	
+	/**
+	 *Verifica si el participante puede votar la muestra y en caso afirmativo registra el voto
+	 * @throws ErrorParticipanteNoPuedeVotarEstaMuestra
+	 */
 	@Override
 	public void registrarVotacion(Muestra muestra, Votacion votacion) throws  ErrorParticipanteNoPuedeVotarEstaMuestra {
 		verificarSiElParticipantePuedeVotarLaMuestra(muestra, votacion);
@@ -29,8 +23,11 @@ public class NivelExperto extends NivelDeValidacion {
 			muestra.addVotacion(votacion);
 		}
 	}
-
-	private void verificarSiElParticipantePuedeVotarLaMuestra(Muestra muestra, Votacion votacion)
+	/**
+	 * Verifica si el participante puede votar la muestra. levanta excepcion si no puede votar
+	 * @throws ErrorParticipanteNoPuedeVotarEstaMuestra
+	 */
+	private void verificarSiElParticipantePuedeVotarLaMuestra(Muestra muestra, Votacion votacion) 
 			throws ErrorParticipanteNoPuedeVotarEstaMuestra {
 		if (votacion.getParticipante().getNivelDeConocimiento().equals("Nivel Basico")  ||
 				muestra.muestraVotadaPor(votacion.getParticipante()) ||
@@ -46,6 +43,20 @@ public class NivelExperto extends NivelDeValidacion {
 			}
 		}
 	}
+	/**
+	 * Retorna la lista de votaciones de expertos de la muestra
+	 */
+	@Override
+	protected List<Votacion> getVotaciones(Muestra muestra) {
+		Stream<Votacion> votacionesExpertas;
+		votacionesExpertas = muestra.getVotaciones().stream()
+				.filter(votacion -> votacion.getNivelDeConocimientoParticipante() == "Nivel Experto");
+		return votacionesExpertas.collect(Collectors.toList());
+	}
+	
+	/**
+	 *Agrega la opinion de la muestra al ranking de votaciones de la muestra si la muestra fue creada por un experto
+	 */
 	@Override
 	protected Map<String, Integer> agregarOpinionDeLaMuestraAlRanking(Muestra muestra,
 			Map<String, Integer> contadorDeOpiniones) {
@@ -55,6 +66,9 @@ public class NivelExperto extends NivelDeValidacion {
 		return contadorDeOpiniones;
 	}
 
+	/**
+	 * Retorna el nivel de validacion de la muestra
+	 */
 	@Override
 	protected String getNivelDeValidacion() {
 		return "Nivel Experto";
