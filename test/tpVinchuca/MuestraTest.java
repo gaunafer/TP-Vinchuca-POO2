@@ -106,7 +106,6 @@ public class MuestraTest {
 		when(votacion.getNivelDeConocimientoParticipante()).thenReturn("Nivel Basico");
 		assertThrows(ErrorParticipanteNoPuedeVotarEstaMuestra.class,() ->{	muestra1.registrarVotacion(votacion);
 		});
-		System.out.println("hola");
 	}
 	@Test
 	public void muestraCreadaPorExpertoSeCreaConNivelDeValidacionExperto() {
