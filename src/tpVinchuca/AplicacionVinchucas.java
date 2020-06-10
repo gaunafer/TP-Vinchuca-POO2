@@ -44,7 +44,7 @@ public class AplicacionVinchucas {
 	 * creadas despues de {@code fecha} 
 	 */
 	public List<Muestra> getMuestrasDeParticipantePorFecha(Participante participante, LocalDate fecha) {
-		Filtro filtroFecha =  new FiltroFechaDeCreacionDesde(fecha);
+		Filtro filtroFecha =  new FiltroPorFechaDeCreacionDeMuestra(OperadorLogico.IGUALESA, fecha);
 		Filtro filtroParticipante = new FiltroParticipante(participante);
 	    Filtro and = new FiltroAnd(filtroParticipante, filtroFecha);
 		return buscar(muestras, and);
