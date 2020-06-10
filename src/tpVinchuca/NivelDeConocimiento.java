@@ -69,7 +69,7 @@ public abstract class NivelDeConocimiento {
 	 * @return el total de votaciones realizadas por participante en los ultimos 30 dias
 	 */
 	public Integer getCantidadDeVotacionesDeUnParticipanteA30DiasDeLaFechaActual(Participante participante) {
-		return this.aplicacionVinchucas.getVotacionDeParticipantePorfecha(participante).size();
+		return this.aplicacionVinchucas.getVotacionesDeParticipanteDeLosUltimos30Dias(participante).size();
 	}	
 
 }
