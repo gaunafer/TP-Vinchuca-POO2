@@ -60,7 +60,7 @@ public class NivelExperto extends NivelDeValidacion {
 	@Override
 	protected Map<String, Integer> agregarOpinionDeLaMuestraAlRanking(Muestra muestra,
 			Map<String, Integer> contadorDeOpiniones) {
-		if (muestra.getVeredicto().equalsIgnoreCase("Nivel Experto")) {
+		if (muestra.getNivelDeConocimientoDeCreacion().equalsIgnoreCase("Nivel Experto")) {
 			contadorDeOpiniones.put(muestra.getVeredicto(), 1);
 		}
 		return contadorDeOpiniones;

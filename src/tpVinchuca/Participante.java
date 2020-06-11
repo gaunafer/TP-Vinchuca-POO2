@@ -1,8 +1,5 @@
 package tpVinchuca;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Participante {
 	
 	private String alias;
@@ -27,7 +24,6 @@ public class Participante {
 	}
 	
     public void setNivelDeConocimiento(NivelDeConocimiento nivelDeConocimiento) {
-		
 		this.nivelDeConocimiento = nivelDeConocimiento;
 		
 	}
@@ -35,6 +31,7 @@ public class Participante {
 	public void actualizarEstado() {
 		this.nivelDeConocimiento.verificarEstado(this);
 	}	
+	
 	@Override
 	public boolean equals(Object participante) {
 		Participante otroParticipante = (Participante)participante;
