@@ -54,7 +54,7 @@ public class ZonaDeCobertura {
 	 * Setea el radio de la zona de cobertura. De ser igual o menor a 0km, lanza una excepcion
 	 * @param radio Debe ser expresado en kilometros, mayor a 0km
 	 */
-	public void setRadio(Double radio) {
+	public void setRadio(Double radio) throws ErrorElRadioDebeSerMayorACero {
 		if (radio <= 0d) {
 			throw new ErrorElRadioDebeSerMayorACero();
 		} else {
