@@ -58,7 +58,7 @@ public abstract class NivelDeValidacion {
 	}
 	/**
 	 * Analiza las opiniones mas votadas y retorna el estado actual de la muestra. Siendo indefinida si 
-	 * hay más de una opinion en la lista o la opinion en caso de que exista solo una.
+	 * hay mï¿½s de una opinion en la lista o la opinion en caso de que exista solo una.
 	 * */
 	private String analizarOpiniones(List<String> estadosMasVotados) {
 		if (estadosMasVotados.size() > 1 ) {

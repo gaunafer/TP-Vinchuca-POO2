@@ -39,7 +39,7 @@ public class NivelExperto extends NivelDeValidacion {
 				throw new ErrorParticipanteNoPuedeVotarEstaMuestra("Error Participante no puede volver a votar esta muestra");
 			}
 			else {
-				throw new ErrorParticipanteNoPuedeVotarEstaMuestra("Error Participante no puede votar muestra creada por sí mismo");
+				throw new ErrorParticipanteNoPuedeVotarEstaMuestra("Error Participante no puede votar muestra creada por sï¿½ mismo");
 			}
 		}
 	}
