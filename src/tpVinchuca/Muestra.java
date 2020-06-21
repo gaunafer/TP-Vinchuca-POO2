@@ -208,10 +208,8 @@ public class Muestra {
 	 */
 
 	public LocalDate getFechaUltimaVotacion() {
-		int posicionUltimaVotacion = this.getVotaciones().size() - 1;
-		Votacion ultimaVotacion = votaciones.get(posicionUltimaVotacion);
 
-		return ultimaVotacion.getFecha();
+		return votaciones.get(this.getVotaciones().size() - 1).getFecha();
 	}
 	/**
 	 * Retorna el nivel de creacion del creador de la muestra al momento de la creacion

@@ -29,6 +29,7 @@ public abstract class NivelDeValidacion {
 	
 	/**
 	 * Crea un ranking de las opiniones recibidas con la cantidad de veces que se voto cada opcion
+	 * @Return 
 	 * */	
 	protected Map<String, Integer> crearRankingDeOpiniones(Muestra muestra, List<Votacion> votaciones) {
 		Map<String, Integer> contadorDeOpiniones = new HashMap<>();

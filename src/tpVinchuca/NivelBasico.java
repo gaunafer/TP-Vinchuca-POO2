@@ -43,9 +43,8 @@ public class NivelBasico extends NivelDeValidacion {
 	 */
 	@Override
 	protected  List<Votacion> getVotaciones(Muestra muestra) {
-		List<Votacion> votaciones;
-		votaciones = muestra.getVotaciones();
-		return votaciones;
+	
+		return muestra.getVotaciones();
 	}
 
 	/**
