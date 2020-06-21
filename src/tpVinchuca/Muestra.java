@@ -108,10 +108,21 @@ public class Muestra {
 	 * Asigna la zona a la lista de zonas del InformadorDeZonas a las que pertenece
 	 * la muestra
 	 * 
-	 * @param zona ZonaDeCobertura
+	 * @param zona ZonaDeCobertura a agregar
 	 */
 	public void asignarZona(ZonaDeCobertura zona) {
 		getInformadorDeZonas().agregarZonaDeCobertura(zona);
+	}
+	
+	/**
+	 * Elimina la zona de la lista de zonas del InformadorDeZonas a las que pertenece
+	 * la muestra. Esto sucede cuando una zona cambia su area, dejando por fuera la 
+	 * ubicacion de la muestra.
+	 * 
+	 * @param zona ZonaDeCobertura a eliminar
+	 */
+	public void eliminarZona(ZonaDeCobertura zona) {
+		getInformadorDeZonas().eliminarZonaDeCobertura(zona);
 	}
 
 	/**

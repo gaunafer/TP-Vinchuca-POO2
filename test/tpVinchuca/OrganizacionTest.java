@@ -11,7 +11,7 @@ public class OrganizacionTest {
 	private Organizacion flech;
 
 	private Muestra muestra;
-	private ZonaDeCobertura zona;
+	private ZonaDeCobertura solano;
 	
 	@BeforeEach
 	public void setUp() {
@@ -20,7 +20,7 @@ public class OrganizacionTest {
 		flech = new Organizacion(TipoDeOrganizacion.SANITARIA, ubicFlech, 25, funcionalidad, funcionalidad);
 		
 		muestra = mock(Muestra.class);
-		zona = mock(ZonaDeCobertura.class);
+		solano = mock(ZonaDeCobertura.class);
 	}
 	
 	// Testea el constructor sin funcionalidades externas de la clase Organizacion
@@ -50,20 +50,29 @@ public class OrganizacionTest {
 		assertEquals(25, cantDeTrabajadores);
 	}
 	
+	// Chequea que se envie el mensaje a la zona para que agregue a la organizacion
+	// como observer de la misma
+	@Test
+	public void testOrganizacionSeAgregaComoObserverDeZona() {
+		flech.interesEnZona(solano);
+		
+		verify(solano).agregarObserver(flech);
+	}
+	
 	// Chequea que el metodo updateCreacionMuestra llame correctamente al nuevoEvento de la funcionalidadExterna
 	@Test
 	public void testUpdateCreacionMuestra() {
 		
-		flech.updateCreacionMuestra(muestra, zona);
-		verify(funcionalidad).nuevoEvento(flech, zona, muestra);
+		flech.updateCreacionMuestra(muestra, solano);
+		verify(funcionalidad).nuevoEvento(flech, solano, muestra);
 	}
 	
 	// Chequea que el metodo updateValidacionMuestra llame correctamente al nuevoEvento de la funcionalidadExterna
 	@Test
 	public void testUpdateValidacionMuestra() {
 		
-		flech.updateValidacionMuestra(muestra, zona);
-		verify(funcionalidad).nuevoEvento(flech, zona, muestra);
+		flech.updateValidacionMuestra(muestra, solano);
+		verify(funcionalidad).nuevoEvento(flech, solano, muestra);
 	}
 
 }

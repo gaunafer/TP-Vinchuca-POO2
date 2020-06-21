@@ -87,6 +87,15 @@ public class Organizacion implements IObservadoresDeZonas {
 	}
 
 	/**
+	 * Le indica a la zona pasada como parametro que agregue a la organizacion 
+	 * como observer de la misma
+	 * @param zona Zona que quiere observar la organizacion
+	 */
+	public void interesEnZona(ZonaDeCobertura zona) {
+		zona.agregarObserver(this);
+	}
+
+	/**
 	 * Metodo de la interaz IObservadoresDeZona.
 	 * Convoca a la funcionalidad externa de creacion de muestra.
 	 */
