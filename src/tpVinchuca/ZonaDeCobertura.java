@@ -1,6 +1,7 @@
 package tpVinchuca;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ZonaDeCobertura {
 	
@@ -20,12 +21,12 @@ public class ZonaDeCobertura {
 	 * @param radio Es el radio de la zona, expresado en kilometros
 	 * @param nombre Es el nombre de la zona de cobertura
 	 */
-	public ZonaDeCobertura(Ubicacion epicentro, Double radio, String nombre) {
+	public ZonaDeCobertura(Ubicacion epicentro, Double radio, String nombre, List<Muestra> muestras) {
 		
 		this.epicentro = epicentro;
-		setRadio(radio);
-		this.nombre = nombre;
 		this.muestras = new ArrayList<Muestra>();
+		setRadio(radio, muestras);
+		this.nombre = nombre;
 		this.observers = new ArrayList<IObservadoresDeZonas>();
 	}
 
@@ -54,12 +55,23 @@ public class ZonaDeCobertura {
 	 * Setea el radio de la zona de cobertura. De ser igual o menor a 0km, lanza una excepcion
 	 * @param radio Debe ser expresado en kilometros, mayor a 0km
 	 */
-	public void setRadio(Double radio) throws ErrorElRadioDebeSerMayorACero {
+	public void setRadio(Double radio, List<Muestra> muestras) throws ErrorElRadioDebeSerMayorACero {
 		if (radio <= 0d) {
 			throw new ErrorElRadioDebeSerMayorACero();
 		} else {
 			this.radio = radio;
 		}
+		actualizarMuestrasQueSeUbicanEnLaZona(muestras);
+	}
+	
+	/**
+	 * 
+	 * @param epicentro
+	 * @param muestras
+	 */
+	public void setEpicentro(Ubicacion epicentro, List<Muestra> muestras) {
+		this.epicentro = epicentro;
+		actualizarMuestrasQueSeUbicanEnLaZona(muestras);
 	}
 
 	/**
@@ -160,6 +172,49 @@ public class ZonaDeCobertura {
 		Double distanciaEntreMuestraYEpicentro = ubicacionDeLaMuestra.calcularDistancia(getEpicentro());
 		Boolean zonaContieneUbicacionDeMuestra = distanciaEntreMuestraYEpicentro <= getRadio();
 		return zonaContieneUbicacionDeMuestra;
+	}
+	
+	/**
+	 * Recorre la lista de muestras de la zona y chequea su ubicacion. Si la 
+	 * ubicacion de la muestra ya no pertenece a la zona, elimina la muestra 
+	 * de la lista. 
+	 * Ademas, le indica a la muestra que debe eliminar la zona de su 
+	 * InformadorDeZonas
+	 */
+	private void filtrarMuestrasQueYaNoEstanEnLaZona() {
+		List<Muestra> aEliminar = new ArrayList<Muestra>();
+		for (Muestra muestra : this.muestras) {
+			if(!zonaContieneUbicacionDeMuestra(muestra)) {
+				muestra.eliminarZona(this);
+				aEliminar.add(muestra);
+			}
+		}
+		this.muestras.removeAll(aEliminar);
+	}
+	
+	/**
+	 * Actualiza la lista de muestras de una zona mediante: 
+	 * a) la eliminacion de las muestras que ya no forman parte de la zona 
+	 * b) el recorrido de la lista de todas las muestras existentes y el 
+	 * agregado de aquellas que pertenecen a la zona y no estaban previamente 
+	 * en su lista. 
+	 * Ademas, le indica a las muestras nuevas en la zona que deben agregar 
+	 * a la zona a su InformadorDeZonas
+	 * @param muestras Lista de todas las muestras existentes
+	 */
+	private void actualizarMuestrasQueSeUbicanEnLaZona(List<Muestra> muestras) {
+		filtrarMuestrasQueYaNoEstanEnLaZona();
+		
+		List<Muestra> muestrasEnZona = muestras.stream()
+							.filter(muestra->zonaContieneUbicacionDeMuestra(muestra))
+							.collect(Collectors.toList());
+
+		for (Muestra muestra : muestrasEnZona) {
+			if(!this.muestras.contains(muestra)) {
+				this.muestras.add(muestra);
+				muestra.asignarZona(this);
+			}
+		}
 	}
 
 }
