@@ -9,7 +9,8 @@ public class Participante {
 	public Participante(String alias, NivelDeConocimiento nivelDeConocimiento) {
 		super();
 		this.alias = alias;
-		this.nivelDeConocimiento = nivelDeConocimiento;	
+		this.nivelDeConocimiento = nivelDeConocimiento;
+		this.actualizarEstado();
 	}
 
 	/**
@@ -23,7 +24,6 @@ public class Participante {
 	 * Retorna el nivel de conocimiento del participante
 	 */
 	public String getNivelDeConocimiento() {
-		this.actualizarEstado();
 		
 		 return this.nivelDeConocimiento.getNivelDeConocimiento();
 	}

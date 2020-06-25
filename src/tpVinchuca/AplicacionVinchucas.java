@@ -110,5 +110,19 @@ public class AplicacionVinchucas {
 	public List<Muestra> buscar(List<Muestra> muestras, Filtro filtro) {
 		return getBuscador().buscar(muestras, filtro);
 	}
-
+	
+	/**
+	 * Busca la lista de participantes que han subido muestras a la palicacion o simplemente votado y actualiza sus estados
+	 * 
+	 */
+	
+	public void actualizarNivelDeConocimiento() {
+		List<Participante> participantesEnMuestras = new ArrayList<Participante>();
+		participantesEnMuestras = muestras.stream().map(muestra -> muestra.getParticipante()).collect(Collectors.toList());
+		List<Participante> participantesEnVotaciones =new ArrayList<Participante>();
+		participantesEnVotaciones = this.getVotaciones().stream().map(votacion->votacion.getParticipante()).collect(Collectors.toList());
+		List<Participante> participantes = Stream.concat(participantesEnMuestras.stream(), participantesEnVotaciones.stream()).collect(Collectors.toList());
+		
+		participantes.stream().forEach(participante -> participante.actualizarEstado());
+	}
 }

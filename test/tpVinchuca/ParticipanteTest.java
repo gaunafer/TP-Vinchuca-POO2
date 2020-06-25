@@ -50,6 +50,8 @@ public class ParticipanteTest {
 	private List<Muestra> muestras = mock(List.class);
 	@Mock
 	private List<Votacion> votaciones = mock(List.class);
+	@Mock
+	private AplicacionVinchucas aplicacion = mock(AplicacionVinchucas.class);
 	
 	
 	//@Spy
@@ -97,7 +99,22 @@ public class ParticipanteTest {
 	
 
 	@Test
-    public void siElParticipanteGeneraMasDe10MuestrasYRealiza20VotacionesEnLosUltimos30DiasSuEstadoEsExperto() {
+    public void siElParticipanteGeneraMasDe10MuestrasYRealiza20VotacionesEnLosUltimos30DiasYSeEjecutaLaFuncionActualizarEstadosDeLosParticipantesSuEstadoEsExperto() {
+
+		when(muestras.size()).thenReturn(11);
+		when(votaciones.size()).thenReturn(21);
+		when(aplicacionVinchucas.getMuestrasDeParticipantePorFecha(juanPerez, LocalDate.now().minusMonths(1l))).thenReturn(muestras);
+		when(aplicacionVinchucas.getVotacionesDeParticipanteDeLosUltimos30Dias(juanPerez)).thenReturn(votaciones);
+		when(nivelDeConocimiento.getCantidadDeMuestrasDeUnParticipanteA30DiasDeLaFechaActual(juanPerez)).thenReturn(11);
+		when(nivelDeConocimiento.getCantidadDeVotacionesDeUnParticipanteA30DiasDeLaFechaActual(juanPerez)).thenReturn(21);
+		juanPerez.actualizarEstado();
+		
+
+       assertEquals("Nivel Experto", juanPerez.getNivelDeConocimiento());
+    }
+	
+	@Test
+    public void siElParticipanteConNivelDeConocimientoBasicoGeneraMasDe10MuestrasYRealiza20VotacionesEnLosUltimos30DiasPeroNoHaSidoEjcutadaLaFuncionActualizarEstadoSuEstadoEsBasico() {
 
 		when(muestras.size()).thenReturn(11);
 		when(votaciones.size()).thenReturn(21);
@@ -107,7 +124,7 @@ public class ParticipanteTest {
 		when(nivelDeConocimiento.getCantidadDeVotacionesDeUnParticipanteA30DiasDeLaFechaActual(juanPerez)).thenReturn(21);
 		
 
-       assertEquals("Nivel Experto", juanPerez.getNivelDeConocimiento());
+       assertEquals("Nivel Basico", juanPerez.getNivelDeConocimiento());
     }
  
 	@Test
