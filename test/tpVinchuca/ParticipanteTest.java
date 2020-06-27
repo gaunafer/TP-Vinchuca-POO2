@@ -1,6 +1,7 @@
 package tpVinchuca;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
@@ -22,6 +23,7 @@ public class ParticipanteTest {
 	private Participante juanPerez;
 	private Participante juanaMolina;
 	private Participante marioBros;
+	private Participante marioBrossFalso;
 	@Mock
 	private Votacion votacion1 = mock(Votacion.class);
 	@Mock
@@ -67,6 +69,7 @@ public class ParticipanteTest {
 		juanPerez = new Participante("Juan Perez", nivelDeConocimiento);
 		juanaMolina = new Participante("Juana Molina", new ExpertoValidado(aplicacionVinchucas));
 		marioBros = new Participante("Mario Bros", new Experto(aplicacionVinchucas));	
+		marioBrossFalso = new Participante("Mario Bros", new Experto(aplicacionVinchucas));
 	}
 
 	@Test
@@ -146,6 +149,14 @@ public class ParticipanteTest {
 		juanPerez.actualizarEstado();
 
 		assertEquals("Nivel Experto", juanaMolina.getNivelDeConocimiento());
+	}
+	
+	@Test
+	public void corectoFuncionamientoDelOverridedelMetodoequals() {
+		
+		assertTrue(marioBros.equals(marioBrossFalso));
+		assertTrue(marioBrossFalso.equals(marioBros));
+		assertFalse(marioBros.equals(juanPerez));
 	}
 
 

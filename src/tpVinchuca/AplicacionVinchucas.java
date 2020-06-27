@@ -113,6 +113,7 @@ public class AplicacionVinchucas {
 	
 	/**
 	 * Busca la lista de participantes que han subido muestras a la palicacion o simplemente votado y actualiza sus estados
+	 * se prefiere utilizar la interfaz Set en ves de List, ya que no admite objetos repetidos
 	 * 
 	 */
 	
