@@ -32,5 +32,13 @@ public class Experto extends NivelDeConocimiento{
 					this.cambiarABasico(participante);
 				}
 	}
+	
+	/**
+	 * Devuelve true para indicar que el nivel de conocimiento de la persona 
+	 * es experto
+	 */
+	public Boolean esExperto() {
+		return true;
+	}
 		
 }

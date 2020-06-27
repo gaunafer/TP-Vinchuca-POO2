@@ -32,6 +32,14 @@ public class Basico extends NivelDeConocimiento{
 					&& this.getCantidadDeVotacionesDeUnParticipanteA30DiasDeLaFechaActual(participante) > 20) {
 					this.cambiarAExperto(participante);}
 		}
+	
+	/**
+	 * Devuelve false para indicar que el nivel de conocimiento de la persona 
+	 * no es experto
+	 */
+	public Boolean esExperto() {
+		return false;
+	}
 }	
 	
 

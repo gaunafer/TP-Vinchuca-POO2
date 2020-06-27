@@ -29,6 +29,13 @@ public abstract class NivelDeConocimiento {
 	 * @param participante participante del cual se verifica su nivel de conocimiento
 	 */
 	protected abstract void verificarEstado(Participante participante);
+	
+	/**
+	 * Metodo definido en las subclases.
+	 * @return devuelve true para nivel de conocimiento experto y false para 
+	 * nivel de conocimiento basico
+	 */
+	protected abstract Boolean esExperto();
 
 	/**
 	 * Cambia el nivel de conocimiento del {@code participante} a Basico

@@ -53,4 +53,12 @@ public class Participante {
 		return this.getAlias().equals(otroParticipante.getAlias());
 	}
 
+	/**
+	 * Chequea si el nivel de conocimiento de participante es experto
+	 * @return true si el nivel de conocimiento es experto, false si es basico
+	 */
+	public Boolean esExperto() {
+		return this.nivelDeConocimiento.esExperto();
+	}
+	
 }
