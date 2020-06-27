@@ -77,6 +77,7 @@ public class ParticipanteTest {
 
 		assertEquals("Juan Perez", juanPerez.getAlias());
 		assertEquals("Nivel Basico", juanPerez.getNivelDeConocimiento());
+		assertEquals(false, juanPerez.esExperto());
 	}
 	
 	@Test
@@ -90,6 +91,8 @@ public class ParticipanteTest {
 		
 		assertEquals("Mario Bros", marioBros.getAlias());
 		assertEquals("Nivel Basico", marioBros.getNivelDeConocimiento());
+		assertEquals(false, marioBros.esExperto());
+		
 		
 	}
 	
@@ -98,6 +101,7 @@ public class ParticipanteTest {
 
 		assertEquals("Juana Molina", juanaMolina.getAlias());
 		assertEquals("Nivel Experto", juanaMolina.getNivelDeConocimiento());
+		assertEquals(true, juanaMolina.esExperto());
 	}
 	
 
@@ -114,6 +118,7 @@ public class ParticipanteTest {
 		
 
        assertEquals("Nivel Experto", juanPerez.getNivelDeConocimiento());
+		assertEquals(true, juanPerez.esExperto());
     }
 	
 	@Test
@@ -127,13 +132,15 @@ public class ParticipanteTest {
 		when(nivelDeConocimiento.getCantidadDeVotacionesDeUnParticipanteA30DiasDeLaFechaActual(juanPerez)).thenReturn(21);
 		
 
-       assertEquals("Nivel Basico", juanPerez.getNivelDeConocimiento());
+        assertEquals("Nivel Basico", juanPerez.getNivelDeConocimiento());
+		assertEquals(false, juanPerez.esExperto());
     }
  
 	@Test
 	public void siLaPersonaNoHizo10VotacionesEnUnMismoMesSuEstadoEsBasico() {
 		
 		assertEquals("Nivel Basico", juanPerez.getNivelDeConocimiento());
+		assertEquals(false, juanPerez.esExperto());
 	}
 
 	@Test
@@ -142,6 +149,7 @@ public class ParticipanteTest {
 		juanPerez.actualizarEstado();
 
 		assertEquals("Nivel Basico", juanPerez.getNivelDeConocimiento());
+		assertEquals(false, juanPerez.esExperto());
 	}
 
 	@Test
@@ -149,6 +157,7 @@ public class ParticipanteTest {
 		juanPerez.actualizarEstado();
 
 		assertEquals("Nivel Experto", juanaMolina.getNivelDeConocimiento());
+		assertEquals(true, juanaMolina.esExperto());
 	}
 	
 	@Test

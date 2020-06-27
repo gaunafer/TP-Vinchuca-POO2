@@ -72,7 +72,7 @@ public class NivelBasicoTest {
 		basico.registrarVotacion(muestra, votacion);
 		
 		verify(muestra, times(1)).addVotacion(any(Votacion.class));
-		verify(votacion, times(1)).getNivelDeConocimientoParticipante();
+		verify(votacion, times(1)).participanteEsExpertoAlMomentoDeVotar();
 	}
 	@Test
 	public void registrarVotacionSeteaMuestraNivelExpertoSiElParticipanteEsExperto() throws ErrorParticipanteNoPuedeVotarEstaMuestra{
@@ -80,7 +80,7 @@ public class NivelBasicoTest {
 		when(participante.getAlias()).thenReturn("fer");
 		when(votacion.getParticipante()).thenReturn(participante2);
 		when(participante2.getAlias()).thenReturn("nati");
-		when(votacion.getNivelDeConocimientoParticipante()).thenReturn("Nivel Experto");
+		when(votacion.participanteEsExpertoAlMomentoDeVotar()).thenReturn(true);
 		basico.registrarVotacion(muestra, votacion);
 		verify(muestra, times(1)).setNivelDeValidacionExperto();
 	}

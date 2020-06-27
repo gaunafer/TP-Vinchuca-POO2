@@ -48,9 +48,9 @@ public class NivelExpertoTest {
 		votaciones.add(votacion1);
 		votaciones.add(votacion2);
 		votaciones.add(votacion3);
-		when(votacion1.getNivelDeConocimientoParticipante()).thenReturn("Nivel Experto");
-		when(votacion2.getNivelDeConocimientoParticipante()).thenReturn("Nivel Experto");
-		when(votacion3.getNivelDeConocimientoParticipante()).thenReturn("Nivel Basico");
+		when(votacion1.participanteEsExpertoAlMomentoDeVotar()).thenReturn(true);
+		when(votacion2.participanteEsExpertoAlMomentoDeVotar()).thenReturn(true);
+		when(votacion3.participanteEsExpertoAlMomentoDeVotar()).thenReturn(false);
 		List<Votacion> vot = new ArrayList<Votacion>();
 		vot = nivelExperto.getVotaciones(muestra);
 		assertTrue(vot.contains(votacion1));
@@ -63,7 +63,7 @@ public class NivelExpertoTest {
 		when(votacion1.getParticipante()).thenReturn(participante2);
 		when(muestra.muestraVotadaPor(participante2)).thenReturn(false);
 		when(participante2.getNivelDeConocimiento()).thenReturn("Nivel Basico");
-		when(votacion1.getNivelDeConocimientoParticipante()).thenReturn("Nivel Basico");
+		when(votacion1.participanteEsExpertoAlMomentoDeVotar()).thenReturn(false);
 		
 		String exception = assertThrows(ErrorParticipanteNoPuedeVotarEstaMuestra.class,()->{nivelExperto.registrarVotacion(muestra, votacion1);}).getMessage();
 		assertEquals("Error participante Nivel Basico no puede votar muestra nivel experto", exception);
@@ -74,7 +74,7 @@ public class NivelExpertoTest {
 		when(votacion1.getParticipante()).thenReturn(participante);
 		when(muestra.muestraVotadaPor(participante2)).thenReturn(false);
 		when(participante.getNivelDeConocimiento()).thenReturn("Nivel Experto");
-		when(votacion1.getNivelDeConocimientoParticipante()).thenReturn("Nivel Basico");
+		when(votacion1.participanteEsExpertoAlMomentoDeVotar()).thenReturn(false);
 		
 		String exception = assertThrows(ErrorParticipanteNoPuedeVotarEstaMuestra.class,()->{nivelExperto.registrarVotacion(muestra, votacion1);}).getMessage();
 		assertEquals("Error Participante no puede votar muestra creada por s� mismo", exception);
@@ -85,7 +85,7 @@ public class NivelExpertoTest {
 		when(votacion1.getParticipante()).thenReturn(participante2);
 		when(muestra.muestraVotadaPor(participante2)).thenReturn(true);
 		when(participante2.getNivelDeConocimiento()).thenReturn("Nivel Experto");
-		when(votacion1.getNivelDeConocimientoParticipante()).thenReturn("Nivel Experto");
+		when(votacion1.participanteEsExpertoAlMomentoDeVotar()).thenReturn(true);
 		
 		String exception = assertThrows(ErrorParticipanteNoPuedeVotarEstaMuestra.class,()->{nivelExperto.registrarVotacion(muestra, votacion1);}).getMessage();
 		assertEquals("Error Participante no puede volver a votar esta muestra", exception);
@@ -96,7 +96,7 @@ public class NivelExpertoTest {
 		when(votacion1.getParticipante()).thenReturn(participante2);
 		when(muestra.muestraVotadaPor(participante2)).thenReturn(false);
 		when(participante2.getNivelDeConocimiento()).thenReturn("Nivel Experto");
-		when(votacion1.getNivelDeConocimientoParticipante()).thenReturn("Nivel Experto");
+		when(votacion1.participanteEsExpertoAlMomentoDeVotar()).thenReturn(true);
 		nivelExperto.registrarVotacion(muestra, votacion1);
 		verify(muestra, times(1)).addVotacion(votacion1);
 	}
@@ -111,8 +111,8 @@ public class NivelExpertoTest {
 		when(votacion1.getParticipante()).thenReturn(participante2);
 		when(muestra.muestraVotadaPor(participante2)).thenReturn(false);
 		when(participante2.getNivelDeConocimiento()).thenReturn("Nivel Experto");
-		when(votacion1.getNivelDeConocimientoParticipante()).thenReturn("Nivel Experto");
-		when(votacion2.getNivelDeConocimientoParticipante()).thenReturn("Nivel Experto");
+		when(votacion1.participanteEsExpertoAlMomentoDeVotar()).thenReturn(true);
+		when(votacion2.participanteEsExpertoAlMomentoDeVotar()).thenReturn(true);
 		nivelExperto.registrarVotacion(muestra, votacion1);
 		
 		verify(muestra, times(1)).setNivelDeValidacionValidada();

@@ -53,7 +53,7 @@ public class NivelExperto extends NivelDeValidacion {
 	@Override
 	protected List<Votacion> getVotaciones(Muestra muestra) {
 		Stream<Votacion> votacionesExpertas = muestra.getVotaciones().stream()
-				.filter(votacion -> votacion.getNivelDeConocimientoParticipante() == "Nivel Experto");
+				.filter(votacion -> votacion.participanteEsExpertoAlMomentoDeVotar());
 		return votacionesExpertas.collect(Collectors.toList());
 	}
 	
