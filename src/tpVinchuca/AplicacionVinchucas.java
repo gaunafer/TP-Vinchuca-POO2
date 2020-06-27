@@ -117,12 +117,12 @@ public class AplicacionVinchucas {
 	 */
 	
 	public void actualizarNivelDeConocimiento() {
-		List<Participante> participantesEnMuestras = new ArrayList<Participante>();
-		participantesEnMuestras = this.muestras.stream().map(muestra -> muestra.getParticipante()).collect(Collectors.toList());
-		List<Participante> participantesEnVotaciones =new ArrayList<Participante>();
-		participantesEnVotaciones = this.getVotaciones().stream().map(votacion->votacion.getParticipante()).collect(Collectors.toList());
-		List<Participante> participantes = Stream.concat(participantesEnMuestras.stream(), participantesEnVotaciones.stream()).collect(Collectors.toList());
-		
+		Set<Participante> participantesEnMuestras = new HashSet<Participante>();
+		participantesEnMuestras = this.muestras.stream().map(muestra -> muestra.getParticipante()).collect(Collectors.toSet());
+		Set<Participante> participantesEnVotaciones =new HashSet<Participante>();
+		participantesEnVotaciones = this.getVotaciones().stream().map(votacion->votacion.getParticipante()).collect(Collectors.toSet());
+		Set<Participante> participantes = Stream.concat(participantesEnMuestras.stream(), participantesEnVotaciones.stream()).collect(Collectors.toSet());
+		System.out.println(participantes);
 		participantes.stream().forEach(participante -> participante.actualizarEstado());
 	}
 

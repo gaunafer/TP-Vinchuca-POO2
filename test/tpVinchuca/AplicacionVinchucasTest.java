@@ -6,6 +6,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -37,6 +38,8 @@ public class AplicacionVinchucasTest {
 	private Votacion votacion = mock(Votacion.class);
 	@Mock
 	private Votacion votacion1 = mock(Votacion.class);
+	@Mock
+	private Votacion votacion2 = mock(Votacion.class);
 	@Mock
 	private Participante juanPerez = mock(Participante.class);
 	@Mock
@@ -188,12 +191,14 @@ public class AplicacionVinchucasTest {
 		votaciones.add(votacion1);
 		
 		List<Votacion>votaciones1 = new ArrayList<Votacion>();
+		votaciones1.add(votacion2);
 		
 		when(muestra.getVotaciones()).thenReturn(votaciones);
 		when(muestra1.getVotaciones()).thenReturn(votaciones1);
 		
 		when(votacion.getParticipante()).thenReturn(pepitaLaPistolera);
-		when(votacion.getParticipante()).thenReturn(mataHari);
+		when(votacion1.getParticipante()).thenReturn(mataHari);
+		when(votacion2.getParticipante()).thenReturn(juanPerez);
 		
 		aplicacion.actualizarNivelDeConocimiento();
 		
