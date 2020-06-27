@@ -3,6 +3,8 @@ package tpVinchuca;
 import java.util.ArrayList;
 import java.util.List;
 
+import tpVinchucas.error.ErrorLaUbicacionNoExiste;
+
 public class Ubicacion {
 
 	private Double latitud;

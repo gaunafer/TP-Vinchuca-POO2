@@ -9,6 +9,9 @@ import java.util.List;
 import org.junit.jupiter.api.*;
 import org.mockito.Mockito;
 
+import tpVinchucas.error.ErrorElRadioDebeSerMayorACero;
+import tpVinchucas.organizacion.Organizacion;
+
 public class ZonaDeCoberturaTest {
 	
 	private ZonaDeCobertura dominicoWilde;

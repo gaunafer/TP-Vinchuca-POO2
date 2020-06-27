@@ -16,6 +16,11 @@ import org.junit.jupiter.api.*;
 import org.mockito.Mock;
 import org.mockito.Spy;
 
+import tpVinchucas.filtro.FiltroAnd;
+import tpVinchucas.filtro.FiltroOr;
+import tpVinchucas.filtro.FiltroParticipante;
+import tpVinchucas.filtro.FiltroPorFecha;
+
 public class AplicacionVinchucasTest {
 	
 	@Mock

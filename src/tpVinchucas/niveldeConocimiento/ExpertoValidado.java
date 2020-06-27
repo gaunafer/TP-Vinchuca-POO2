@@ -1,4 +1,7 @@
-package tpVinchuca;
+package tpVinchucas.niveldeConocimiento;
+
+import tpVinchuca.AplicacionVinchucas;
+import tpVinchuca.Participante;
 
 public class ExpertoValidado extends Experto{
 	

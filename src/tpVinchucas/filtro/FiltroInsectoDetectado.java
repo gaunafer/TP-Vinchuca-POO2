@@ -1,7 +1,10 @@
-package tpVinchuca;
+package tpVinchucas.filtro;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import tpVinchuca.ClasificacionDeFoto;
+import tpVinchuca.Muestra;
 
 public class FiltroInsectoDetectado implements Filtro {
 	

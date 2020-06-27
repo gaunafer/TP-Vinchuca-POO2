@@ -1,6 +1,8 @@
-package tpVinchuca;
+package tpVinchucas.filtro;
 
 import java.time.LocalDate;
+
+import tpVinchuca.Muestra;
 
 public class FiltroPorFechaDeCreacionDeMuestra extends FiltroPorFecha {
 

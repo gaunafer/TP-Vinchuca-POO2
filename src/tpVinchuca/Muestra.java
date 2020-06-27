@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import tpVinchuca.nivelDeValidacion.NivelBasico;
+import tpVinchuca.nivelDeValidacion.NivelDeValidacion;
+import tpVinchuca.nivelDeValidacion.NivelExperto;
+import tpVinchuca.nivelDeValidacion.NivelValidada;
+import tpVinchucas.error.ErrorParticipanteNoPuedeVotarEstaMuestra;
+
 public class Muestra {
 	private LocalDate fechaDeCreacion;
 	private List<Votacion> votaciones;

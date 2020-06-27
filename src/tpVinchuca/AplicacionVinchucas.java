@@ -4,6 +4,12 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.*;
 
+import tpVinchucas.filtro.Filtro;
+import tpVinchucas.filtro.FiltroAnd;
+import tpVinchucas.filtro.FiltroParticipante;
+import tpVinchucas.filtro.FiltroPorFechaDeCreacionDeMuestra;
+import tpVinchucas.filtro.OperadorLogico;
+
 public class AplicacionVinchucas {
 	
 	private Buscador buscador;

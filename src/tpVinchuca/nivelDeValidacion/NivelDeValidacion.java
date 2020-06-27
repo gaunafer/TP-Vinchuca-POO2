@@ -1,4 +1,4 @@
-package tpVinchuca;
+package tpVinchuca.nivelDeValidacion;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,6 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import tpVinchuca.ClasificacionDeFoto;
+import tpVinchuca.Muestra;
+import tpVinchuca.Votacion;
+import tpVinchucas.error.ErrorParticipanteNoPuedeVotarEstaMuestra;
 
 public abstract class NivelDeValidacion {
 	
@@ -69,6 +74,6 @@ public abstract class NivelDeValidacion {
 			return estadosMasVotados.get(0);
 		}
 	}
-	protected abstract String getNivelDeValidacion();
+	public abstract String getNivelDeValidacion();
 	
 }

@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mock;
 
+import tpVinchuca.nivelDeValidacion.NivelBasico;
+import tpVinchucas.error.ErrorParticipanteNoPuedeVotarEstaMuestra;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 

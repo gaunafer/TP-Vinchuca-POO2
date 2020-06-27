@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 import org.mockito.Mock;
+
+import tpVinchuca.nivelDeValidacion.NivelValidada;
+import tpVinchucas.error.ErrorParticipanteNoPuedeVotarEstaMuestra;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

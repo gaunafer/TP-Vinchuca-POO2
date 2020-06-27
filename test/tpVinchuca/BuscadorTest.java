@@ -16,6 +16,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Spy;
 
+import tpVinchucas.filtro.Filtro;
+import tpVinchucas.filtro.FiltroOr;
+
 
 public class BuscadorTest {
 	

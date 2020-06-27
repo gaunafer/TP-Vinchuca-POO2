@@ -15,6 +15,10 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.stubbing.OngoingStubbing;
 
+import tpVinchucas.niveldeConocimiento.Basico;
+import tpVinchucas.niveldeConocimiento.Experto;
+import tpVinchucas.niveldeConocimiento.ExpertoValidado;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 

@@ -1,6 +1,9 @@
-package tpVinchuca;
+package tpVinchucas.niveldeConocimiento;
 
 import java.time.LocalDate;
+
+import tpVinchuca.AplicacionVinchucas;
+import tpVinchuca.Participante;
 
 public class Basico extends NivelDeConocimiento{
 	

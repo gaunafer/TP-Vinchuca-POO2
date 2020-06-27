@@ -1,9 +1,13 @@
-package tpVinchuca;
+package tpVinchuca.nivelDeValidacion;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import tpVinchuca.Muestra;
+import tpVinchuca.Votacion;
+import tpVinchucas.error.ErrorParticipanteNoPuedeVotarEstaMuestra;
 
 public class NivelExperto extends NivelDeValidacion {
 
@@ -51,7 +55,7 @@ public class NivelExperto extends NivelDeValidacion {
 	 * Retorna la lista de votaciones de expertos de la muestra
 	 */
 	@Override
-	protected List<Votacion> getVotaciones(Muestra muestra) {
+	public List<Votacion> getVotaciones(Muestra muestra) {
 		Stream<Votacion> votacionesExpertas = muestra.getVotaciones().stream()
 				.filter(votacion -> votacion.participanteEsExpertoAlMomentoDeVotar());
 		return votacionesExpertas.collect(Collectors.toList());
@@ -73,7 +77,7 @@ public class NivelExperto extends NivelDeValidacion {
 	 * Retorna el nivel de validacion de la muestra
 	 */
 	@Override
-	protected String getNivelDeValidacion() {
+	public String getNivelDeValidacion() {
 		return "Nivel Experto";
 	}
 

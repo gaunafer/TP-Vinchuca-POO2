@@ -3,6 +3,8 @@ package tpVinchuca;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import tpVinchucas.error.ErrorElRadioDebeSerMayorACero;
+
 public class ZonaDeCobertura {
 	
 	private Ubicacion epicentro;

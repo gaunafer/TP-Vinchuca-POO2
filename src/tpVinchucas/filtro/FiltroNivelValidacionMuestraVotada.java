@@ -1,4 +1,6 @@
-package tpVinchuca;
+package tpVinchucas.filtro;
+
+import tpVinchuca.Muestra;
 
 public class FiltroNivelValidacionMuestraVotada extends FiltroNivelValidacionMuestra {
 

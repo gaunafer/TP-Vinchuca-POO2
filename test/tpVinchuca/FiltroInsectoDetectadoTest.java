@@ -11,6 +11,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
+import tpVinchucas.filtro.Filtro;
+import tpVinchucas.filtro.FiltroInsectoDetectado;
+
 public class FiltroInsectoDetectadoTest {
 	
 	private Filtro filtro;

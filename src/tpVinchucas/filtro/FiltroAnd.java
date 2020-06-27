@@ -1,6 +1,8 @@
-package tpVinchuca;
+package tpVinchucas.filtro;
 
 import java.util.List;
+
+import tpVinchuca.Muestra;
 
 public class FiltroAnd extends OperadorBinario {
 

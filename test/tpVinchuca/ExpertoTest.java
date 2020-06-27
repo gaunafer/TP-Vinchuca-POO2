@@ -13,6 +13,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Spy;
 
+import tpVinchucas.niveldeConocimiento.Basico;
+import tpVinchucas.niveldeConocimiento.Experto;
+import tpVinchucas.niveldeConocimiento.NivelDeConocimiento;
+
 import static org.mockito.Mockito.*;
 
 public class ExpertoTest {

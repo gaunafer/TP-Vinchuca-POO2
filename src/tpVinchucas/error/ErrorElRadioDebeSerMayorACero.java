@@ -1,4 +1,4 @@
-package tpVinchuca;
+package tpVinchucas.error;
 
 public class ErrorElRadioDebeSerMayorACero extends IllegalArgumentException {
 	

@@ -14,6 +14,10 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
+import tpVinchucas.niveldeConocimiento.Basico;
+import tpVinchucas.niveldeConocimiento.Experto;
+import tpVinchucas.niveldeConocimiento.NivelDeConocimiento;
+
 public class BasicoTest {
 	
 	@Mock

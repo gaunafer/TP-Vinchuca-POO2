@@ -1,7 +1,10 @@
-package tpVinchuca;
+package tpVinchucas.filtro;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import tpVinchuca.Muestra;
+import tpVinchuca.Participante;
 
 public class FiltroParticipante implements Filtro {
 	

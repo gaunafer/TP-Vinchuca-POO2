@@ -1,4 +1,4 @@
-package tpVinchuca;
+package tpVinchuca.nivelDeValidacion;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import tpVinchuca.Muestra;
+import tpVinchuca.Votacion;
+import tpVinchucas.error.ErrorParticipanteNoPuedeVotarEstaMuestra;
 
 public class NivelValidada extends NivelExperto {
 	
@@ -23,7 +27,7 @@ public class NivelValidada extends NivelExperto {
 	 * Retorna el nivel de validacion de la muestra
 	 */
 	@Override
-	protected String getNivelDeValidacion() {
+	public String getNivelDeValidacion() {
 		return "Nivel Validada";
 	}
 }

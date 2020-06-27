@@ -5,6 +5,9 @@ import java.util.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import tpVinchucas.filtro.Filtro;
+import tpVinchucas.filtro.FiltroNivelValidacionMuestraVotada;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 

@@ -1,5 +1,7 @@
 package tpVinchuca;
 
+import tpVinchucas.niveldeConocimiento.NivelDeConocimiento;
+
 public class Participante {
 	
 	private String alias;

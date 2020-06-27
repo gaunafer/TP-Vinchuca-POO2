@@ -15,6 +15,10 @@ import org.junit.jupiter.api.*;
 import org.mockito.Mock;
 import org.mockito.Spy;
 
+import tpVinchucas.filtro.Filtro;
+import tpVinchucas.filtro.FiltroPorFechaDeCreacionDeMuestra;
+import tpVinchucas.filtro.OperadorLogico;
+
 public class FiltroPorFechaDeCreacionDeMuestrasTest {
 	
 	private Filtro filtroFecha;

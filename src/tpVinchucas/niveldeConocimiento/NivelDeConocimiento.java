@@ -1,7 +1,10 @@
-package tpVinchuca;
+package tpVinchucas.niveldeConocimiento;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import tpVinchuca.AplicacionVinchucas;
+import tpVinchuca.Participante;
 
 public abstract class NivelDeConocimiento {
 	
@@ -21,21 +24,21 @@ public abstract class NivelDeConocimiento {
 	 * Metodo definido en las subclases.
 	 * @return el correspondiente nivel de conocimiento.
 	 */
-	protected abstract String getNivelDeConocimiento();
+	public abstract String getNivelDeConocimiento();
 	
 	/**
 	 * Metodo definido en las subclases, verifica que el nivel de conocimiento
 	 * del participante no haya cambiado.
 	 * @param participante participante del cual se verifica su nivel de conocimiento
 	 */
-	protected abstract void verificarEstado(Participante participante);
+	public abstract void verificarEstado(Participante participante);
 	
 	/**
 	 * Metodo definido en las subclases.
 	 * @return devuelve true para nivel de conocimiento experto y false para 
 	 * nivel de conocimiento basico
 	 */
-	protected abstract Boolean esExperto();
+	public abstract Boolean esExperto();
 
 	/**
 	 * Cambia el nivel de conocimiento del {@code participante} a Basico

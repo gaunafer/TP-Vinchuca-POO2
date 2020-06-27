@@ -1,4 +1,4 @@
-package tpVinchuca;
+package tpVinchucas.organizacion;
 
 public enum TipoDeOrganizacion {
 	

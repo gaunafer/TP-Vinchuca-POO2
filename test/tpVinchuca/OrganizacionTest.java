@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.*;
 
+import tpVinchucas.organizacion.Organizacion;
+import tpVinchucas.organizacion.TipoDeOrganizacion;
+
 public class OrganizacionTest {
 
 	private Ubicacion ubicFlech;

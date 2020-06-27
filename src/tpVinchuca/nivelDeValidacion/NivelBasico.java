@@ -1,8 +1,12 @@
-package tpVinchuca;
+package tpVinchuca.nivelDeValidacion;
 
 
 import java.util.List;
 import java.util.Map;
+
+import tpVinchuca.Muestra;
+import tpVinchuca.Votacion;
+import tpVinchucas.error.ErrorParticipanteNoPuedeVotarEstaMuestra;
 
 
 public class NivelBasico extends NivelDeValidacion {
@@ -42,7 +46,7 @@ public class NivelBasico extends NivelDeValidacion {
 	 * Retorna la lista de votaciones de la muestra
 	 */
 	@Override
-	protected  List<Votacion> getVotaciones(Muestra muestra) {
+	public  List<Votacion> getVotaciones(Muestra muestra) {
 	
 		return muestra.getVotaciones();
 	}
@@ -61,7 +65,7 @@ public class NivelBasico extends NivelDeValidacion {
 	 * Retorna el nivel de validacion de la muestra
 	 */
 	@Override
-	protected String getNivelDeValidacion() {
+	public String getNivelDeValidacion() {
 		return "Nivel Basico";
 	}
 

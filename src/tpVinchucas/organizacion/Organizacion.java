@@ -1,5 +1,10 @@
-package tpVinchuca;
+package tpVinchucas.organizacion;
 
+import tpVinchuca.IFuncionalidadExterna;
+import tpVinchuca.IObservadoresDeZonas;
+import tpVinchuca.Muestra;
+import tpVinchuca.Ubicacion;
+import tpVinchuca.ZonaDeCobertura;
 
 public class Organizacion implements IObservadoresDeZonas {
 	

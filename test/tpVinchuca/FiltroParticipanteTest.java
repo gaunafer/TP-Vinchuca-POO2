@@ -12,6 +12,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
+import tpVinchucas.filtro.Filtro;
+import tpVinchucas.filtro.FiltroParticipante;
+
 public class FiltroParticipanteTest {
 	private Filtro filtroParticipante;
 	private List<Muestra> muestras;

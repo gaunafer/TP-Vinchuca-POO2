@@ -6,6 +6,8 @@ import java.util.*;
 
 import org.junit.jupiter.api.*;
 
+import tpVinchucas.error.ErrorLaUbicacionNoExiste;
+
 import static org.mockito.Mockito.*;
 
 

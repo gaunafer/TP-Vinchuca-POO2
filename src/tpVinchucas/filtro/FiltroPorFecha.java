@@ -1,8 +1,10 @@
-package tpVinchuca;
+package tpVinchucas.filtro;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import tpVinchuca.Muestra;
 
 public abstract class FiltroPorFecha implements Filtro{
 	
