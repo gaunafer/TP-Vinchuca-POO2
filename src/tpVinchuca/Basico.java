@@ -40,6 +40,11 @@ public class Basico extends NivelDeConocimiento{
 	public Boolean esExperto() {
 		return false;
 	}
+	
+	
+	public void actualizarNivelValidacionMuestra(Muestra muestra) {
+		muestra.setNivelDeValidacion(new NivelBasico());
+	}
 }	
 	
 

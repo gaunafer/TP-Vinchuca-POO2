@@ -62,7 +62,7 @@ public class NivelExpertoTest {
 		when(muestra.getParticipante()).thenReturn(participante);
 		when(votacion1.getParticipante()).thenReturn(participante2);
 		when(muestra.muestraVotadaPor(participante2)).thenReturn(false);
-		when(participante2.getNivelDeConocimiento()).thenReturn("Nivel Basico");
+		when(participante2.esExperto()).thenReturn(false);
 		when(votacion1.participanteEsExpertoAlMomentoDeVotar()).thenReturn(false);
 		
 		String exception = assertThrows(ErrorParticipanteNoPuedeVotarEstaMuestra.class,()->{nivelExperto.registrarVotacion(muestra, votacion1);}).getMessage();
@@ -73,7 +73,7 @@ public class NivelExpertoTest {
 		when(muestra.getParticipante()).thenReturn(participante);
 		when(votacion1.getParticipante()).thenReturn(participante);
 		when(muestra.muestraVotadaPor(participante2)).thenReturn(false);
-		when(participante.getNivelDeConocimiento()).thenReturn("Nivel Experto");
+		when(participante.esExperto()).thenReturn(true);
 		when(votacion1.participanteEsExpertoAlMomentoDeVotar()).thenReturn(false);
 		
 		String exception = assertThrows(ErrorParticipanteNoPuedeVotarEstaMuestra.class,()->{nivelExperto.registrarVotacion(muestra, votacion1);}).getMessage();
@@ -84,7 +84,7 @@ public class NivelExpertoTest {
 		when(muestra.getParticipante()).thenReturn(participante);
 		when(votacion1.getParticipante()).thenReturn(participante2);
 		when(muestra.muestraVotadaPor(participante2)).thenReturn(true);
-		when(participante2.getNivelDeConocimiento()).thenReturn("Nivel Experto");
+		when(participante2.esExperto()).thenReturn(true);
 		when(votacion1.participanteEsExpertoAlMomentoDeVotar()).thenReturn(true);
 		
 		String exception = assertThrows(ErrorParticipanteNoPuedeVotarEstaMuestra.class,()->{nivelExperto.registrarVotacion(muestra, votacion1);}).getMessage();

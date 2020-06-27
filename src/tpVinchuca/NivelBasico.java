@@ -15,9 +15,7 @@ public class NivelBasico extends NivelDeValidacion {
 	public void registrarVotacion(Muestra muestra, Votacion votacion) throws ErrorParticipanteNoPuedeVotarEstaMuestra {
 		verificarSiElParticipantePuedeVotarLaMuestra(muestra, votacion);
 		muestra.addVotacion(votacion);
-		if (votacion.participanteEsExpertoAlMomentoDeVotar()) {
-			muestra.setNivelDeValidacionExperto();
-		}
+		votacion.getNivelConocimientoParticipanteAlVotar().actualizarNivelValidacionMuestra(muestra);
 	}
 
 	/**

@@ -37,6 +37,8 @@ public abstract class NivelDeConocimiento {
 	 */
 	protected abstract Boolean esExperto();
 
+	protected abstract void actualizarNivelValidacionMuestra(Muestra muestra);
+	
 	/**
 	 * Cambia el nivel de conocimiento del {@code participante} a Basico
 	 * @param participante participante del cual se cambia su nivel de conocimiento

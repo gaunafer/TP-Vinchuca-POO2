@@ -7,6 +7,7 @@ public class Votacion {
 	private ClasificacionDeFoto opinion;
 	private LocalDate fecha;
 	private Boolean participanteEsExperto;
+	private NivelDeConocimiento nivelConocimientoParticipanteAlVotar;
 	
 	
 	public Votacion(Participante participante, ClasificacionDeFoto opinion) {
@@ -14,6 +15,7 @@ public class Votacion {
 		this.opinion = opinion;
 		this.fecha = LocalDate.now();
 		this.participanteEsExperto = participante.esExperto();
+		this.nivelConocimientoParticipanteAlVotar = participante.getNivelDeConocimiento();
 	}
 	
 	/**
@@ -44,6 +46,10 @@ public class Votacion {
 	 */
 	public Boolean participanteEsExpertoAlMomentoDeVotar() {
 		return this.participanteEsExperto;
+	}
+	
+	public NivelDeConocimiento getNivelConocimientoParticipanteAlVotar() {
+		return this.nivelConocimientoParticipanteAlVotar;
 	}
 
 }

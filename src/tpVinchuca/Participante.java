@@ -23,9 +23,9 @@ public class Participante {
 	/**
 	 * Retorna el nivel de conocimiento del participante
 	 */
-	public String getNivelDeConocimiento() {
+	public NivelDeConocimiento getNivelDeConocimiento() {
 		
-		 return this.nivelDeConocimiento.getNivelDeConocimiento();
+		 return this.nivelDeConocimiento;
 	}
 	
     /**

@@ -176,10 +176,6 @@ public class AplicacionVinchucasTest {
 	
 	@Test
 	public void seRealizaLaActualizacionDeEstadoDeLosParticipantesCorrectamente() {
-        
-		when(juanPerez.getNivelDeConocimiento()).thenReturn("Nivel Basico");
-		when(pepitaLaPistolera.getNivelDeConocimiento()).thenReturn("Nivel Experto");
-		when(mataHari.getNivelDeConocimiento()).thenReturn("Nivel Experto");  
 		
 		aplicacion.agregarMuestra(muestra);
 		aplicacion.agregarMuestra(muestra1);

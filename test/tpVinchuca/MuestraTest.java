@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
+
 import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
@@ -118,10 +120,11 @@ public class MuestraTest {
 	}
 	@Test
 	public void muestraCreadaPorExpertoSeCreaConNivelDeValidacionExperto() {
+		Experto nivelExperto = mock(Experto.class);
 		when(persona4.getAlias()).thenReturn("pepe");
-		when(persona4.getNivelDeConocimiento()).thenReturn("Nivel Experto");
+		when(persona4.getNivelDeConocimiento()).thenReturn(nivelExperto);
 		muestra2 = new Muestra(imagen, persona4, opinion,ubicacion);
-		assertEquals("Nivel Experto", muestra2.getNivelDeValidacion());
+		assertEquals("Experto", muestra2.getNivelDeValidacion());
 	}
 	@Test
 	public void muestraCreadaPorParticipanteBasicoSeCreaConNivelDeValidacionBasico() {
@@ -140,7 +143,7 @@ public class MuestraTest {
 		when(votacion3.getParticipante()).thenReturn(persona3);
 		when(votacion3.getOpinion()).thenReturn("Chinche Foliada");
 		when(votacion3.participanteEsExpertoAlMomentoDeVotar()).thenReturn(true);
-		when(persona.getNivelDeConocimiento()).thenReturn("Nivel Basico");
+		when(persona.getNivelDeConocimiento()).thenReturn(nivelBasico);
 		muestra1 = new Muestra(imagen, persona, opinion, ubicacion);
 		muestra1.registrarVotacion(votacion4);
 		muestra1.registrarVotacion(votacion5);

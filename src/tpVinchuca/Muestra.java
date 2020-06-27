@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Muestra {
 	private LocalDate fechaDeCreacion;
@@ -14,7 +15,7 @@ public class Muestra {
 	private ClasificacionDeFoto veredicto;
 	private Ubicacion ubicacion;
 	private InformadorDeZonas informadorDeZonas;
-	private String nivelDeConocimientoDeCreacion;
+	private NivelDeConocimiento nivelDeConocimientoDeCreacion;
 
 	public Muestra(Imagen imagen, Participante participante, ClasificacionDeFoto veredicto, Ubicacion ubicacion) {
 		this.participante = participante;
@@ -33,11 +34,7 @@ public class Muestra {
 	 * del nivel de conocimiento del participante
 	 */
 	private void inicializarEstado() {
-		if (participante.getNivelDeConocimiento() == "Nivel Experto") {
-			setNivelDeValidacionExperto();
-		} else {
-			setNivelDeValidacionBasico();
-		}
+		participante.getNivelDeConocimiento().actualizarNivelValidacionMuestra(this);
 	}
 
 	/**
@@ -133,6 +130,13 @@ public class Muestra {
 	}
 
 	/**
+	 * 
+	 */
+	public void setNivelDeValidacion(NivelDeValidacion nivel) {
+		this.nivelDeValidacion = nivel;
+	}
+
+	/**
 	 * Setea nivel de validacion Basico
 	 */
 	public void setNivelDeValidacionBasico() {
@@ -192,6 +196,10 @@ public class Muestra {
 	public String getNivelDeValidacion() {
 		return nivelDeValidacion.getNivelDeValidacion();
 	}
+	
+	public NivelDeValidacion getNivelDeValidacionNoString() {
+		return nivelDeValidacion;
+	}
 
 	/**
 	 * Retorna true si la muestra tiene votaciones.
@@ -211,10 +219,17 @@ public class Muestra {
 
 		return votaciones.get(this.getVotaciones().size() - 1).getFecha();
 	}
+	
 	/**
 	 * Retorna el nivel de creacion del creador de la muestra al momento de la creacion
 	 */
-	public String getNivelDeConocimientoDeCreacion() {
+	public NivelDeConocimiento getNivelDeConocimientoDeCreacion() {
 		return nivelDeConocimientoDeCreacion;
+	}
+	
+	public List<Votacion> getVotacionesExpertas(){
+		Stream<Votacion> votacionesExpertas = getVotaciones().stream()
+				.filter(votacion -> votacion.participanteEsExpertoAlMomentoDeVotar());
+		return votacionesExpertas.collect(Collectors.toList());
 	}
 }
