@@ -1,7 +1,10 @@
-package tpVinchuca;
+package tpVinchuca.nivelDeValidacion;
 
 import org.mockito.Mock;
 
+import tpVinchuca.Muestra;
+import tpVinchuca.Participante;
+import tpVinchuca.Votacion;
 import tpVinchuca.nivelDeValidacion.NivelExperto;
 import tpVinchucas.error.ErrorParticipanteNoPuedeVotarEstaMuestra;
 

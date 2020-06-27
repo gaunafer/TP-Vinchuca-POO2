@@ -1,10 +1,11 @@
-package tpVinchuca;
+package tpVinchuca.filtro;
 
 import java.util.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import tpVinchuca.Muestra;
 import tpVinchucas.filtro.Filtro;
 import tpVinchucas.filtro.FiltroNivelValidacionMuestraValidada;
 

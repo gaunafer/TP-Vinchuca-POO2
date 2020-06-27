@@ -1,4 +1,4 @@
-package tpVinchuca;
+package tpVinchuca.filtro;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -12,6 +12,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
+import tpVinchuca.Muestra;
+import tpVinchuca.Participante;
 import tpVinchucas.filtro.Filtro;
 import tpVinchucas.filtro.FiltroParticipante;
 

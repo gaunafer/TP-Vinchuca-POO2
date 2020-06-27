@@ -1,10 +1,9 @@
-package tpVinchuca;
+package tpVinchuca.filtro;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,17 +11,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
+import tpVinchuca.Muestra;
+import tpVinchuca.Participante;
 import tpVinchucas.filtro.Filtro;
-import tpVinchucas.filtro.FiltroOr;
+import tpVinchucas.filtro.FiltroAnd;
 import tpVinchucas.filtro.FiltroParticipante;
 import tpVinchucas.filtro.FiltroPorFechaDeCreacionDeMuestra;
 
-public class FiltroOrTest {
+public class FiltroAndTest {
 	
-	private Filtro filtroOr;
+	private Filtro filtroAnd;
 	private List<Muestra> muestras;
-	private List<Muestra> muestrasFiltradasPorPersona;
-	private List<Muestra> muestrasFiltradasPorFecha;
 	private List<Muestra> muestrasFiltradas;
 	
 	@Mock
@@ -42,7 +41,7 @@ public class FiltroOrTest {
 	
 	@BeforeEach
 	public void setUp() {
-		filtroOr = new FiltroOr(filtroFecha, filtroParticipante);
+		filtroAnd = new FiltroAnd(filtroFecha, filtroParticipante);
 		
 		muestras = new ArrayList<Muestra>();
 		muestras.add(muestra);
@@ -53,25 +52,13 @@ public class FiltroOrTest {
 		when(muestra1.getParticipante()).thenReturn(rafaGorgory);
 		when(muestra2.getParticipante()).thenReturn(troyMcClure);
 		
-		when(muestra.getFecha()).thenReturn(LocalDate.now().minusDays(15l));
-		when(muestra1.getFecha()).thenReturn(LocalDate.now().minusDays(29l));
-		when(muestra2.getFecha()).thenReturn(LocalDate.now().minusDays(31l));
-		
-		muestrasFiltradasPorPersona = new ArrayList<Muestra>();
-		
-		muestrasFiltradasPorPersona.add(muestra);
-		muestrasFiltradasPorPersona.add(muestra2);
-		
-		muestrasFiltradasPorFecha = new ArrayList<Muestra>();
-		muestrasFiltradasPorFecha.add(muestra);
-		muestrasFiltradasPorFecha.add(muestra1);
-		
 		muestrasFiltradas = new ArrayList<Muestra>();
+		
 		muestrasFiltradas.add(muestra);
+		muestrasFiltradas.add(muestra2);
 		
-		
-		when(filtroFecha.criterioDeBusqueda(muestras)).thenReturn(muestrasFiltradasPorFecha);
-		when(filtroParticipante.criterioDeBusqueda(muestras)).thenReturn(muestrasFiltradasPorPersona);		
+		when(filtroFecha.criterioDeBusqueda(muestras)).thenReturn(muestras);
+		when(filtroParticipante.criterioDeBusqueda(muestras)).thenReturn(muestrasFiltradas);		
 		
 		
 	}
@@ -79,10 +66,9 @@ public class FiltroOrTest {
 	@Test
 	public void seFiltraUnaListaDeMuestrasYDevuelveUnaListaDeMuestrasFiltradasSegunElcriterioFecha() {
 		
-		assertEquals(muestrasFiltradas, filtroOr.criterioDeBusqueda(muestras));
+		assertEquals(muestrasFiltradas, filtroAnd.criterioDeBusqueda(muestras));
 		
 	}
-
 
 
 }

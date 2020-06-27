@@ -1,4 +1,4 @@
-package tpVinchuca;
+package tpVinchuca.filtro;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
@@ -15,6 +15,7 @@ import org.junit.jupiter.api.*;
 import org.mockito.Mock;
 import org.mockito.Spy;
 
+import tpVinchuca.Muestra;
 import tpVinchucas.filtro.Filtro;
 import tpVinchucas.filtro.FiltroPorFechaDeCreacionDeMuestra;
 import tpVinchucas.filtro.OperadorLogico;

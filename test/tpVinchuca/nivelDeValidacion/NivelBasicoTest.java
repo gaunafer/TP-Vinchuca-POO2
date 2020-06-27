@@ -1,4 +1,4 @@
-package tpVinchuca;
+package tpVinchuca.nivelDeValidacion;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mock;
 
+import tpVinchuca.Muestra;
+import tpVinchuca.Participante;
+import tpVinchuca.Votacion;
 import tpVinchuca.nivelDeValidacion.NivelBasico;
 import tpVinchucas.error.ErrorParticipanteNoPuedeVotarEstaMuestra;
 

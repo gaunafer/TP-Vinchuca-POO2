@@ -1,4 +1,4 @@
-package tpVinchuca;
+package tpVinchuca.niveldeConocimiento;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -13,6 +13,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Spy;
 
+import tpVinchuca.AplicacionVinchucas;
+import tpVinchuca.Muestra;
+import tpVinchuca.Participante;
+import tpVinchuca.Votacion;
 import tpVinchucas.niveldeConocimiento.Basico;
 import tpVinchucas.niveldeConocimiento.Experto;
 import tpVinchucas.niveldeConocimiento.NivelDeConocimiento;
