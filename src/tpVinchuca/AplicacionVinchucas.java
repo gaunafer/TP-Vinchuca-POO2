@@ -113,16 +113,19 @@ public class AplicacionVinchucas {
 	
 	/**
 	 * Busca la lista de participantes que han subido muestras a la palicacion o simplemente votado y actualiza sus estados
+	 * se prefiere utilizar la interfaz Set en ves de List, ya que no admite objetos repetidos
 	 * 
 	 */
 	
 	public void actualizarNivelDeConocimiento() {
-		List<Participante> participantesEnMuestras = new ArrayList<Participante>();
-		participantesEnMuestras = muestras.stream().map(muestra -> muestra.getParticipante()).collect(Collectors.toList());
-		List<Participante> participantesEnVotaciones =new ArrayList<Participante>();
-		participantesEnVotaciones = this.getVotaciones().stream().map(votacion->votacion.getParticipante()).collect(Collectors.toList());
-		List<Participante> participantes = Stream.concat(participantesEnMuestras.stream(), participantesEnVotaciones.stream()).collect(Collectors.toList());
-		
+		Set<Participante> participantesEnMuestras = new HashSet<Participante>();
+		participantesEnMuestras = this.muestras.stream().map(muestra -> muestra.getParticipante()).collect(Collectors.toSet());
+		Set<Participante> participantesEnVotaciones =new HashSet<Participante>();
+		participantesEnVotaciones = this.getVotaciones().stream().map(votacion->votacion.getParticipante()).collect(Collectors.toSet());
+		Set<Participante> participantes = Stream.concat(participantesEnMuestras.stream(), participantesEnVotaciones.stream()).collect(Collectors.toSet());
+		System.out.println(participantes);
 		participantes.stream().forEach(participante -> participante.actualizarEstado());
 	}
+
+
 }

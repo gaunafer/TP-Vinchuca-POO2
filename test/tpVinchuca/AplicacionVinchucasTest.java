@@ -6,6 +6,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -38,7 +39,14 @@ public class AplicacionVinchucasTest {
 	@Mock
 	private Votacion votacion1 = mock(Votacion.class);
 	@Mock
+	private Votacion votacion2 = mock(Votacion.class);
+	@Mock
 	private Participante juanPerez = mock(Participante.class);
+	@Mock
+	private Participante pepitaLaPistolera = mock(Participante.class);
+	@Mock
+	private Participante mataHari = mock(Participante.class);
+	
 	
 	
 
@@ -55,6 +63,11 @@ public class AplicacionVinchucasTest {
 			votaciones = new ArrayList<Votacion>();
 			muestrasConVotaciones = new ArrayList<Muestra>();	
 			muestras = new ArrayList<Muestra>();
+	}
+	
+	@Test
+	public void seCreaUnaAplicacionVinchucasCorrectamente() {
+		assertEquals(buscador, aplicacion.getBuscador());
 	}
 	
 	// Testea:
@@ -105,10 +118,7 @@ public class AplicacionVinchucasTest {
 		verify(muestra, never()).asignarZona(berazategui);
 	}
 	
-	@Test
-	public void seCreaUnaAplicacionVinchucasCorrectamente() {
-		assertEquals(buscador, aplicacion.getBuscador());
-	}
+	
 	
 	@Test
 	public void retornaLaListaDeMuestrasFiltradasPorFecha() {
@@ -162,6 +172,40 @@ public class AplicacionVinchucasTest {
 	
 	
 		assertEquals(votaciones, aplicacion.getVotacionesDeParticipanteDeLosUltimos30Dias(juanPerez));
+	}
+	
+	@Test
+	public void seRealizaLaActualizacionDeEstadoDeLosParticipantesCorrectamente() {
+        
+		when(juanPerez.getNivelDeConocimiento()).thenReturn("Nivel Basico");
+		when(pepitaLaPistolera.getNivelDeConocimiento()).thenReturn("Nivel Experto");
+		when(mataHari.getNivelDeConocimiento()).thenReturn("Nivel Experto");  
+		
+		aplicacion.agregarMuestra(muestra);
+		aplicacion.agregarMuestra(muestra1);
+		
+		when(muestra.getParticipante()).thenReturn(juanPerez);
+		when(muestra1.getParticipante()).thenReturn(mataHari);
+		
+		votaciones.add(votacion);
+		votaciones.add(votacion1);
+		
+		List<Votacion>votaciones1 = new ArrayList<Votacion>();
+		votaciones1.add(votacion2);
+		
+		when(muestra.getVotaciones()).thenReturn(votaciones);
+		when(muestra1.getVotaciones()).thenReturn(votaciones1);
+		
+		when(votacion.getParticipante()).thenReturn(pepitaLaPistolera);
+		when(votacion1.getParticipante()).thenReturn(mataHari);
+		when(votacion2.getParticipante()).thenReturn(juanPerez);
+		
+		aplicacion.actualizarNivelDeConocimiento();
+		
+		verify(juanPerez).actualizarEstado();
+		verify(pepitaLaPistolera).actualizarEstado();
+		verify(mataHari).actualizarEstado();
+	
 	}
 
 
