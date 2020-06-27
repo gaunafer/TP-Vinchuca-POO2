@@ -6,14 +6,14 @@ public class Votacion {
 	private Participante participante;
 	private ClasificacionDeFoto opinion;
 	private LocalDate fecha;
-	private String nivelConocimientoParticipante;
+	private Boolean participanteEsExperto;
 	
 	
 	public Votacion(Participante participante, ClasificacionDeFoto opinion) {
 		this.participante = participante;
 		this.opinion = opinion;
 		this.fecha = LocalDate.now();
-		this.nivelConocimientoParticipante = participante.getNivelDeConocimiento();
+		this.participanteEsExperto = participante.esExperto();
 	}
 	
 	/**
@@ -38,10 +38,12 @@ public class Votacion {
 	}
 	
 	/**
-	 * Retorna el nivel de conocimiento del participante al momento de creacion de la muestra
+	 * Devuelve true si participante es experto al momento de realizar la votacion. 
+	 * Devuelve false en caso de que participante tenga nivel de conocimiento basico 
+	 * al momento de la votacion.
 	 */
-	public String getNivelDeConocimientoParticipante() {
-		return this.nivelConocimientoParticipante;
+	public Boolean participanteEsExpertoAlMomentoDeVotar() {
+		return this.participanteEsExperto;
 	}
 
 }
