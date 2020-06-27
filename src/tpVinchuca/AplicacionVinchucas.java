@@ -127,7 +127,6 @@ public class AplicacionVinchucas {
 		Set<Participante> participantesEnMuestras = this.muestras.stream().map(muestra -> muestra.getParticipante()).collect(Collectors.toSet());
 		Set<Participante> participantesEnVotaciones =this.getVotaciones().stream().map(votacion->votacion.getParticipante()).collect(Collectors.toSet());
 		Set<Participante> participantes = Stream.concat(participantesEnMuestras.stream(), participantesEnVotaciones.stream()).collect(Collectors.toSet());
-		System.out.println(participantes);
 		participantes.stream().forEach(participante -> participante.actualizarEstado());
 	}
 
