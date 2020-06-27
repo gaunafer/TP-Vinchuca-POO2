@@ -3,8 +3,10 @@ package tpVinchuca.nivelDeValidacion;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -37,16 +39,9 @@ public abstract class NivelDeValidacion {
 	 * @Return 
 	 * */	
 	protected Map<String, Integer> crearRankingDeOpiniones(Muestra muestra, List<Votacion> votaciones) {
-		Map<String, Integer> contadorDeOpiniones = new HashMap<>();
-		for (Votacion vot : votaciones) {
-			if (contadorDeOpiniones.containsKey(vot.getOpinion())) {
-				contadorDeOpiniones.put(vot.getOpinion(), contadorDeOpiniones.get(vot.getOpinion())+1);
-			}
-			else {
-				contadorDeOpiniones.put(vot.getOpinion(),1);
-			}
-		}
-		return contadorDeOpiniones;
+		return  votaciones.stream().map(vot -> vot.getOpinion())
+	            .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new,
+	            		Collectors.summingInt(opinion -> 1)));
 	}
 	/**
 	 * Genera una lista con la opinion mas votadas, si hubiera empate incluye en la lista todas las opiniones 
