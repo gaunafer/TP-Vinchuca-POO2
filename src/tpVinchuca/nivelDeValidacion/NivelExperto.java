@@ -44,9 +44,9 @@ public class NivelExperto extends NivelDeValidacion {
 		//}
 	}
 	
-	private void verificarSiPuedeVotarExperto() {
-		
-	}
+//	private void verificarSiPuedeVotarExperto() {
+//		
+//	}
 	/**
 	 * Retorna la lista de votaciones de expertos de la muestra
 	 */

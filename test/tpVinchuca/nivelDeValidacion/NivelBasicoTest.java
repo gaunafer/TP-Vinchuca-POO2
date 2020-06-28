@@ -1,6 +1,7 @@
 package tpVinchuca.nivelDeValidacion;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.Rule;
@@ -43,8 +44,9 @@ public class NivelBasicoTest {
 	}
 	
 	@Test
-	public void testNivelDeValidacion() {
+	public void testEstaValidada() {
 		assertEquals("Nivel Basico", nivelValidacionBasico.getNivelDeValidacion());
+		assertFalse(nivelValidacionBasico.estaValidada());
 	}
 	
 	@Test
