@@ -2,8 +2,8 @@ package tpVinchucas.niveldeConocimiento;
 
 import java.time.LocalDate;
 
-import tpVinchuca.AplicacionVinchucas;
-import tpVinchuca.Participante;
+import tpVinchuca.*;
+import tpVinchuca.nivelDeValidacion.*;
 
 public class Basico extends NivelDeConocimiento{
 	
@@ -43,6 +43,8 @@ public class Basico extends NivelDeConocimiento{
 	public Boolean esExperto() {
 		return false;
 	}
-}	
 	
-
+	public void actualizarNivelValidacionMuestra(Muestra muestra) {
+		muestra.setNivelDeValidacion(new NivelBasico());
+	}
+}	

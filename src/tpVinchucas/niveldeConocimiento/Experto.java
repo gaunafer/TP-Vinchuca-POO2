@@ -2,8 +2,8 @@ package tpVinchucas.niveldeConocimiento;
 
 import java.time.LocalDate;
 
-import tpVinchuca.AplicacionVinchucas;
-import tpVinchuca.Participante;
+import tpVinchuca.*;
+import tpVinchuca.nivelDeValidacion.*;
 
 public class Experto extends NivelDeConocimiento{
 	
@@ -42,6 +42,20 @@ public class Experto extends NivelDeConocimiento{
 	 */
 	public Boolean esExperto() {
 		return true;
+	}
+	
+
+	public void actualizarNivelValidacionMuestra(Muestra muestra) { 
+		Integer	cantVotaciones = muestra.getVotaciones().size();
+		Votacion votacion = muestra.getVotaciones().get(cantVotaciones - 1);
+	
+		if (muestra.tieneDosOpinionesExpertas(votacion)) {
+				muestra.setNivelDeValidacion(new NivelValidada());
+				muestra.informarVerificacion();
+		} 
+		else {
+			muestra.setNivelDeValidacion(new NivelExperto());
+		}
 	}
 		
 }

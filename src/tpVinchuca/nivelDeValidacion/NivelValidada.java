@@ -30,4 +30,8 @@ public class NivelValidada extends NivelExperto {
 	public String getNivelDeValidacion() {
 		return "Nivel Validada";
 	}
+	
+	public Boolean estaValidada() {
+		return true;
+	}
 }

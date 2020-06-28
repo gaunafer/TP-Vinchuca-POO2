@@ -69,6 +69,14 @@ public abstract class NivelDeValidacion {
 			return estadosMasVotados.get(0);
 		}
 	}
+	
 	public abstract String getNivelDeValidacion();
+	
+	public Boolean hayDosOpinionesExpertas(Muestra muestra, Votacion votacion) {
+		Map<String, Integer> rankingOpiniones = crearRankingDeOpiniones(muestra, muestra.getVotacionesExpertas());
+		return rankingOpiniones.get(votacion.getOpinion()).equals(2);
+	}
+	
+	public abstract Boolean estaValidada();
 	
 }

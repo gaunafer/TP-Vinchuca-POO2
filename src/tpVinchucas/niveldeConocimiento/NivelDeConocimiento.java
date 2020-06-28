@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import tpVinchuca.AplicacionVinchucas;
+import tpVinchuca.Muestra;
 import tpVinchuca.Participante;
 
 public abstract class NivelDeConocimiento {
@@ -39,6 +40,8 @@ public abstract class NivelDeConocimiento {
 	 * nivel de conocimiento basico
 	 */
 	public abstract Boolean esExperto();
+	
+	public abstract void actualizarNivelValidacionMuestra(Muestra muestra);
 
 	/**
 	 * Cambia el nivel de conocimiento del {@code participante} a Basico

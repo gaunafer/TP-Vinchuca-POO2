@@ -4,12 +4,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import tpVinchuca.nivelDeValidacion.NivelBasico;
-import tpVinchuca.nivelDeValidacion.NivelDeValidacion;
-import tpVinchuca.nivelDeValidacion.NivelExperto;
-import tpVinchuca.nivelDeValidacion.NivelValidada;
+import tpVinchuca.nivelDeValidacion.*;
 import tpVinchucas.error.ErrorParticipanteNoPuedeVotarEstaMuestra;
+import tpVinchucas.niveldeConocimiento.NivelDeConocimiento;
 
 public class Muestra {
 	private LocalDate fechaDeCreacion;
@@ -20,7 +19,7 @@ public class Muestra {
 	private ClasificacionDeFoto veredicto;
 	private Ubicacion ubicacion;
 	private InformadorDeZonas informadorDeZonas;
-	private String nivelDeConocimientoDeCreacion;
+	private NivelDeConocimiento nivelDeConocimientoDeCreacion;
 
 	public Muestra(Imagen imagen, Participante participante, ClasificacionDeFoto veredicto, Ubicacion ubicacion) {
 		this.participante = participante;
@@ -28,10 +27,10 @@ public class Muestra {
 		this.fechaDeCreacion = LocalDate.now();
 		this.veredicto = veredicto;
 		this.ubicacion = ubicacion;
-		this.inicializarEstado();
 		this.votaciones = new ArrayList<Votacion>();
 		this.informadorDeZonas = new InformadorDeZonas();
 		this.nivelDeConocimientoDeCreacion = participante.getNivelDeConocimiento();
+		this.inicializarEstado();
 	}
 
 	/**
@@ -39,11 +38,7 @@ public class Muestra {
 	 * del nivel de conocimiento del participante
 	 */
 	private void inicializarEstado() {
-		if (participante.getNivelDeConocimiento() == "Nivel Experto") {
-			setNivelDeValidacionExperto();
-		} else {
-			setNivelDeValidacionBasico();
-		}
+		getNivelDeConocimientoDeCreacion().actualizarNivelValidacionMuestra(this);
 	}
 
 	/**
@@ -52,9 +47,6 @@ public class Muestra {
 	 * 
 	 * @param votacion
 	 * @throws ErrorParticipanteNoPuedeVotarEstaMuestra
-	 * 
-	 * 
-	 * 
 	 */
 	public void registrarVotacion(Votacion votacion) throws ErrorParticipanteNoPuedeVotarEstaMuestra {
 		nivelDeValidacion.registrarVotacion(this, votacion);
@@ -109,6 +101,13 @@ public class Muestra {
 	public List<Votacion> getVotaciones() {
 		return this.votaciones;
 	}
+	
+
+	public List<Votacion> getVotacionesExpertas() {
+		Stream<Votacion> votacionesExpertas = getVotaciones().stream()
+				.filter(votacion -> votacion.participanteEsExpertoAlMomentoDeVotar());
+		return votacionesExpertas.collect(Collectors.toList());
+	}
 
 	/**
 	 * Asigna la zona a la lista de zonas del InformadorDeZonas a las que pertenece
@@ -138,6 +137,13 @@ public class Muestra {
 		return this.veredicto.getValor();
 	}
 
+	/**
+	 * Setea nivel de validacion
+	 */
+	public void setNivelDeValidacion(NivelDeValidacion nivelDeValidacion) {
+		this.nivelDeValidacion = nivelDeValidacion;
+	}
+	
 	/**
 	 * Setea nivel de validacion Basico
 	 */
@@ -195,8 +201,8 @@ public class Muestra {
 	/**
 	 * retorna nivel de validacion actual
 	 */
-	public String getNivelDeValidacion() {
-		return nivelDeValidacion.getNivelDeValidacion();
+	public NivelDeValidacion getNivelDeValidacion() {
+		return nivelDeValidacion;
 	}
 
 	/**
@@ -212,15 +218,23 @@ public class Muestra {
 	 * 
 	 * @return Fecha de la votacion mas reciente que se le realizo a esa muestra.
 	 */
-
 	public LocalDate getFechaUltimaVotacion() {
 
 		return votaciones.get(this.getVotaciones().size() - 1).getFecha();
 	}
+	
 	/**
 	 * Retorna el nivel de creacion del creador de la muestra al momento de la creacion
 	 */
-	public String getNivelDeConocimientoDeCreacion() {
+	public NivelDeConocimiento getNivelDeConocimientoDeCreacion() {
 		return nivelDeConocimientoDeCreacion;
+	}
+	
+	public Boolean tieneDosOpinionesExpertas(Votacion votacion) {
+		return getNivelDeValidacion().hayDosOpinionesExpertas(this, votacion);
+	}
+	
+	public Boolean estaValidada() {
+		return getNivelDeValidacion().estaValidada();
 	}
 }
