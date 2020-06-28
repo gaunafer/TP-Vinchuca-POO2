@@ -34,10 +34,10 @@ class FiltroNivelDeValidacionDeMuestraVotadaTest {
 		 muestra3 = mock(Muestra.class);
 		 muestra4 = mock(Muestra.class);
 		 
-		 when(muestra1.getNivelDeValidacion()).thenReturn("Nivel Validada");
-		 when(muestra2.getNivelDeValidacion()).thenReturn("Nivel Experto");
-		 when(muestra3.getNivelDeValidacion()).thenReturn("Nivel Basico");
-		 when(muestra4.getNivelDeValidacion()).thenReturn("Nivel Validada");
+		 when(muestra1.estaValidada()).thenReturn(true);
+		 when(muestra2.estaValidada()).thenReturn(false);
+		 when(muestra3.estaValidada()).thenReturn(false);
+		 when(muestra4.estaValidada()).thenReturn(true);
 		 
 		 muestras.add(muestra1);
 		 muestras.add(muestra2);
