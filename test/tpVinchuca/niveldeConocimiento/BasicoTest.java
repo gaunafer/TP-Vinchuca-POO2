@@ -40,11 +40,6 @@ public class BasicoTest {
 	private List<Muestra> muestras = mock(ArrayList.class);
 	
 	
-	@Test
-	public void seCreaUnNivelExpertoySuNivelDeConocimientoEsNivelBasico() {
-		
-		assertEquals("Nivel Basico", basico.getNivelDeConocimiento());
-	}
 	
 	@Test
 	public void elNivelDeConocimientoDejaDeSerBasicoCuandoCumpleConGenerarMasDe10MuestrasYMasDe20VotosEnLosUltimos30Dias(){
@@ -76,9 +71,8 @@ public class BasicoTest {
 	    basico.verificarEstado(juanPerez);
 	    
 	    verify(juanPerez, never()).setNivelDeConocimiento(any(Basico.class));
-	    assertEquals("Nivel Basico", basico.getNivelDeConocimiento());
-	}
-	
+	   
+	}	
 	@Test
 	public void elNivelDeConocimientoSigueSiendoBasicoCuandoNoRealizaMas11MuestrasEnLosUltimos30Dias() {
 
@@ -93,7 +87,7 @@ public class BasicoTest {
 	    basico.verificarEstado(juanPerez);
 	    
 	    verify(juanPerez, never()).setNivelDeConocimiento(any(Basico.class));
-	    assertEquals("Nivel Basico", basico.getNivelDeConocimiento());
-	}
+	   
 
+    }
 }

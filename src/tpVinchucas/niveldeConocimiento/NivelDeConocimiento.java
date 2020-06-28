@@ -21,11 +21,11 @@ public abstract class NivelDeConocimiento {
 		this.aplicacionVinchucas = aplicacionVinchucas;
 	}
 	
-	/**
-	 * Metodo definido en las subclases.
-	 * @return el correspondiente nivel de conocimiento.
-	 */
-	public abstract String getNivelDeConocimiento();
+//	/**
+//	 * Metodo definido en las subclases.
+//	 * @return el correspondiente nivel de conocimiento.
+//	 */
+//	public abstract String getNivelDeConocimiento();
 	
 	/**
 	 * Metodo definido en las subclases, verifica que el nivel de conocimiento
