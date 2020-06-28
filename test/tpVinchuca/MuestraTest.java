@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
 import tpVinchucas.error.ErrorParticipanteNoPuedeVotarEstaMuestra;
+import tpVinchucas.niveldeConocimiento.Basico;
 
 import static org.mockito.Mockito.*;
 
@@ -62,9 +63,12 @@ public class MuestraTest {
 		sarandi = mock(ZonaDeCobertura.class);
 		donBosco = mock(ZonaDeCobertura.class);
 		persona = mock(Participante.class);
+		Basico nivelConocimientoBasico = mock(Basico.class);
+		when(persona.getNivelDeConocimiento()).thenReturn(nivelConocimientoBasico);
 		persona2 = mock(Participante.class);
 		persona3 = mock(Participante.class);
 		persona4 = mock(Participante.class);
+		when(persona4.getNivelDeConocimiento()).thenReturn(nivelConocimientoBasico);
 		persona5 = mock(Participante.class);
 		persona6 = mock(Participante.class);
 		votacion = mock(Votacion.class);
@@ -230,5 +234,22 @@ public class MuestraTest {
 		muestra2.addVotacion(votacion2);
 		
 		assertTrue(muestra2.esMuestraVotada());
+	}
+	
+
+	@Test
+	public void testGetVotacionesExpertas() {
+		muestra1.addVotacion(votacion);
+		muestra1.addVotacion(votacion2);
+		muestra1.addVotacion(votacion3);
+		when(votacion.participanteEsExpertoAlMomentoDeVotar()).thenReturn(true);
+		when(votacion2.participanteEsExpertoAlMomentoDeVotar()).thenReturn(true);
+		when(votacion3.participanteEsExpertoAlMomentoDeVotar()).thenReturn(false);
+		
+		votaciones = muestra1.getVotacionesExpertas();
+		
+		assertTrue(votaciones.contains(votacion));
+		assertTrue(votaciones.contains(votacion2));
+		assertFalse(votaciones.contains(votacion3));
 	}
 }

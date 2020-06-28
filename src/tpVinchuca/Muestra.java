@@ -30,15 +30,15 @@ public class Muestra {
 		this.votaciones = new ArrayList<Votacion>();
 		this.informadorDeZonas = new InformadorDeZonas();
 		this.nivelDeConocimientoDeCreacion = participante.getNivelDeConocimiento();
-		this.inicializarEstado();
+		this.inicializarEstado(participante.getNivelDeConocimiento());
 	}
 
 	/**
 	 * Setea el nivel de validacion de la muestra en Basico o experto dependiendo
 	 * del nivel de conocimiento del participante
 	 */
-	private void inicializarEstado() {
-		getNivelDeConocimientoDeCreacion().actualizarNivelValidacionMuestra(this);
+	private void inicializarEstado(NivelDeConocimiento nivel) {
+		nivel.actualizarNivelValidacionMuestra(this);
 	}
 
 	/**

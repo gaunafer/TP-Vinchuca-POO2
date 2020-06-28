@@ -11,12 +11,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.Spy;
 
 import tpVinchuca.AplicacionVinchucas;
 import tpVinchuca.Muestra;
 import tpVinchuca.Participante;
 import tpVinchuca.Votacion;
+import tpVinchuca.nivelDeValidacion.NivelExperto;
+import tpVinchuca.nivelDeValidacion.NivelValidada;
+import tpVinchucas.error.ErrorParticipanteNoPuedeVotarEstaMuestra;
 import tpVinchucas.niveldeConocimiento.Basico;
 import tpVinchucas.niveldeConocimiento.Experto;
 import tpVinchucas.niveldeConocimiento.NivelDeConocimiento;
@@ -29,7 +33,7 @@ public class ExpertoTest {
 	private AplicacionVinchucas aplicacionVinchucas = mock(AplicacionVinchucas.class);
 	
 
-	private NivelDeConocimiento experto = new Experto(aplicacionVinchucas);
+	private NivelDeConocimiento nivelConocimientoExperto = new Experto(aplicacionVinchucas);
 	
 	
 	@Mock
@@ -44,7 +48,7 @@ public class ExpertoTest {
 	@Test
 	public void seCreaUnNivelExpertoySuNivelDeConocimientoEsNivelexperto() {
 		
-		assertEquals("Nivel Experto", experto.getNivelDeConocimiento());
+		assertEquals("Nivel Experto", nivelConocimientoExperto.getNivelDeConocimiento());
 	}
 	
 	@Test
@@ -56,7 +60,7 @@ public class ExpertoTest {
 	    when(votaciones.size()).thenReturn(11);
 	    when(muestras.size()).thenReturn(11);
 	    
-	    experto.verificarEstado(pepe);
+	    nivelConocimientoExperto.verificarEstado(pepe);
 	    
 	    verify(pepe).setNivelDeConocimiento(any(Basico.class));
 	   
@@ -71,7 +75,7 @@ public class ExpertoTest {
 	    when(aplicacionVinchucas.getVotacionesDeParticipanteDeLosUltimos30Dias(pepe)).thenReturn(votaciones);
 	    when(votaciones.size()).thenReturn(11);
 	    when(muestras.size()).thenReturn(11);
-	    experto.verificarEstado(pepe);
+	    nivelConocimientoExperto.verificarEstado(pepe);
 	    
 	    verify(pepe).setNivelDeConocimiento(any(Basico.class));
 	}
@@ -80,18 +84,39 @@ public class ExpertoTest {
 	@Test
 	public void elNivelDeConocimientoSigueSiendoExpertoCuandoCumpleConMas20VotacionesY10MuestrasEnLos30DiasPosterioresALaFechaActual() {
 
-
-
 	    when(aplicacionVinchucas.getMuestrasDeParticipantePorFecha(pepe, LocalDate.now().minusMonths(1l))).thenReturn(muestras);
 	    when(aplicacionVinchucas.getVotacionesDeParticipanteDeLosUltimos30Dias(pepe)).thenReturn(votaciones);
 	    when(votaciones.size()).thenReturn(21);
 	    when(muestras.size()).thenReturn(11);
 	   
 	    
-	    experto.verificarEstado(pepe);
+	    nivelConocimientoExperto.verificarEstado(pepe);
 	    
 	    verify(pepe, never()).setNivelDeConocimiento(any(Basico.class));
-	    assertEquals("Nivel Experto", experto.getNivelDeConocimiento());
+	    assertEquals("Nivel Experto", nivelConocimientoExperto.getNivelDeConocimiento());
 	}
 
+	@Test
+	public void testActualizarNivelValidacionDeMuestraQuedaExperto() throws ErrorParticipanteNoPuedeVotarEstaMuestra {
+		
+		Muestra muestra = mock(Muestra.class, Mockito.RETURNS_DEEP_STUBS);
+		when(muestra.tieneDosOpinionesExpertas(any())).thenReturn(false);
+		
+		nivelConocimientoExperto.actualizarNivelValidacionMuestra(muestra);
+
+		verify(muestra, times(1)).setNivelDeValidacion(any(NivelExperto.class));
+		verify(muestra, never()).setNivelDeValidacion(any(NivelValidada.class));
+	}
+	
+	@Test
+	public void testActualizarNivelValidacionDeMuestraAValidada() throws ErrorParticipanteNoPuedeVotarEstaMuestra {
+		
+		Muestra muestra = mock(Muestra.class, Mockito.RETURNS_DEEP_STUBS);
+		when(muestra.tieneDosOpinionesExpertas(any())).thenReturn(true);
+		
+		nivelConocimientoExperto.actualizarNivelValidacionMuestra(muestra);
+
+		verify(muestra, times(1)).setNivelDeValidacion(any(NivelValidada.class));
+	}
+	
 }
