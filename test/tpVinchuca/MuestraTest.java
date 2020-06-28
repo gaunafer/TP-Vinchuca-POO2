@@ -8,8 +8,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.Spy;
 
 import tpVinchucas.error.ErrorParticipanteNoPuedeVotarEstaMuestra;
+import tpVinchucas.niveldeConocimiento.Basico;
+import tpVinchucas.niveldeConocimiento.Experto;
+import tpVinchucas.niveldeConocimiento.ExpertoValidado;
 
 import static org.mockito.Mockito.*;
 
@@ -56,6 +60,15 @@ public class MuestraTest {
 	@Mock
 	private Votacion votacion6;
 	
+	@Mock
+	private AplicacionVinchucas aplicacionVinchucas = mock(AplicacionVinchucas.class);
+	@Spy
+	private Experto nivelDeConocimientoExperto;
+	@Spy
+	private Basico nivelDeConocimientoBasico;
+	@Spy
+	private ExpertoValidado nivelDeConocimientoExpertoValidado;
+	
 	@BeforeEach
 	public void setUp() {
 		opinion = ClasificacionDeFoto.VINCHUCA_INFESTANS;
@@ -76,6 +89,9 @@ public class MuestraTest {
 		muestra1 = new Muestra(imagen, persona, opinion, ubicacion);
 		muestra2 = new Muestra(imagen, persona4, opinion,ubicacion);
 		votaciones = new ArrayList<Votacion>();
+		nivelDeConocimientoExpertoValidado = new ExpertoValidado(aplicacionVinchucas);
+		nivelDeConocimientoExperto = new Experto(aplicacionVinchucas);
+		nivelDeConocimientoBasico = new Basico(aplicacionVinchucas);
 	}
 	
 	@Test
@@ -122,14 +138,14 @@ public class MuestraTest {
 	@Test
 	public void muestraCreadaPorExpertoSeCreaConNivelDeValidacionExperto() {
 		when(persona4.getAlias()).thenReturn("pepe");
-		when(persona4.getNivelDeConocimiento()).thenReturn("Nivel Experto");
+		when(persona4.getNivelDeConocimiento()).thenReturn(nivelDeConocimientoExperto);
 		muestra2 = new Muestra(imagen, persona4, opinion,ubicacion);
 		assertEquals("Nivel Experto", muestra2.getNivelDeValidacion());
 	}
 	@Test
 	public void muestraCreadaPorParticipanteBasicoSeCreaConNivelDeValidacionBasico() {
 		when(persona.getAlias()).thenReturn("fer");
-		when(persona.getNivelDeConocimiento()).thenReturn("Nivel Basico");
+		when(persona.getNivelDeConocimiento()).thenReturn(nivelDeConocimientoBasico);
 		assertEquals("Nivel Basico", muestra1.getNivelDeValidacion());
 	}
 	@Test
@@ -143,7 +159,7 @@ public class MuestraTest {
 		when(votacion3.getParticipante()).thenReturn(persona3);
 		when(votacion3.getOpinion()).thenReturn("Chinche Foliada");
 		when(votacion3.participanteEsExpertoAlMomentoDeVotar()).thenReturn(true);
-		when(persona.getNivelDeConocimiento()).thenReturn("Nivel Basico");
+		when(persona.getNivelDeConocimiento()).thenReturn(nivelDeConocimientoBasico);
 		muestra1 = new Muestra(imagen, persona, opinion, ubicacion);
 		muestra1.registrarVotacion(votacion4);
 		muestra1.registrarVotacion(votacion5);
@@ -158,9 +174,9 @@ public class MuestraTest {
 		when(votacion5.getParticipante()).thenReturn(persona5);
 		when(votacion5.getOpinion()).thenReturn("Chinche Foliada");
 		when(votacion5.participanteEsExpertoAlMomentoDeVotar()).thenReturn(true);
-		when(persona5.getNivelDeConocimiento()).thenReturn("Nivel Experto");
-		when(persona4.getNivelDeConocimiento()).thenReturn("Nivel Experto");
-		when(persona.getNivelDeConocimiento()).thenReturn("Nivel Basico");
+		when(persona5.getNivelDeConocimiento()).thenReturn(nivelDeConocimientoExperto);
+		when(persona4.getNivelDeConocimiento()).thenReturn(nivelDeConocimientoExperto);
+		when(persona.getNivelDeConocimiento()).thenReturn(nivelDeConocimientoBasico);
 		muestra1 = new Muestra(imagen, persona, opinion, ubicacion);
 		muestra1.registrarVotacion(votacion4);
 		muestra1.registrarVotacion(votacion5);
@@ -176,7 +192,7 @@ public class MuestraTest {
 		when(votacion5.getParticipante()).thenReturn(persona5);
 		when(votacion5.getOpinion()).thenReturn("Chinche Foliada");
 		when(votacion5.participanteEsExpertoAlMomentoDeVotar()).thenReturn(true);
-		when(persona5.getNivelDeConocimiento()).thenReturn("Nivel Experto");
+		when(persona5.getNivelDeConocimiento()).thenReturn(nivelDeConocimientoExperto);
 		
 		muestra1.registrarVotacion(votacion4);
 		muestra1.registrarVotacion(votacion5);
@@ -190,7 +206,7 @@ public class MuestraTest {
 		when(votacion4.getOpinion()).thenReturn("Chinche Foliada");
 		when(votacion4.participanteEsExpertoAlMomentoDeVotar()).thenReturn(true);
 		when(votacion5.getParticipante()).thenReturn(persona5);
-		when(persona5.getNivelDeConocimiento()).thenReturn("Nivel Experto");
+		when(persona5.getNivelDeConocimiento()).thenReturn(nivelDeConocimientoExperto);
 		when(votacion5.getOpinion()).thenReturn("Chinche Foliada");
 		when(votacion5.participanteEsExpertoAlMomentoDeVotar()).thenReturn(true);
 		muestra1.asignarZona(sarandi);

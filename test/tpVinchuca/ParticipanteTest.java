@@ -98,7 +98,6 @@ public class ParticipanteTest {
 		when(nivelDeConocimientoBasico.getCantidadDeVotacionesDeUnParticipanteA30DiasDeLaFechaActual(juanPerez)).thenReturn(0);
 		
 		assertEquals("Mario Bros", marioBros.getAlias());
-		assertEquals(nivelDeConocimientoBasico, marioBros.getNivelDeConocimiento());
 		assertEquals(false, marioBros.esExperto());
 		
 		
@@ -123,9 +122,7 @@ public class ParticipanteTest {
 		when(nivelDeConocimientoBasico.getCantidadDeMuestrasDeUnParticipanteA30DiasDeLaFechaActual(juanPerez)).thenReturn(11);
 		when(nivelDeConocimientoBasico.getCantidadDeVotacionesDeUnParticipanteA30DiasDeLaFechaActual(juanPerez)).thenReturn(21);
 		juanPerez.actualizarEstado();
-		
-
-       assertEquals("Nivel Experto", juanPerez.getNivelDeConocimiento());
+	
 		assertEquals(true, juanPerez.esExperto());
     }
 	
@@ -152,11 +149,10 @@ public class ParticipanteTest {
 	}
 
 	@Test
-	public void siLaPersonaEnEstadoExpertoEnElMesSiguienteNoHizo10VotacionesVuelveAEstadoEstadoEsBasico() {
+	public void siLaPersonaEnEstadoExpertoEnElMesSiguienteNoHizo10VotacionesVuelveANivelDeConocimientoBasico() {
 		juanPerez.setNivelDeConocimiento(new Experto(aplicacionVinchucas));
 		juanPerez.actualizarEstado();
 
-		assertEquals(nivelDeConocimientoBasico,  juanPerez.getNivelDeConocimiento());
 		assertEquals(false, juanPerez.esExperto());
 	}
 
