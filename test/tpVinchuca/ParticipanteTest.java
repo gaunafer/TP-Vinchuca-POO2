@@ -76,7 +76,8 @@ public class ParticipanteTest {
 	public void seCreaUnParticipanteConSuAliasUnaListaVaciaDeVotacionesYConUnEstadoBasico() {
 
 		assertEquals("Juan Perez", juanPerez.getAlias());
-		assertEquals("Nivel Basico", juanPerez.getNivelDeConocimiento());
+		
+		assertEquals(nivelDeConocimiento, juanPerez.getNivelDeConocimientoNoString());
 		assertEquals(false, juanPerez.esExperto());
 	}
 	

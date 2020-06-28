@@ -63,4 +63,8 @@ public class NivelBasico extends NivelDeValidacion {
 		return "Nivel Basico";
 	}
 
+	public Boolean estaValidada() {
+		return false;
+	}
+	
 }

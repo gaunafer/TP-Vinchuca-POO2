@@ -232,4 +232,8 @@ public class Muestra {
 				.filter(votacion -> votacion.participanteEsExpertoAlMomentoDeVotar());
 		return votacionesExpertas.collect(Collectors.toList());
 	}
+	
+	public Boolean estaValidada() {
+		return this.nivelDeValidacion.estaValidada();
+	}
 }

@@ -71,4 +71,6 @@ public abstract class NivelDeValidacion {
 	}
 	protected abstract String getNivelDeValidacion();
 	
+	protected abstract Boolean estaValidada();
+	
 }

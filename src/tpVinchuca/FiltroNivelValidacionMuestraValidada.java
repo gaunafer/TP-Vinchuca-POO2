@@ -4,7 +4,7 @@ public class FiltroNivelValidacionMuestraValidada extends FiltroNivelValidacionM
 
 	@Override
 	public Boolean tieneNivelCorrespondiente(Muestra muestra) {
-		return muestra.getNivelDeValidacion().equals("Nivel Validada");
+		return muestra.estaValidada();
 	}
 
 	

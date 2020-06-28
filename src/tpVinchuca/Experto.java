@@ -43,19 +43,24 @@ public class Experto extends NivelDeConocimiento{
 	}
 	
 	
-	public void actualizarNivelValidacionMuestra(Muestra muestra) {
-		Integer cantVotaciones = muestra.getVotaciones().size();
-		Votacion votacion = muestra.getVotaciones().get(cantVotaciones - 1);
-		
-		Map<String, Integer>  rankingOpiniones = muestra.getNivelDeValidacionNoString().crearRankingDeOpiniones(muestra, muestra.getVotacionesExpertas()); 
-		
-		if (rankingOpiniones.containsKey(votacion.getOpinion())) {
-			muestra.setNivelDeValidacion(new NivelValidada());
-			muestra.informarVerificacion();
-		} else {
-			muestra.setNivelDeValidacion(new NivelExperto());
-		}
-		
-	}
+	/*
+	 * public void actualizarNivelValidacionMuestra(Muestra muestra) { Integer
+	 * cantVotaciones = muestra.getVotaciones().size(); Votacion votacion =
+	 * muestra.getVotaciones().get(cantVotaciones - 1);
+	 * 
+	 * if (muestra.hayDosOpinionesExpertas(muestra, votacion)) {
+	 * muestra.setNivelDeValidacion(new NivelValidada());
+	 * muestra.informarVerificacion(); } else { muestra.setNivelDeValidacion(new
+	 * NivelExperto()); } }
+	 */
+//	
+//	NIVEL DE VALIDACION
+//	Boolean hayDosOpinionesExpertas(muestra, votacion) {
+//		crearRankingDeOpiniones(muestra, muestra.getVotacionesExpertas();
+//		return rankingOpiniones.get(votacion.getOpinion()).equals(2);
+//	}
+//	
+//	MUESTRA
+	
 		
 }

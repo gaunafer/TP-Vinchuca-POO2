@@ -24,7 +24,26 @@ public class NivelExperto extends NivelDeValidacion {
 		} else {
 			muestra.addVotacion(votacion);
 		}*/
-	}
+	}/*
+		 * 
+		 * MUESTRA actualizarNivelValidacionMuestra(NivelDeConocimiento nivel){
+		 * this.nivelDeValidacion.actualizarblablabla(nivel, this) }
+		 * 
+		 * NIVEL DE VALIDACION actualizarblablabla(nivel, muestra)
+		 * 
+		 * Integer cantVotaciones = muestra.getVotaciones().size(); Votacion votacion =
+		 * muestra.getVotaciones().get(cantVotaciones - 1);
+		 * 
+		 * Map<String, Integer> rankingOpiniones =
+		 * muestra.getNivelDeValidacionNoString().crearRankingDeOpiniones(muestra,
+		 * muestra.getVotacionesExpertas());
+		 * 
+		 * if (rankingOpiniones.get(votacion.getOpinion()).equals(2)) {
+		 * muestra.setNivelDeValidacion(new NivelValidada());
+		 * muestra.informarVerificacion(); } else { muestra.setNivelDeValidacion(new
+		 * NivelExperto()); }
+		 */
+	
 	/**
 	 * Verifica si el participante puede votar la muestra. levanta excepcion si no puede votar
 	 * @throws ErrorParticipanteNoPuedeVotarEstaMuestra
@@ -75,6 +94,10 @@ public class NivelExperto extends NivelDeValidacion {
 	@Override
 	protected String getNivelDeValidacion() {
 		return "Nivel Experto";
+	}
+	
+	public Boolean estaValidada() {
+		return false;
 	}
 
 }

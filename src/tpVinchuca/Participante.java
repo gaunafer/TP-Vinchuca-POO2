@@ -61,4 +61,8 @@ public class Participante {
 		return this.nivelDeConocimiento.esExperto();
 	}
 	
+	public NivelDeConocimiento getNivelDeConocimientoNoString() {
+		return this.nivelDeConocimiento;
+	}
+	
 }
