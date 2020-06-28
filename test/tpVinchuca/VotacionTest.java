@@ -1,14 +1,22 @@
 package tpVinchuca;
 import org.junit.jupiter.api.Test;
+
+import tpVinchuca.nivelDeValidacion.NivelBasico;
+import tpVinchucas.niveldeConocimiento.Basico;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 import java.time.LocalDate;
 public class VotacionTest {
 	
+	
+	
 	// Testea la creacion de una votacion
 	@Test
 	public void testCreacionDeMuestra() {
 		Participante emma = mock(Participante.class);
+		Basico nivelDeConocimientoBasico = mock(Basico.class);
+		when(emma.getNivelDeConocimiento()).thenReturn(nivelDeConocimientoBasico);
 		when(emma.esExperto()).thenReturn(false);
 		
 		Votacion votacion = new Votacion(emma, ClasificacionDeFoto.VINCHUCA_INFESTANS);
