@@ -60,18 +60,22 @@ public class ParticipanteTest {
 	private AplicacionVinchucas aplicacion = mock(AplicacionVinchucas.class);
 	
 	
-	//@Spy
-	//private NivelDeConocimiento nivelDeConocimiento = mock(NivelDeConocimiento.class);
 	@Spy
-	private Basico nivelDeConocimiento;
+	private Experto nivelDeConocimientoExperto;
+	@Spy
+	private Basico nivelDeConocimientoBasico;
+	@Spy
+	private ExpertoValidado nivelDeConocimientoExpertoValidado;
 
 
 
 	@BeforeEach
 	public void setUp() {
-		nivelDeConocimiento = new Basico(aplicacionVinchucas);
-		juanPerez = new Participante("Juan Perez", nivelDeConocimiento);
-		juanaMolina = new Participante("Juana Molina", new ExpertoValidado(aplicacionVinchucas));
+		nivelDeConocimientoExpertoValidado = new ExpertoValidado(aplicacionVinchucas);
+		nivelDeConocimientoExperto = new Experto(aplicacionVinchucas);
+		nivelDeConocimientoBasico = new Basico(aplicacionVinchucas);
+		juanPerez = new Participante("Juan Perez", nivelDeConocimientoBasico);
+		juanaMolina = new Participante("Juana Molina", nivelDeConocimientoExpertoValidado);
 		marioBros = new Participante("Mario Bros", new Experto(aplicacionVinchucas));	
 		marioBrossFalso = new Participante("Mario Bros", new Experto(aplicacionVinchucas));
 	}
@@ -80,7 +84,7 @@ public class ParticipanteTest {
 	public void seCreaUnParticipanteConSuAliasUnaListaVaciaDeVotacionesYConUnEstadoBasico() {
 
 		assertEquals("Juan Perez", juanPerez.getAlias());
-		assertEquals("Nivel Basico", juanPerez.getNivelDeConocimiento());
+		assertEquals(nivelDeConocimientoBasico, juanPerez.getNivelDeConocimiento());
 		assertEquals(false, juanPerez.esExperto());
 	}
 	
@@ -90,11 +94,10 @@ public class ParticipanteTest {
 		when(votaciones.size()).thenReturn(0);
 		when(aplicacionVinchucas.getMuestrasDeParticipantePorFecha(juanPerez, LocalDate.now().minusMonths(1l))).thenReturn(muestras);
 		when(aplicacionVinchucas.getVotacionesDeParticipanteDeLosUltimos30Dias(juanPerez)).thenReturn(votaciones);
-		when(nivelDeConocimiento.getCantidadDeMuestrasDeUnParticipanteA30DiasDeLaFechaActual(juanPerez)).thenReturn(0);
-		when(nivelDeConocimiento.getCantidadDeVotacionesDeUnParticipanteA30DiasDeLaFechaActual(juanPerez)).thenReturn(0);
+		when(nivelDeConocimientoBasico.getCantidadDeMuestrasDeUnParticipanteA30DiasDeLaFechaActual(juanPerez)).thenReturn(0);
+		when(nivelDeConocimientoBasico.getCantidadDeVotacionesDeUnParticipanteA30DiasDeLaFechaActual(juanPerez)).thenReturn(0);
 		
 		assertEquals("Mario Bros", marioBros.getAlias());
-		assertEquals("Nivel Basico", marioBros.getNivelDeConocimiento());
 		assertEquals(false, marioBros.esExperto());
 		
 		
@@ -104,7 +107,7 @@ public class ParticipanteTest {
 	public void seCreaUnParticipanteConSuAliasYConUnEstadoExpertoValidado() {
 
 		assertEquals("Juana Molina", juanaMolina.getAlias());
-		assertEquals("Nivel Experto", juanaMolina.getNivelDeConocimiento());
+		assertEquals(nivelDeConocimientoExpertoValidado, juanaMolina.getNivelDeConocimiento());
 		assertEquals(true, juanaMolina.esExperto());
 	}
 	
@@ -116,12 +119,10 @@ public class ParticipanteTest {
 		when(votaciones.size()).thenReturn(21);
 		when(aplicacionVinchucas.getMuestrasDeParticipantePorFecha(juanPerez, LocalDate.now().minusMonths(1l))).thenReturn(muestras);
 		when(aplicacionVinchucas.getVotacionesDeParticipanteDeLosUltimos30Dias(juanPerez)).thenReturn(votaciones);
-		when(nivelDeConocimiento.getCantidadDeMuestrasDeUnParticipanteA30DiasDeLaFechaActual(juanPerez)).thenReturn(11);
-		when(nivelDeConocimiento.getCantidadDeVotacionesDeUnParticipanteA30DiasDeLaFechaActual(juanPerez)).thenReturn(21);
+		when(nivelDeConocimientoBasico.getCantidadDeMuestrasDeUnParticipanteA30DiasDeLaFechaActual(juanPerez)).thenReturn(11);
+		when(nivelDeConocimientoBasico.getCantidadDeVotacionesDeUnParticipanteA30DiasDeLaFechaActual(juanPerez)).thenReturn(21);
 		juanPerez.actualizarEstado();
-		
-
-       assertEquals("Nivel Experto", juanPerez.getNivelDeConocimiento());
+	
 		assertEquals(true, juanPerez.esExperto());
     }
 	
@@ -132,27 +133,26 @@ public class ParticipanteTest {
 		when(votaciones.size()).thenReturn(21);
 		when(aplicacionVinchucas.getMuestrasDeParticipantePorFecha(juanPerez, LocalDate.now().minusMonths(1l))).thenReturn(muestras);
 		when(aplicacionVinchucas.getVotacionesDeParticipanteDeLosUltimos30Dias(juanPerez)).thenReturn(votaciones);
-		when(nivelDeConocimiento.getCantidadDeMuestrasDeUnParticipanteA30DiasDeLaFechaActual(juanPerez)).thenReturn(11);
-		when(nivelDeConocimiento.getCantidadDeVotacionesDeUnParticipanteA30DiasDeLaFechaActual(juanPerez)).thenReturn(21);
+		when(nivelDeConocimientoBasico.getCantidadDeMuestrasDeUnParticipanteA30DiasDeLaFechaActual(juanPerez)).thenReturn(11);
+		when(nivelDeConocimientoBasico.getCantidadDeVotacionesDeUnParticipanteA30DiasDeLaFechaActual(juanPerez)).thenReturn(21);
 		
 
-        assertEquals("Nivel Basico", juanPerez.getNivelDeConocimiento());
+        assertEquals(nivelDeConocimientoBasico, juanPerez.getNivelDeConocimiento());
 		assertEquals(false, juanPerez.esExperto());
     }
  
 	@Test
 	public void siLaPersonaNoHizo10VotacionesEnUnMismoMesSuEstadoEsBasico() {
 		
-		assertEquals("Nivel Basico", juanPerez.getNivelDeConocimiento());
+		assertEquals(nivelDeConocimientoBasico, juanPerez.getNivelDeConocimiento());
 		assertEquals(false, juanPerez.esExperto());
 	}
 
 	@Test
-	public void siLaPersonaEnEstadoExpertoEnElMesSiguienteNoHizo10VotacionesVuelveAEstadoEstadoEsBasico() {
+	public void siLaPersonaEnEstadoExpertoEnElMesSiguienteNoHizo10VotacionesVuelveANivelDeConocimientoBasico() {
 		juanPerez.setNivelDeConocimiento(new Experto(aplicacionVinchucas));
 		juanPerez.actualizarEstado();
 
-		assertEquals("Nivel Basico", juanPerez.getNivelDeConocimiento());
 		assertEquals(false, juanPerez.esExperto());
 	}
 
@@ -160,7 +160,7 @@ public class ParticipanteTest {
 	public void siLaPersonaHaceMasDe10VotacionesEnUnMesSuEstadoEsExperto() {
 		juanPerez.actualizarEstado();
 
-		assertEquals("Nivel Experto", juanaMolina.getNivelDeConocimiento());
+		assertEquals(nivelDeConocimientoExpertoValidado, juanaMolina.getNivelDeConocimiento());
 		assertEquals(true, juanaMolina.esExperto());
 	}
 	
