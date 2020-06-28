@@ -20,6 +20,9 @@ import tpVinchucas.filtro.FiltroAnd;
 import tpVinchucas.filtro.FiltroOr;
 import tpVinchucas.filtro.FiltroParticipante;
 import tpVinchucas.filtro.FiltroPorFecha;
+import tpVinchucas.niveldeConocimiento.Basico;
+import tpVinchucas.niveldeConocimiento.Experto;
+import tpVinchucas.niveldeConocimiento.ExpertoValidado;
 
 public class AplicacionVinchucasTest {
 	
@@ -52,6 +55,13 @@ public class AplicacionVinchucasTest {
 	@Mock
 	private Participante mataHari = mock(Participante.class);
 	
+	@Spy
+	private Experto nivelDeConocimientoExperto;
+	@Spy
+	private Basico nivelDeConocimientoBasico;
+	@Spy
+	private ExpertoValidado nivelDeConocimientoExpertoValidado;
+	
 	
 	
 
@@ -68,7 +78,11 @@ public class AplicacionVinchucasTest {
 			votaciones = new ArrayList<Votacion>();
 			muestrasConVotaciones = new ArrayList<Muestra>();	
 			muestras = new ArrayList<Muestra>();
-	}
+			nivelDeConocimientoExpertoValidado = new ExpertoValidado(aplicacion);
+			nivelDeConocimientoExperto = new Experto(aplicacion);
+			nivelDeConocimientoBasico = new Basico(aplicacion);
+		}
+	
 	
 	@Test
 	public void seCreaUnaAplicacionVinchucasCorrectamente() {
@@ -182,9 +196,9 @@ public class AplicacionVinchucasTest {
 	@Test
 	public void seRealizaLaActualizacionDeEstadoDeLosParticipantesCorrectamente() {
         
-		when(juanPerez.getNivelDeConocimiento()).thenReturn("Nivel Basico");
-		when(pepitaLaPistolera.getNivelDeConocimiento()).thenReturn("Nivel Experto");
-		when(mataHari.getNivelDeConocimiento()).thenReturn("Nivel Experto");  
+		when(juanPerez.getNivelDeConocimiento()).thenReturn(nivelDeConocimientoBasico);
+		when(pepitaLaPistolera.getNivelDeConocimiento()).thenReturn(nivelDeConocimientoExperto);
+		when(mataHari.getNivelDeConocimiento()).thenReturn(nivelDeConocimientoExpertoValidado);  
 		
 		aplicacion.agregarMuestra(muestra);
 		aplicacion.agregarMuestra(muestra1);
@@ -212,7 +226,4 @@ public class AplicacionVinchucasTest {
 		verify(mataHari).actualizarEstado();
 	
 	}
-
-
-
 }
