@@ -19,9 +19,7 @@ public class NivelBasico extends NivelDeValidacion {
 	public void registrarVotacion(Muestra muestra, Votacion votacion) throws ErrorParticipanteNoPuedeVotarEstaMuestra {
 		verificarSiElParticipantePuedeVotarLaMuestra(muestra, votacion);
 		muestra.addVotacion(votacion);
-		if (votacion.participanteEsExpertoAlMomentoDeVotar()) {
-			muestra.setNivelDeValidacionExperto();
-		}
+		votacion.getNivelDeConocimientoParticipanteAlVotar().actualizarNivelValidacionMuestra(muestra);
 	}
 
 	/**
@@ -30,16 +28,17 @@ public class NivelBasico extends NivelDeValidacion {
 	 */
 	private void verificarSiElParticipantePuedeVotarLaMuestra(Muestra muestra, Votacion votacion)
 			throws ErrorParticipanteNoPuedeVotarEstaMuestra {
-		if (muestra.getParticipante().equals(votacion.getParticipante())
-				|| muestra.muestraVotadaPor(votacion.getParticipante())) {
-			if (muestra.getParticipante().equals(votacion.getParticipante())) {
-				throw new ErrorParticipanteNoPuedeVotarEstaMuestra(
-						"Error participante no puede votar muestra creada por si mismo");
-			} else {
-				throw new ErrorParticipanteNoPuedeVotarEstaMuestra(
-						"Error el participante no pueve volver a votar esta muestra");
-			}
+		//if (muestra.getParticipante().equals(votacion.getParticipante())
+			//	|| muestra.muestraVotadaPor(votacion.getParticipante())) {
+		if (muestra.getParticipante().equals(votacion.getParticipante())) {
+			throw new ErrorParticipanteNoPuedeVotarEstaMuestra(
+				"Error participante no puede votar muestra creada por si mismo");
+			} 
+		else if (muestra.muestraVotadaPor(votacion.getParticipante())) {
+			throw new ErrorParticipanteNoPuedeVotarEstaMuestra(
+				"Error el participante no pueve volver a votar esta muestra");
 		}
+		//}
 	}
 
 	/**
@@ -67,6 +66,10 @@ public class NivelBasico extends NivelDeValidacion {
 	@Override
 	public String getNivelDeValidacion() {
 		return "Nivel Basico";
+	}
+	
+	public Boolean estaValidada() {
+		return false;
 	}
 
 }
