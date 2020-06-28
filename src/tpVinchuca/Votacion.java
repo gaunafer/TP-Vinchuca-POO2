@@ -22,25 +22,25 @@ public class Votacion {
 	 * Retorna la opinion de la votacion
 	 */
 	public String getOpinion() {
-		return opinion.getValor();
+		return this.opinion.getValor();
 	}
 	
 	/**
 	 * Retorna la fecha de creacion de la votacion
 	 */
 	public LocalDate getFecha() {
-		return fecha;
+		return this.fecha;
 	}
 	
 	/**
 	 * Retorna el participante que vota
 	 */
 	public Participante getParticipante() {
-				return participante;
+		return this.participante;
 	}
 	
 	public NivelDeConocimiento getNivelDeConocimientoParticipanteAlVotar() {
-		return nivelDeConocimientoParticipanteAlVotar;
+		return this.nivelDeConocimientoParticipanteAlVotar;
 	}
 	
 	/**
@@ -49,7 +49,7 @@ public class Votacion {
 	 * al momento de la votacion.
 	 */
 	public Boolean participanteEsExpertoAlMomentoDeVotar() {
-		return nivelDeConocimientoParticipanteAlVotar.esExperto();
+		return this.nivelDeConocimientoParticipanteAlVotar.esExperto();
 	}
 
 }
