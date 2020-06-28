@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Spy;
 
+import tpVinchuca.nivelDeValidacion.NivelExperto;
 import tpVinchucas.error.ErrorParticipanteNoPuedeVotarEstaMuestra;
 import tpVinchucas.niveldeConocimiento.Basico;
 import tpVinchucas.niveldeConocimiento.Experto;
@@ -177,6 +178,7 @@ public class MuestraTest {
 		muestra1.addVotacion(votacion4);
 		muestra1.addVotacion(votacion5);
 		muestra1.addVotacion(votacion3);
+		muestra1.setNivelDeValidacion(new NivelExperto());
 		assertEquals("Chinche Foliada", muestra1.getResultadoActual());
 	}
 	
