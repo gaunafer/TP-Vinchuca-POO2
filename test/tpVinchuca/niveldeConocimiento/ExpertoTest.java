@@ -107,6 +107,7 @@ public class ExpertoTest {
 	public void testActualizarNivelValidacionDeMuestraAValidada() throws ErrorParticipanteNoPuedeVotarEstaMuestra {
 		
 		Muestra muestra = mock(Muestra.class, Mockito.RETURNS_DEEP_STUBS);
+		when(muestra.esMuestraVotada()).thenReturn(true);
 		when(muestra.tieneDosOpinionesExpertas(any())).thenReturn(true);
 		
 		nivelConocimientoExperto.actualizarNivelValidacionMuestra(muestra);
