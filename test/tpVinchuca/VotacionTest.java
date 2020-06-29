@@ -29,5 +29,6 @@ public class VotacionTest {
 		assertEquals("Vinchuca Infestans", resultadoDeVotacion);
 		assertEquals(LocalDate.now(), fecha);
 		assertEquals(false, participanteEsExperto);
+		assertEquals(nivelDeConocimientoBasico, votacion.getNivelDeConocimientoParticipanteAlVotar());
 	}
 }

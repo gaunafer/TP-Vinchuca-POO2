@@ -2,6 +2,7 @@ package tpVinchuca.nivelDeValidacion;
 
 import org.mockito.Mock;
 
+import tpVinchuca.ClasificacionDeFoto;
 import tpVinchuca.Muestra;
 import tpVinchuca.Participante;
 import tpVinchuca.Votacion;
@@ -35,8 +36,14 @@ public class NivelExpertoTest {
 	Votacion votacion2;
 	@Mock
 	Votacion votacion3;
+	@Mock
+	Experto nivelConocimientoExperto;
+	@Mock
+	Basico nivelConocimientoBasico;
+	
 	NivelExperto nivelValidacionExperto;
 	List<Votacion> votaciones;
+	
 	@BeforeEach
 	public void setUp() {
 		nivelValidacionExperto = new NivelExperto();
@@ -49,6 +56,8 @@ public class NivelExpertoTest {
 		votacion3 = mock(Votacion.class);
 		when(muestra.getParticipante()).thenReturn(participante);
 		when(muestra.getVotaciones()).thenReturn(votaciones);
+		nivelConocimientoExperto = mock(Experto.class);
+		nivelConocimientoBasico = mock(Basico.class);
 				
 	}
 	
@@ -91,13 +100,51 @@ public class NivelExpertoTest {
 		when(votacion1.getParticipante()).thenReturn(participante2);
 		when(muestra.muestraVotadaPor(participante2)).thenReturn(false);
 		when(votacion1.participanteEsExpertoAlMomentoDeVotar()).thenReturn(true);
-		Experto nivelConocimientoExperto = mock(Experto.class);
 		when(votacion1.getNivelDeConocimientoParticipanteAlVotar()).thenReturn(nivelConocimientoExperto);
 		
 		nivelValidacionExperto.registrarVotacion(muestra, votacion1);
 		
 		verify(muestra, times(1)).addVotacion(votacion1);
 		verify(nivelConocimientoExperto).actualizarNivelValidacionMuestra(muestra);
+	}
+	
+	@Test
+	public void testEstaValidada() {
+		assertFalse(nivelValidacionExperto.estaValidada());
+	}
+	
+	@Test 
+	public void testHayDosMuestrasConOpinionExpertas() {
+
+		List<Votacion> votacionesExpertas = new ArrayList<Votacion>();
+		votacionesExpertas.add(votacion1);
+		votacionesExpertas.add(votacion2);
+		
+		when(muestra.getVotacionesExpertas()).thenReturn(votacionesExpertas);
+	
+			
+		when(votacion1.getOpinion()).thenReturn(ClasificacionDeFoto.CHINCHE_FOLIADA.getValor());
+		when(votacion2.getOpinion()).thenReturn(ClasificacionDeFoto.CHINCHE_FOLIADA.getValor());
+		
+		
+		assertTrue(nivelValidacionExperto.hayDosOpinionesExpertas(muestra, votacion1));
+	}
+	
+	@Test 
+	public void testNoHayDosMuestrasConOpinionExpertas() {
+
+		List<Votacion> votacionesExpertas = new ArrayList<Votacion>();
+		votacionesExpertas.add(votacion1);
+		votacionesExpertas.add(votacion2);
+		
+		when(muestra.getVotacionesExpertas()).thenReturn(votacionesExpertas);
+	
+			
+		when(votacion1.getOpinion()).thenReturn(ClasificacionDeFoto.CHINCHE_FOLIADA.getValor());
+		when(votacion2.getOpinion()).thenReturn(ClasificacionDeFoto.IMAGEN_POCO_CLARA.getValor());
+		
+		
+		assertFalse(nivelValidacionExperto.hayDosOpinionesExpertas(muestra, votacion1));
 	}
 	
 }

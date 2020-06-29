@@ -45,11 +45,6 @@ public class ExpertoTest {
 	private List<Muestra> muestras = mock(ArrayList.class);
 	
 	
-	@Test
-	public void seCreaUnNivelExpertoySuNivelDeConocimientoEsNivelexperto() {
-		
-		assertEquals("Nivel Experto", nivelConocimientoExperto.getNivelDeConocimiento());
-	}
 	
 	@Test
 	public void elNivelDeConocimientoDejaDeSerExpertoCuandoNoCumpleCon10MuestrasEnLos30DiasPosterioresALaFechaActual(){
@@ -93,7 +88,7 @@ public class ExpertoTest {
 	    nivelConocimientoExperto.verificarEstado(pepe);
 	    
 	    verify(pepe, never()).setNivelDeConocimiento(any(Basico.class));
-	    assertEquals("Nivel Experto", nivelConocimientoExperto.getNivelDeConocimiento());
+	   
 	}
 
 	@Test

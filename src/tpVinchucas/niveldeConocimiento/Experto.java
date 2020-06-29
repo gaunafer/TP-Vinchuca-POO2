@@ -18,9 +18,9 @@ public class Experto extends NivelDeConocimiento{
 	/**
 	 * Devuelve un String con el nivel de conocimiento, en este caso Nivel Experto.
 	 */
-	public String getNivelDeConocimiento() {
-		return "Nivel Experto";
-	}
+//	public String getNivelDeConocimiento() {
+//		return "Nivel Experto";
+//	}
 
 	/**
 	 * Verifica si hubo cambios en el nivel de conocimiento del participante.
@@ -59,5 +59,6 @@ public class Experto extends NivelDeConocimiento{
 			muestra.setNivelDeValidacion(new NivelExperto());
 		}
 	}
+
 		
 }

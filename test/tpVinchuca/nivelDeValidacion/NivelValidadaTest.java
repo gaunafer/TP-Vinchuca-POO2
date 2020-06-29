@@ -1,7 +1,9 @@
 package tpVinchuca.nivelDeValidacion;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 import org.mockito.Mock;
 
@@ -38,6 +40,11 @@ public class NivelValidadaTest {
 	public void testNoSePuedeBotarMuestraValidada() {
 		String exception = assertThrows(ErrorParticipanteNoPuedeVotarEstaMuestra.class,()->{nivelValidada.registrarVotacion(muestra, votacion1);}).getMessage();
 		assertEquals("No se puede votar una muestra validada", exception);
+	}
+	
+	@Test
+	public void testEstaValidada() {
+		assertTrue(nivelValidada.estaValidada());
 	}
 
 }
