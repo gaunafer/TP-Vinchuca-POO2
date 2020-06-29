@@ -56,7 +56,7 @@ public class Muestra {
 	 * Retorna el alias del participante que creo la muestra.
 	 */
 	public String getAliasParticipante() {
-		return participante.getAlias();
+		return getParticipante().getAlias();
 	}
 
 	/**
@@ -147,23 +147,23 @@ public class Muestra {
 	/**
 	 * Setea nivel de validacion Basico
 	 */
-	public void setNivelDeValidacionBasico() {
-		this.nivelDeValidacion = new NivelBasico();
-	}
+//	public void setNivelDeValidacionBasico() {
+//		this.nivelDeValidacion = new NivelBasico();
+//	}
 
 	/**
 	 * Setea nivel de validacion Experto
 	 */
-	public void setNivelDeValidacionExperto() {
-		this.nivelDeValidacion = new NivelExperto();
-	}
+//	public void setNivelDeValidacionExperto() {
+//		this.nivelDeValidacion = new NivelExperto();
+//	}
 
 	/**
 	 * Setea nivel de validacion Validada
 	 */
-	public void setNivelDeValidacionValidada() {
-		this.nivelDeValidacion = new NivelValidada();
-	}
+//	public void setNivelDeValidacionValidada() {
+//		this.nivelDeValidacion = new NivelValidada();
+//	}
 
 	/**
 	 * Retorna la imagen de la muestra

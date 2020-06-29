@@ -46,13 +46,15 @@ public class Experto extends NivelDeConocimiento{
 	
 
 	public void actualizarNivelValidacionMuestra(Muestra muestra) { 
+		if (muestra.esMuestraVotada()) {
 		Integer	cantVotaciones = muestra.getVotaciones().size();
 		Votacion votacion = muestra.getVotaciones().get(cantVotaciones - 1);
 	
 		if (muestra.tieneDosOpinionesExpertas(votacion)) {
 				muestra.setNivelDeValidacion(new NivelValidada());
 				muestra.informarVerificacion();
-		} 
+		}
+		}
 		else {
 			muestra.setNivelDeValidacion(new NivelExperto());
 		}
