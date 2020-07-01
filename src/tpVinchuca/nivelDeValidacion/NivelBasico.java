@@ -28,8 +28,6 @@ public class NivelBasico extends NivelDeValidacion {
 	 */
 	private void verificarSiElParticipantePuedeVotarLaMuestra(Muestra muestra, Votacion votacion)
 			throws ErrorParticipanteNoPuedeVotarEstaMuestra {
-		//if (muestra.getParticipante().equals(votacion.getParticipante())
-			//	|| muestra.muestraVotadaPor(votacion.getParticipante())) {
 		if (muestra.getParticipante().equals(votacion.getParticipante())) {
 			throw new ErrorParticipanteNoPuedeVotarEstaMuestra(
 				"Error participante no puede votar muestra creada por si mismo");
@@ -38,7 +36,7 @@ public class NivelBasico extends NivelDeValidacion {
 			throw new ErrorParticipanteNoPuedeVotarEstaMuestra(
 				"Error el participante no pueve volver a votar esta muestra");
 		}
-		//}
+		
 	}
 
 	/**

@@ -29,9 +29,6 @@ public class NivelExperto extends NivelDeValidacion {
 	 */
 	private void verificarSiElParticipantePuedeVotarLaMuestra(Muestra muestra, Votacion votacion) 
 			throws ErrorParticipanteNoPuedeVotarEstaMuestra {
-		//if (votacion.getParticipante().getNivelDeConocimiento().equals("Nivel Basico")  ||
-		//		muestra.muestraVotadaPor(votacion.getParticipante()) ||
-		//		muestra.getParticipante().equals(votacion.getParticipante())) {
 		if(!votacion.participanteEsExpertoAlMomentoDeVotar()) {
 			throw new ErrorParticipanteNoPuedeVotarEstaMuestra("Error participante Nivel Basico no puede votar muestra nivel experto");
 		}
@@ -41,7 +38,7 @@ public class NivelExperto extends NivelDeValidacion {
 		else if (muestra.getParticipante().equals(votacion.getParticipante())) {
 			throw new ErrorParticipanteNoPuedeVotarEstaMuestra("Error Participante no puede votar muestra creada por s� mismo");
 		}
-		//}
+		
 	}
 	
 //	private void verificarSiPuedeVotarExperto() {

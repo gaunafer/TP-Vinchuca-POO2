@@ -16,12 +16,6 @@ public class Basico extends NivelDeConocimiento{
 		super(aplicacionVinchucas);
 	}
 
-	/**
-	 * Devuelve un String con el nivel de conocimiento, en este caso Nivel Basico.
-	 */
-	public String getNivelDeConocimiento() {
-		return "Nivel Basico";
-	}
 	
 	/**
 	 * Verifica si hubo cambios en el nivel de conocimiento del participante.

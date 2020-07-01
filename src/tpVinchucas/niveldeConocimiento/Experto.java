@@ -16,13 +16,6 @@ public class Experto extends NivelDeConocimiento{
 	}
 
 	/**
-	 * Devuelve un String con el nivel de conocimiento, en este caso Nivel Experto.
-	 */
-//	public String getNivelDeConocimiento() {
-//		return "Nivel Experto";
-//	}
-
-	/**
 	 * Verifica si hubo cambios en el nivel de conocimiento del participante.
 	 * En caso de que se cumpla que:
 	 * a.{@code participante} tiene menos o igual a 10 muestras creadas en los ultimos 30 dias; y 
