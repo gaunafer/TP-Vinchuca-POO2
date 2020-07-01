@@ -1,7 +1,7 @@
 package tpVinchucas.error;
 import javax.imageio.IIOException;
 
-public class ErrorParticipanteNoPuedeVotarEstaMuestra extends Exception {
+public class ErrorParticipanteNoPuedeVotarEstaMuestra extends RuntimeException {
 	/**
 	 * 
 	 */
