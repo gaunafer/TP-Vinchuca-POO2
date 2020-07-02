@@ -40,10 +40,7 @@ public class NivelExperto extends NivelDeValidacion {
 		}
 		
 	}
-	
-//	private void verificarSiPuedeVotarExperto() {
-//		
-//	}
+
 	/**
 	 * Retorna la lista de votaciones de expertos de la muestra
 	 */
@@ -53,7 +50,10 @@ public class NivelExperto extends NivelDeValidacion {
 	}
 	
 	/**
-	 *Agrega la opinion de la muestra al ranking de votaciones de la muestra si la muestra fue creada por un experto
+	 * Agrega la opinion de la muestra al ranking de votaciones de la muestra si la muestra fue creada por un experto
+	 * @param muestra
+	 * @param  Map<String, Integer> contadorDeOpiniones
+	 * @return Map<String, Integer> 
 	 */
 	@Override
 	protected Map<String, Integer> agregarOpinionDeLaMuestraAlRanking(Muestra muestra,
@@ -63,15 +63,10 @@ public class NivelExperto extends NivelDeValidacion {
 		}
 		return contadorDeOpiniones;
 	}
-
-	/**
-	 * Retorna el nivel de validacion de la muestra
-	 */
-	@Override
-	public String getNivelDeValidacion() {
-		return "Nivel Experto";
-	}
 	
+	/**
+	 *Retorna False
+	 */
 	public Boolean estaValidada() {
 		return false;
 	}

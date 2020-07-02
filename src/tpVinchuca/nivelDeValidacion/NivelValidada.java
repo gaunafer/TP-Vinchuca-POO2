@@ -24,13 +24,8 @@ public class NivelValidada extends NivelExperto {
 	}
 	
 	/**
-	 * Retorna el nivel de validacion de la muestra
+	 *Retorna True
 	 */
-	@Override
-	public String getNivelDeValidacion() {
-		return "Nivel Validada";
-	}
-	
 	public Boolean estaValidada() {
 		return true;
 	}

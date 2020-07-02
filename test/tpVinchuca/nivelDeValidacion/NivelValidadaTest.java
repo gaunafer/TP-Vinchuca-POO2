@@ -33,10 +33,6 @@ public class NivelValidadaTest {
 		nivelValidada = new NivelValidada();
 	}
 	@Test
-	public void testGetNivelDeValidacion() {
-		assertEquals(nivelValidada.getNivelDeValidacion(),"Nivel Validada");
-	}
-	@Test
 	public void testNoSePuedeBotarMuestraValidada() {
 		String exception = assertThrows(ErrorParticipanteNoPuedeVotarEstaMuestra.class,()->{nivelValidada.registrarVotacion(muestra, votacion1);}).getMessage();
 		assertEquals("No se puede votar una muestra validada", exception);

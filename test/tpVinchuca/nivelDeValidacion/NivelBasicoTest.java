@@ -45,7 +45,6 @@ public class NivelBasicoTest {
 	
 	@Test
 	public void testEstaValidada() {
-		assertEquals("Nivel Basico", nivelValidacionBasico.getNivelDeValidacion());
 		assertFalse(nivelValidacionBasico.estaValidada());
 	}
 	

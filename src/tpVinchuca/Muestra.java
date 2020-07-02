@@ -34,8 +34,10 @@ public class Muestra {
 	}
 
 	/**
-	 * Setea el nivel de validacion de la muestra en Basico o experto dependiendo
+	 * Delega en nivelDeConocimiento setear el nivel de validacion de la muestra en 
+	 * Basico o experto dependiendo
 	 * del nivel de conocimiento del participante
+	 * @param nivel
 	 */
 	private void inicializarEstado(NivelDeConocimiento nivel) {
 		nivel.actualizarNivelValidacionMuestra(this);
@@ -103,6 +105,9 @@ public class Muestra {
 	}
 	
 
+	/**
+	 * @return List<Votacion> con las Votacion cuyos participantes eran expertos al momento de votar
+	 */
 	public List<Votacion> getVotacionesExpertas() {
 		Stream<Votacion> votacionesExpertas = getVotaciones().stream()
 				.filter(votacion -> votacion.participanteEsExpertoAlMomentoDeVotar());
@@ -199,7 +204,7 @@ public class Muestra {
 	}
 
 	/**
-	 * retorna nivel de validacion actual
+	 * @return NivelDeValidacion - Retorna nivel de validacion actual
 	 */
 	public NivelDeValidacion getNivelDeValidacion() {
 		return nivelDeValidacion;
@@ -214,9 +219,9 @@ public class Muestra {
 
 	/**
 	 * este metodo solo es utilizado para Muestras que han sido votadas al menos una
-	 * ves.
+	 * vez.
 	 * 
-	 * @return Fecha de la votacion mas reciente que se le realizo a esa muestra.
+	 * @return LocalDate Fecha de la votacion mas reciente que se le realizo a esa muestra.
 	 */
 	public LocalDate getFechaUltimaVotacion() {
 
@@ -224,16 +229,25 @@ public class Muestra {
 	}
 	
 	/**
-	 * Retorna el nivel de creacion del creador de la muestra al momento de la creacion
+	 * @return NivelDeConocimiento del Participante al momento de crear la Muestra
 	 */
 	public NivelDeConocimiento getNivelDeConocimientoDeCreacion() {
 		return nivelDeConocimientoDeCreacion;
 	}
 	
+	/**
+	 * verifica si la muestra contiene dos votaciones de Participantes expertos con la misma opinion.
+	 * @param Votacion votacion de la que se va a comparar la opinion 
+	 * @return True si dos expertos coinciden en la opinion.
+	 */
 	public Boolean tieneDosOpinionesExpertas(Votacion votacion) {
 		return getNivelDeValidacion().hayDosOpinionesExpertas(this, votacion);
 	}
 	
+	/**
+	 * Delega en el NivelDeValidacion mensaje estaValidada()
+	 * @return True si la muestra esta validada
+	 */
 	public Boolean estaValidada() {
 		return getNivelDeValidacion().estaValidada();
 	}

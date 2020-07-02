@@ -59,13 +59,8 @@ public class NivelBasico extends NivelDeValidacion {
 	}
 
 	/**
-	 * Retorna el nivel de validacion de la muestra
+	 *Retorna False
 	 */
-	@Override
-	public String getNivelDeValidacion() {
-		return "Nivel Basico";
-	}
-	
 	public Boolean estaValidada() {
 		return false;
 	}

@@ -10,7 +10,7 @@ public class FiltroAnd extends OperadorBinario {
 	      super(filtro, otroFiltro);
 	   }
 
-	   @Override
+	@Override
 	   public List<Muestra> criterioDeBusqueda(List<Muestra> muestras) {
 	   
 	      List<Muestra> muestrasSegunCriterio = getFiltro().criterioDeBusqueda(muestras);		

@@ -40,14 +40,15 @@ public class Participante {
 	}
 
 	/**
-	 * Delega en estado la actualizacion del estado del participante al estado correspondiente
+	 * Delega en NivelDeConocimiento verificar si corresponde actualizar
+	 * el estado y setea el NivelDeConocimiento correspondiente
 	 */
 	public void actualizarEstado() {
 		this.nivelDeConocimiento.verificarEstado(this);
 	}	
 	
 	/**
-	 * Redefine equals para busquedas realizar busquedas por igualdad
+	 * Redefine equals para  realizar busquedas por igualdad
 	 */
 	@Override
 	public boolean equals(Object participante) {

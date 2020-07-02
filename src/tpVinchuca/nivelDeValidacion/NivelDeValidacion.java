@@ -18,8 +18,10 @@ import tpVinchucas.error.ErrorParticipanteNoPuedeVotarEstaMuestra;
 public abstract class NivelDeValidacion {
 	
 	public abstract void registrarVotacion(Muestra muestra, Votacion votacion) throws ErrorParticipanteNoPuedeVotarEstaMuestra;
+	
 	/**
-	 * retorna el resultado actual de la muestra
+	 * @return retorna el resultado actual de la muestra
+	 * @param Muestra de la que verifica el resultado actual
 	 * */
 	public  String resultadoActual(Muestra muestra) {
 		List<Votacion> votaciones = getVotaciones(muestra);
@@ -28,7 +30,15 @@ public abstract class NivelDeValidacion {
 		List<String> estadosMasVotados = obtenerOpinionesMasVotadas(contadorDeOpiniones);
 		return analizarOpiniones(estadosMasVotados);
 	}
+	
+	/**
+	 * Agrega la opinion de la muestra Map Recibido por parametro
+	 * @param muestra
+	 * @param  Map<String, Integer> contadorDeOpiniones
+	 * @return Map<String, Integer> 
+	 */
 	protected abstract Map<String, Integer> agregarOpinionDeLaMuestraAlRanking(Muestra muestra, Map<String, Integer> contadorDeOpiniones);
+	
 	/**
 	 * Obtiene las votaciones que seran tenidas en cuenta para analizar el resultado actual de la muestra.
 	 * */
@@ -46,7 +56,9 @@ public abstract class NivelDeValidacion {
 	/**
 	 * Genera una lista con la opinion mas votadas, si hubiera empate incluye en la lista todas las opiniones 
 	 * que estan empatadas en primer lugar en el ranking de opiniones.
-	 * */
+	 * @param contadorDeOpiniones
+	 * @return List<String> 
+	 */
 	private List<String> obtenerOpinionesMasVotadas(Map<String, Integer> contadorDeOpiniones) {
 		Integer valorMaximo = Collections.max(contadorDeOpiniones.values());
 		List<String> estadosMasVotados = new ArrayList<String>();
@@ -59,7 +71,9 @@ public abstract class NivelDeValidacion {
 	}
 	/**
 	 * Analiza las opiniones mas votadas y retorna el estado actual de la muestra. Siendo indefinida si 
-	 * hay m�s de una opinion en la lista o la opinion en caso de que exista solo una.
+	 * hay mas de una opinion en la lista o la opinion en caso de que exista solo una.
+	 * @return String La opinion mas votada de la muestra
+	 * @param List<String> recibe una lista con las opiniones empatadas en primer lugar en cantidad de votos
 	 * */
 	private String analizarOpiniones(List<String> estadosMasVotados) {
 		if (estadosMasVotados.size() > 1 ) {
@@ -69,14 +83,21 @@ public abstract class NivelDeValidacion {
 			return estadosMasVotados.get(0);
 		}
 	}
-	
-	public abstract String getNivelDeValidacion();
-	
+
+	/**
+	 * verifica si la muestra contiene dos votaciones de Participantes expertos con la misma opinion.
+	 * @param muestra
+	 * @param votacion
+	 * @return True si dos expertos coinciden en la opinion.
+	 */
 	public Boolean hayDosOpinionesExpertas(Muestra muestra, Votacion votacion) {
 		Map<String, Integer> rankingOpiniones = crearRankingDeOpiniones(muestra, muestra.getVotacionesExpertas());
 		return rankingOpiniones.get(votacion.getOpinion()).equals(2);
 	}
 	
+	/**
+	 * @return True si la muestra esta validada
+	 */
 	public abstract Boolean estaValidada();
 	
 }
