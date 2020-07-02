@@ -16,13 +16,17 @@ public abstract class FiltroPorFecha implements Filtro{
 		this.operador = operador;
 	}
 
+	/**
+	 *@param muestras: lista de muestras
+	 *@return lista de muestras con las muestras que dan True en enFechaCorrespondiente(LocalDate, LocalDate)
+	 */
 	public List<Muestra> criterioDeBusqueda(List<Muestra> muestras){
 		
 		return muestras.stream()
 				.filter(muestra->enFechaCorrespondiente(fechaAComparar(muestra), fecha))
 				.collect(Collectors.toList());
 	}
-	//muestra.getFecha().isAfter(this.fecha)
+	
 	public Boolean enFechaCorrespondiente(LocalDate fechaAComparar, LocalDate fechaDeComparacion) {
 		return operador.comparar(fechaAComparar, fechaDeComparacion);
 	}

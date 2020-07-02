@@ -11,12 +11,13 @@ public abstract class FiltroNivelValidacionMuestra implements Filtro{
 	public FiltroNivelValidacionMuestra() {
 	}
 	
+	/**
+	 * @param muestras. Lista de muestras
+	 * @return List<Muestra> Retorna la lista de muestras que tienenNivelCorrespondiente
+	 *  (ver metodo tieneNivelCorrespondiente)
+	 */
 	@Override
     public List<Muestra> criterioDeBusqueda(List<Muestra> muestras){
-		/*return muestras.stream()
-				.filter(muestra->muestra.getNivelDeValidacion().equals(nivelDeValidacion))
-				.collect(Collectors.toList());
-		*/
 		List<Muestra> muestrasDeNivelDeValidacion = new ArrayList<Muestra>();
 		
 		for (Muestra muestra : muestras) {
@@ -27,5 +28,9 @@ public abstract class FiltroNivelValidacionMuestra implements Filtro{
 		return muestrasDeNivelDeValidacion;
 	}
 	
+	/**
+	 * @param muestra
+	 * @return True si la muestra tiene el nivel correspondiente
+	 */
 	public abstract Boolean tieneNivelCorrespondiente(Muestra muestra);
 }

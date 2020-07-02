@@ -16,6 +16,10 @@ public class FiltroParticipante implements Filtro {
 	}
 
 
+	/**
+	 *@param muestras: Lista de muestras
+	 *@return Lista de muestras con las muestras creadas por el Participante this.participante 
+	 */
 	public List<Muestra> criterioDeBusqueda(List<Muestra> muestras){
 		
 		return muestras.stream()
