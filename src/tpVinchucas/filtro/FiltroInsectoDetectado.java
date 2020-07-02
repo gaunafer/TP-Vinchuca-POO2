@@ -15,6 +15,11 @@ public class FiltroInsectoDetectado implements Filtro {
 		this.insecto = insecto;
 	}
 
+
+	/**
+	 *@param muestras Lista de muestras
+	 *@return List<Muestra> cuyo resultado actual  es igual a this.insecto
+	 */
 	public List<Muestra> criterioDeBusqueda(List<Muestra> muestras){
 		
 		return muestras.stream()
